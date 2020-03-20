@@ -44,6 +44,128 @@ describe('Test Admin Features', function () {
         })
     })
 
+    describe('Test validation email users, admin add users', () => {
+        it('should return status code 400 when property email is empty', async () => {
+            const res = await request(app)
+                .post('/users')
+                .send({
+                    name: 'pengguna locker',
+                    email: '',
+                    username: 'pengguna',
+                    password: '123456'
+                })
+                .set({
+                    token: tokenAdmin
+                })
+            expect(res.statusCode).toEqual(400)
+            expect(res.body).toHaveProperty('message')
+            expect(res.body.message).toEqual('please fill email')
+        })
+
+        it('should return status code 400 when property email is null', async () => {
+            const res = await request(app)
+                .post('/users')
+                .send({
+                    name: 'pengguna locker',
+                    email: null,
+                    username: 'pengguna',
+                    password: '123456'
+                })
+                .set({
+                    token: tokenAdmin
+                })
+            expect(res.statusCode).toEqual(400)
+            expect(res.body).toHaveProperty('message')
+            expect(res.body.message).toEqual('please enter your email')
+        })
+
+        it('should return status code 400 when property email not use @ and .', async () => {
+            const res = await request(app)
+                .post('/users')
+                .send({
+                    name: 'pengguna locker',
+                    email: 'penggunagmail.com',
+                    username: 'pengguna',
+                    password: '123456'
+                })
+                .set({
+                    token: tokenAdmin
+                })
+            expect(res.statusCode).toEqual(400)
+            expect(res.body).toHaveProperty('message')
+            expect(res.body.message).toEqual('format email wrong')
+        })
+
+        it('should return status code 400 when property email duplicate', async () => {
+            const res = await request(app)
+                .post('/users')
+                .send({
+                    name: 'pengguna locker',
+                    email: "pengguna@gmail.com",
+                    username: 'pengguna',
+                    password: '123456'
+                })
+                .set({
+                    token: tokenAdmin
+                })
+            expect(res.statusCode).toEqual(400)
+            expect(res.body).toHaveProperty('message')
+            expect(res.body.message).toEqual('email already exist')
+        })
+    })
+
+    describe('Test validation password users, admin add users', () => {
+        it('should return status code 400 when property password is null', async () => {
+            const res = await request(app)
+                .post('/users')
+                .send({
+                    name: 'pengguna locker',
+                    email: "pengguna1@gmail.com",
+                    username: 'pengguna',
+                    password: null
+                })
+                .set({
+                    token: tokenAdmin
+                })
+            expect(res.statusCode).toEqual(400)
+            expect(res.body).toHaveProperty('message')
+            expect(res.body.message).toEqual('please enter your password')
+        })
+
+        it('should return status code 400 when property password is empty', async () => {
+            const res = await request(app)
+                .send({
+                    name: 'pengguna locker',
+                    email: "pengguna1@gmail.com",
+                    username: 'pengguna',
+                    password: ''
+                })
+                .set({
+                    token: tokenAdmin
+                })
+            expect(res.statusCode).toEqual(400)
+            expect(res.body).toHaveProperty('message')
+            expect(res.body.message).toEqual('please fill password')
+        })
+
+        it('should return status code 400 when property password length less than 6', async () => {
+            const res = await request(app)
+                .post('/users')
+                .send({
+                    name: 'pengguna locker',
+                    email: "pengguna1@gmail.com",
+                    username: 'pengguna',
+                    password: '12345'
+                })
+                .set({
+                    token: tokenAdmin
+                })
+            expect(res.statusCode).toEqual(400)
+            expect(res.body).toHaveProperty('message')
+            expect(res.body.message).toEqual('minimal password 6')
+        })
+    })
+
     describe('Test admin get all users, get /users route', () => {
         it('should return all users, status code 200', async () => {
             const res = await request(app)

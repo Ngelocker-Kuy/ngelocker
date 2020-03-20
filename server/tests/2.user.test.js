@@ -97,32 +97,6 @@ describe('Test Admin Features', function () {
 })
 
 describe('Test User Login Router', function () {
-    beforeAll((done) => {
-        request(app)
-            .post('/admin/login')
-            .send({
-                username: 'admin',
-                password: 'adminlocker123',
-            })
-            .end((err, res) => {
-                tokenAdmin = res.body.token
-            })
-        request(app)
-            .post('/users')
-            .send({
-                name: 'pengguna locker',
-                email: 'pengguna@gmail.com',
-                username: 'pengguna',
-                password: '123456'
-            })
-            .set({
-                token: tokenAdmin
-            })
-            .end((err, res) => {
-                done()
-            })
-    })
-
     describe('Test users login, post /users/login route', () => {
         it('should return users, token and status code 200', async () => {
             const res = await request(app)
