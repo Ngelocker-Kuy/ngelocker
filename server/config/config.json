@@ -1,0 +1,17 @@
+{
+  "development": {
+    "username": "postgres",
+    "password": "Milala08",
+    "database": "ngelocker_development",
+    "host": "localhost",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "postgres",
+    "password": "Milala08",
+    "database": "ngelocker_test",
+    "host": "localhost",
+    "dialect": "postgres",
+    "operatorsAliases": false
+  }
+}

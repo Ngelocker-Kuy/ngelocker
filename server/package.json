@@ -1,0 +1,46 @@
+{
+  "name": "ngelocker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start-dev": "nodemon index.js",
+    "migrate": "sequelize db:migrate",
+    "migrate:reset": "sequelize db:migrate:undo:all && npm run migrate",
+    "test": " NODE_ENV=test jest --coverage --detectOpenHandles || exit 0 ",
+    "pretest": " NODE_ENV=test npm run migrate:reset",
+    "db_testing": "NODE_ENV=test sequelize db:create",
+    "db_dev": "NODE_ENV=development sequelize db:create",
+    "start": "node app.js",
+    "dev": "NODE_ENV=development nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ngelocker-Kuy/ngelocker.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ngelocker-Kuy/ngelocker/issues"
+  },
+  "homepage": "https://github.com/Ngelocker-Kuy/ngelocker#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "pg": "^7.18.2",
+    "sequelize": "^5.21.5"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
+  },
+  "devDependencies": {
+    "jest": "^25.1.0",
+    "supertest": "^4.0.2"
+  }
+}
