@@ -16,7 +16,7 @@ function App() {
       <Router>
         <Switch>
           <Route path="/" exact>
-            <LoginAdminPage/>
+            <LoginAdminPage />
           </Route>
         </Switch>
       </Router>

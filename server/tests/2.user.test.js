@@ -21,6 +21,7 @@ describe('Test Admin Features', function () {
                 name: 'guest',
                 phoneNumber: '081382062347',
             })
+        setTimeout(function () { }, 1000);
         request(app)
             .post('/users')
             .send({
@@ -31,6 +32,12 @@ describe('Test Admin Features', function () {
             })
             .set({
                 token: tokenAdmin
+            })
+        request(app)
+            .post('/users')
+            .send({
+                username: 'pengguna',
+                password: '123456',
             })
             .end((err, res) => {
                 tokenUser = res.body.token
