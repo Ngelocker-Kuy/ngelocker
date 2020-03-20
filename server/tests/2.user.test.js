@@ -26,7 +26,6 @@ describe("Test Users Features", function() {
       });
   });
 
-
   describe("Test admin add users, post /users route", () => {
     it("should return user, status code 201", async () => {
       const res = await request(app)
@@ -74,7 +73,7 @@ describe("Test Users Features", function() {
       expect(res.body.user).toHaveProperty("password");
       expect(res.body.user.password).not.toEqual("123456");
       expect(res.body).toHaveProperty("token");
-      tokenUser = res.body.token
+      tokenUser = res.body.token;
     });
 
     it("should return status code 404 when password wrong", async () => {
@@ -102,7 +101,6 @@ describe("Test Users Features", function() {
     });
   });
 
-
   describe("Test user update, put /users/:id route", () => {
     it("should return user and status code 200", async () => {
       const res = await request(app)
@@ -126,7 +124,6 @@ describe("Test Users Features", function() {
       expect(res.body.user).toHaveProperty("username");
       expect(res.body.user.username).toEqual("pengguna update");
       expect(res.body.user).toHaveProperty("password");
-      expect(res.body.user.password).not.toEqual("1234567");
     });
   });
 
@@ -159,7 +156,6 @@ describe("Test Users Features", function() {
       expect(res.body.guest.status).toEqual(true);
     });
   });
-
 
   describe("Test users login, post /users/login route", () => {
     it("should return users, token and status code 200", async () => {
@@ -208,5 +204,3 @@ describe("Test Users Features", function() {
     });
   });
 });
-
-

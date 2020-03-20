@@ -19,14 +19,11 @@ module.exports = (sequelize, DataTypes) => {
             args: true,
             msg: "please enter your email"
           },
-          isExist: value => {
-            return User.count({ where: { email: value } }).then(count => {
-              if (count > 0) {
-                throw new Error("email already exist");
-              }
-            });
-          },
-          isEmail: true
+
+          isEmail: {
+            args: true,
+            msg: "format email wrong"
+          }
         }
       },
       username: {
@@ -67,8 +64,19 @@ module.exports = (sequelize, DataTypes) => {
       sequelize,
       hooks: {
         beforeCreate: function(user, options) {
-          let hash = bcrypt.hashSync(user.password, 10);
-          user.password = hash;
+          return User.findOne({ where: { email: user.email } })
+            .then(result => {
+              if (result) {
+                let message = { message: "email already exist" };
+                throw message;
+              } else {
+                let hash = bcrypt.hashSync(user.password, 10);
+                user.password = hash;
+              }
+            })
+            .catch(err => {
+              throw err;
+            });
         }
       }
     }

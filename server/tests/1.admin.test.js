@@ -3,7 +3,7 @@ const app = require("../app");
 
 let tokenAdmin;
 
-describe("Test Admin Features", function () {
+describe("Test Admin Features", function() {
   beforeAll(done => {
     request(app)
       .post("/admin/login")
@@ -134,6 +134,7 @@ describe("Test Admin Features", function () {
 
     it("should return status code 400 when property password is empty", async () => {
       const res = await request(app)
+        .post("/users")
         .send({
           name: "pengguna locker",
           email: "pengguna1@gmail.com",
@@ -236,7 +237,7 @@ describe("Test Admin Features", function () {
   });
 });
 
-describe("Test Admin Login Router", function () {
+describe("Test Admin Login Router", function() {
   describe("Test admin login, post /admin/login route", () => {
     it("should return admin, token and status code 200", async () => {
       const res = await request(app)

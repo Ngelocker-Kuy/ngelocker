@@ -32,7 +32,7 @@ class GuestController {
     Guest.update(status, { where: { id: req.params.id }, returning: true })
       .then(result => {
         if (result[0] != 0) {
-          res.status(200).json(result[1][0].dataValues);
+          res.status(200).json({ guest: result[1][0].dataValues });
         } else {
           let message = {
             status: "404",
