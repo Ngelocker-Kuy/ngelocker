@@ -1,33 +1,31 @@
 const { Admin } = require("../models");
-const bcrypt = require("bcryptjs");
+let jwt = require("../helpers/jwt");
+let bcrypt = require("../helpers/bcrypt");
 class AdminController {
   static loginAdmin(req, res, next) {
-    let username = req.body.id;
+    let username = req.body.username;
     let password = req.body.password;
     Admin.findOne({
       where: {
-        username: username
+        username: username,
+        password: password
       }
     })
       .then(user => {
+        console.log(user, "<<<");
         if (user) {
-          if (bcrypt.compareSync(password, user.password)) {
-            let token = jwt.sign(
-              { email: user.email, id: user.id },
-              process.env.JWT_SECRET
-            );
-            res
-              .status(201)
-              .json({ token: token, id: user.id, role: user.role });
-          } else {
-            ///erorr
-          }
+          // if (bcrypt.checkPassword(password, user.password)) {
+          let token = jwt.createToken({ email: user.email, id: user.id });
+          res.status(200).json({ token: token, admin: user });
+        } else {
+          let message = {
+            status: "404",
+            message: "username/password wrong"
+          };
+          throw message;
         }
       })
       .catch(err => {
-        if (err.message) {
-          err.StatusCode = 400;
-        }
         next(err);
       });
   }

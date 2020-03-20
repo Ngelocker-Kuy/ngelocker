@@ -5,14 +5,15 @@
   "main": "index.js",
   "scripts": {
     "start-dev": "nodemon index.js",
-    "migrate": "sequelize db:migrate",
+    "migrate": "sequelize db:migrate && npm run seed",
+    "seed": "sequelize db:seed:all",
     "migrate:reset": "sequelize db:migrate:undo:all && npm run migrate",
-    "test": " NODE_ENV=test jest --coverage --detectOpenHandles || exit 0 ",
-    "pretest": " NODE_ENV=test npm run migrate:reset",
+    "test": " NODE_ENV=test jest --coverage --detectOpenHandles || exit 0",
+    "pretest": " NODE_ENV=test npm run migrate:reset ",
     "db_testing": "NODE_ENV=test sequelize db:create",
     "db_dev": "NODE_ENV=development sequelize db:create",
     "start": "node app.js",
-    "dev": "NODE_ENV=development nodemon app.js"
+    "dev": "NODE_ENV=development nodemon bin/http.js"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,7 @@
   },
   "homepage": "https://github.com/Ngelocker-Kuy/ngelocker#readme",
   "dependencies": {
+    "bcrypt": "^4.0.1",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "express": "^4.17.1",
