@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/card.css';
 
-function Card() {
+function Card(props) {
     const gambarLucu = [
         "https://robohash.org/1",
         "https://robohash.org/2",
@@ -15,22 +15,16 @@ function Card() {
     ]
 
     return (
-        <div>
-            <section className="Grid">
-                <div className="Grid-row" style={{ display: "flex", flexDirection: "row", flexWrap: "wrap" }}>
-                    <a className="Card col">
-                        <div className="Card-thumb">
-                            <div className="Card-shadow"></div>
-                            <div className="Card-shadow"></div>
-                            <div className="Card-shadow"></div>
-                            <div className="Card-image" style={{ backgroundImage: `url(${gambarLucu[Math.floor(Math.random() * 8) + 1]})` }}></div>
-                        </div>
-                        <div className="Card-title"><span>Super interesting card</span></div>
-                        <div className="Card-explore"><span> ID 2 Locker Owner</span></div>
-                    </a>
-                </div>
-            </section>
-        </div>
+        <a className="Card">
+            <div className="Card-thumb">
+                <div className="Card-shadow"></div>
+                <div className="Card-shadow"></div>
+                <div className="Card-shadow"></div>
+                <div className="Card-image" style={{ backgroundImage: `url(${gambarLucu[Math.floor(Math.random() * 8) + 1]})` }}></div>
+            </div>
+            <div className="Card-title"><span>{props.data.name}</span></div>
+            <div className="Card-explore"><span> ID {props.data.LockerId} Locker Owner</span></div>
+        </a>
     );
 }
 

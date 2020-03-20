@@ -8,13 +8,16 @@ import {
   Route
 } from 'react-router-dom'
 import store from './store/index'
-import { LoginAdminPage } from './containers/index'
+import { LoginAdminPage, ListUsersPage } from './containers/index'
 
 function App() {
   return (
     <Provider store={store}>
       <Router>
         <Switch>
+          <Route path="/users" exact>
+            <ListUsersPage />
+          </Route>
           <Route path="/" exact>
             <LoginAdminPage />
           </Route>
