@@ -6,9 +6,7 @@ class LockerController {
       .then(result => {
         res.status(200).json(result);
       })
-      .catch(err => {
-        next(err);
-      });
+      .catch(next);
   }
 
   // static deleteLocker(req, res, next) {

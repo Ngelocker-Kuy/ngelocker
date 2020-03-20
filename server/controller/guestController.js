@@ -6,9 +6,7 @@ class GuestController {
       .then(result => {
         res.status(200).json(result);
       })
-      .catch(err => {
-        next(err);
-      });
+      .catch(next)
   }
 
   static createGuest(req, res, next) {
@@ -20,11 +18,9 @@ class GuestController {
     };
     Guest.create(body)
       .then(result => {
-        res.status(201).json({ guest: result });
+        res.status(201).json({ guest: result.dataValues });
       })
-      .catch(err => {
-        next(err);
-      });
+      .catch(next)
   }
 
   static updateGuest(req, res, next) {
@@ -41,13 +37,10 @@ class GuestController {
           throw message;
         }
       })
-      .catch(err => {
-        next(err);
-      });
+      .catch(next)
   }
 
   static deleteGuest(req, res, next) {
-    console.log(req.params.id, "<<<");
     Guest.findOne({ where: { id: req.params.id } })
       .then(result => {
         if (result != null) {
@@ -62,9 +55,7 @@ class GuestController {
       .then(result => {
         res.status(200).json({ message: "Guest has been deleted" });
       })
-      .catch(err => {
-        next(err);
-      });
+      .catch(next);
   }
 }
 
