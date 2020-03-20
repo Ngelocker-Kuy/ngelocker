@@ -7,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
   Guest.init(
     {
       name: DataTypes.STRING,
-      phoneNumber: DataTypes.INTEGER,
+      phoneNumber: DataTypes.STRING,
       status: DataTypes.BOOLEAN
     },
     { sequelize }
