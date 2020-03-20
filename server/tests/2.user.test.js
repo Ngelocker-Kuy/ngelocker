@@ -53,6 +53,53 @@ describe("Test Users Features", function () {
     });
   });
 
+  describe("Test users login, post /users/login route", () => {
+    it("should return users, token and status code 200", async () => {
+      const res = await request(app)
+        .post("/users/login")
+        .send({
+          username: "pengguna",
+          password: "123456"
+        });
+      expect(res.statusCode).toEqual(200);
+      expect(res.body).toHaveProperty("user");
+      expect(res.body.user).toHaveProperty("id");
+      expect(res.body.user).toHaveProperty("name");
+      expect(res.body.user.name).toEqual("pengguna locker");
+      expect(res.body.user).toHaveProperty("email");
+      expect(res.body.user.email).toEqual("pengguna@gmail.com");
+      expect(res.body.user).toHaveProperty("username");
+      expect(res.body.user.username).toEqual("pengguna");
+      expect(res.body.user).toHaveProperty("password");
+      expect(res.body.user.password).not.toEqual("123456");
+      expect(res.body).toHaveProperty("token");
+      tokenUser = res.body.token
+    });
+
+    it("should return status code 404 when password wrong", async () => {
+      const res = await request(app)
+        .post("/users/login")
+        .send({
+          username: "pengguna",
+          password: "beda password"
+        });
+      expect(res.statusCode).toEqual(404);
+      expect(res.body).toHaveProperty("message");
+      expect(res.body.message).toEqual("username/password wrong");
+    });
+
+    it("should return status code 404 when username wrong", async () => {
+      const res = await request(app)
+        .post("/users/login")
+        .send({
+          username: "pengguna salah",
+          password: "123456"
+        });
+      expect(res.statusCode).toEqual(404);
+      expect(res.body).toHaveProperty("message");
+      expect(res.body.message).toEqual("username/password wrong");
+    });
+  });
 
   describe("Test user update, put /users/:id route", () => {
     it("should return user and status code 200", async () => {
@@ -108,53 +155,6 @@ describe("Test Users Features", function () {
       expect(res.body.guest).toHaveProperty("id");
       expect(res.body.guest).toHaveProperty("status");
       expect(res.body.guest.status).toEqual(true);
-    });
-  });
-
-  describe("Test users login, post /users/login route", () => {
-    it("should return users, token and status code 200", async () => {
-      const res = await request(app)
-        .post("/users/login")
-        .send({
-          username: "pengguna",
-          password: "123456"
-        });
-      expect(res.statusCode).toEqual(200);
-      expect(res.body).toHaveProperty("user");
-      expect(res.body.user).toHaveProperty("id");
-      expect(res.body.user).toHaveProperty("name");
-      expect(res.body.user.name).toEqual("pengguna locker");
-      expect(res.body.user).toHaveProperty("email");
-      expect(res.body.user.email).toEqual("pengguna@gmail.com");
-      expect(res.body.user).toHaveProperty("username");
-      expect(res.body.user.username).toEqual("pengguna");
-      expect(res.body.user).toHaveProperty("password");
-      expect(res.body.user.password).not.toEqual("123456");
-      expect(res.body).toHaveProperty("token");
-    });
-
-    it("should return status code 404 when password wrong", async () => {
-      const res = await request(app)
-        .post("/users/login")
-        .send({
-          username: "pengguna",
-          password: "beda password"
-        });
-      expect(res.statusCode).toEqual(404);
-      expect(res.body).toHaveProperty("message");
-      expect(res.body.message).toEqual("username/password wrong");
-    });
-
-    it("should return status code 404 when username wrong", async () => {
-      const res = await request(app)
-        .post("/users/login")
-        .send({
-          username: "pengguna salah",
-          password: "123456"
-        });
-      expect(res.statusCode).toEqual(404);
-      expect(res.body).toHaveProperty("message");
-      expect(res.body.message).toEqual("username/password wrong");
     });
   });
 });
