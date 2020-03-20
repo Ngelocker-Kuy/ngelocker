@@ -6,9 +6,48 @@ module.exports = (sequelize, DataTypes) => {
 
   Guest.init(
     {
-      name: DataTypes.STRING,
-      phoneNumber: DataTypes.STRING,
-      status: DataTypes.BOOLEAN,
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            args: true,
+            msg: "please fill password"
+          },
+          notNull: {
+            args: true,
+            msg: "please enter your password"
+          }
+        }
+      },
+      phoneNumber: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            args: true,
+            msg: "please fill password"
+          },
+          notNull: {
+            args: true,
+            msg: "please enter your password"
+          }
+        }
+      },
+      status: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            args: true,
+            msg: "please fill password"
+          },
+          notNull: {
+            args: true,
+            msg: "please enter your password"
+          }
+        }
+      },
       UserId: DataTypes.INTEGER
     },
     { sequelize }
