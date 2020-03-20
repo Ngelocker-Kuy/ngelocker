@@ -8,13 +8,15 @@ module.exports = (sequelize, DataTypes) => {
     {
       name: DataTypes.STRING,
       phoneNumber: DataTypes.STRING,
-      status: DataTypes.BOOLEAN
+      status: DataTypes.BOOLEAN,
+      UserId: DataTypes.INTEGER
     },
     { sequelize }
   );
 
   Guest.associate = function(models) {
     // associations can be defined here
+    Guest.belongsTo(models.User);
   };
   return Guest;
 };

@@ -4,7 +4,7 @@ class LockerController {
   static getLocker(req, res, next) {
     Locker.findAll()
       .then(result => {
-        res.status(200).jason(result);
+        res.status(200).json(result);
       })
       .catch(err => {
         next(err);

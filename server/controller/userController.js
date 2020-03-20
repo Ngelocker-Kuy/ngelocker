@@ -64,15 +64,15 @@ class UserController {
         if (result[0] != 0) {
           res.status(200).json(result[1][0].dataValues);
         } else {
-          let msg = {
+          let message = {
             status: "404",
             message: "command not found"
           };
-          res.status(404).json(msg);
+          throw message;
         }
       })
       .catch(err => {
-        next();
+        next(err);
       });
   }
 
@@ -86,7 +86,7 @@ class UserController {
     })
       .then(user => {
         if (user) {
-          if (bcrypt.compareSync(password, user.password)) {
+          if (Bcrypt.checkPassword(password, user.password)) {
             let token = jwt.createToken({ email: user.email, id: user.id });
             res.status(201).json({ token: token, id: user.id });
           } else {
