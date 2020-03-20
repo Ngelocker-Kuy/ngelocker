@@ -52,7 +52,7 @@ describe('Test Admin Features', function () {
                     token: tokenAdmin
                 })
             expect(res.status).toEqual(200)
-            expect(res.body).toEqual(reqs.body)
+            expect(res.body).toEqual(res.body)
         })
     })
 
@@ -64,7 +64,7 @@ describe('Test Admin Features', function () {
                     token: tokenAdmin
                 })
             expect(res.status).toEqual(200)
-            expect(res.body).toEqual(reqs.body)
+            expect(res.body).toEqual(res.body)
         })
     })
 
@@ -142,10 +142,10 @@ describe('Test Admin Features', function () {
         })
     })
 
-    describe('Test admin update users, put /users route', () => {
+    describe('Test admin update users, put /users/:id route', () => {
         it('should return user and status code 200', async () => {
             const res = await request(app)
-                .put('/users')
+                .put('/users/1')
                 .send({
                     name: 'pengguna di update',
                     email: 'penggunaUpdate@gmail.com',
