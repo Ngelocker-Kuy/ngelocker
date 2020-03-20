@@ -1,5 +1,6 @@
-const { Admin } = require("../models");
+const { Admin, User, Locker } = require("../models");
 const bcrypt = require("bcryptjs");
+let jwt = require("jsonwebtoken");
 class AdminController {
   static loginAdmin(req, res, next) {
     let username = req.body.id;
@@ -25,9 +26,45 @@ class AdminController {
         }
       })
       .catch(err => {
-        if (err.message) {
-          err.StatusCode = 400;
-        }
+        // if (err.message) {
+        //   err.StatusCode = 400;
+        // }
+        next(err);
+      });
+  }
+
+  static getUser(req, res, next) {
+    User.findAll()
+      .then(result => {
+        res.status(200).json(result);
+      })
+      .catch(err => {
+        next(err);
+      });
+  }
+
+  static createUser(req, res, next) {
+    let dataUser = {
+      name: req.body.name,
+      username: req.body.username,
+      password: req.body.password,
+      email: req.body.email
+    };
+    User.create(dataUser)
+      .then(result => {
+        let token = jwt.sign({ email: dataUser.email, id: dataUser.id });
+      })
+      .catch(err => {
+        next(err);
+      });
+  }
+
+  static createLocker(req, res, next) {
+    Locker.create({ UserId: req.body.UserId })
+      .then(result => {
+        res.status(201).json(result);
+      })
+      .catch(err => {
         next(err);
       });
   }
