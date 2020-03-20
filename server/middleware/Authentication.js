@@ -8,6 +8,6 @@ module.exports = function(req, res, next) {
     req.user = user;
     next();
   } catch (error) {
-    res.status(404).json({ message: "token invalid" });
+    res.status(401).json({ message: "Unauthorized Invalid Token" });
   }
 };

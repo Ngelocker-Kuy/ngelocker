@@ -7,22 +7,21 @@ class AdminController {
     let password = req.body.password;
     Admin.findOne({
       where: {
-        username: username
+        username: username,
+        password: password
       }
     })
       .then(user => {
         if (user) {
-          console.log(password, user.password, "<<<");
           // if (bcrypt.checkPassword(password, user.password)) {
           let token = jwt.createToken({ email: user.email, id: user.id });
-          res.status(201).json({ token: token, id: user.id });
-          // } else {
-          //   let message = {
-          //     status: "404",
-          //     message: "Username or password wrong"
-          //   };
-          //   throw message;
-          // }
+          res.status(200).json({ token: token, admin: user });
+        } else {
+          let message = {
+            status: "404",
+            message: "username/password wrong"
+          };
+          throw message;
         }
       })
       .catch(err => {

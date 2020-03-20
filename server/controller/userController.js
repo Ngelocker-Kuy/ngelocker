@@ -26,30 +26,10 @@ class UserController {
         { LockerId: createLocker.id },
         { where: { id: registerUser.id }, returning: true }
       );
-      res.status(201).json({ registerUser, createLocker });
+      res.status(201).json({ user: registerUser, createLocker });
     } catch (error) {
-      next(err);
+      next(error);
     }
-  }
-
-  static deleteUser(req, res, next) {
-    User.findOne({ where: { id: req.params.id } })
-      .then(result => {
-        if (result != null) {
-          return User.destroy({
-            where: { id: req.params.id }
-          });
-        } else {
-          let message = { status: 404, message: "User not found" };
-          throw message;
-        }
-      })
-      .then(result => {
-        res.status(200).json({ message: "User has been deleted" });
-      })
-      .catch(err => {
-        next(err);
-      });
   }
 
   static updateUser(req, res, next) {
@@ -62,7 +42,7 @@ class UserController {
     User.update(body, { where: { id: req.params.id }, returning: true })
       .then(result => {
         if (result[0] != 0) {
-          res.status(200).json(result[1][0].dataValues);
+          res.status(200).json({ user: result[1][0].dataValues });
         } else {
           let message = {
             status: "404",
@@ -79,6 +59,7 @@ class UserController {
   static userLogin(req, res, next) {
     let username = req.body.username;
     let password = req.body.password;
+    console.log("aa");
     User.findOne({
       where: {
         username: username
@@ -88,18 +69,21 @@ class UserController {
         if (user) {
           if (Bcrypt.checkPassword(password, user.password)) {
             let token = jwt.createToken({ email: user.email, id: user.id });
-            res.status(201).json({ token: token, id: user.id });
+            res.status(200).json({
+              token: token,
+              user
+            });
           } else {
             let message = {
               status: "404",
-              message: "Username or password wrong"
+              message: "username/password wrong"
             };
             throw message;
           }
         } else {
           let mesaage = {
-            StatusCode: "404",
-            message: "command not found"
+            status: "404",
+            message: "username/password wrong"
           };
           throw mesaage;
           // next(msg)

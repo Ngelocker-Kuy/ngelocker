@@ -6,8 +6,8 @@ const LockerRoute = require("./lockerRoute");
 const UserRoute = require("./userRoute");
 
 router.use("/admin", AdminRoute);
-router.use("/user", UserRoute);
-router.use("/locker", LockerRoute);
-router.use("/guest", GuestRoute);
+router.use("/users", UserRoute);
+router.use("/lockers", LockerRoute);
+router.use("/guests", GuestRoute);
 
 module.exports = router;
