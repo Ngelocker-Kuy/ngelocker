@@ -20,7 +20,7 @@ class GuestController {
     };
     Guest.create(body)
       .then(result => {
-        res.status(201).json(result);
+        res.status(201).json({ guest: result });
       })
       .catch(err => {
         next(err);

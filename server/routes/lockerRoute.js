@@ -5,6 +5,6 @@ const Authentication = require("../middleware/Authentication");
 
 router.use(Authentication);
 router.get("/", lockerController.getLocker);
-router.delete("/:id", lockerController.deleteLocker);
+// router.delete("/:id", lockerController.deleteLocker);
 
 module.exports = router;
