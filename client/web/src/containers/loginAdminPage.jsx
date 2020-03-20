@@ -23,7 +23,7 @@ function LoginAdminPage() {
 
                 <div className="col-lg-12 login-form">
                     <div className="col-lg-12 login-form">
-                        <form onSubmit={}>
+                        <form onSubmit={() => login()}>
                             <div className="form-group">
                                 <label className="form-control-label">USERNAME</label>
                                 <input type="text" className="form-control" onChange={(e) => setUsername(e.target.value)}/>
