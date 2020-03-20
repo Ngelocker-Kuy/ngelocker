@@ -5,9 +5,48 @@ module.exports = (sequelize, DataTypes) => {
   class Admin extends Model {}
   Admin.init(
     {
-      name: DataTypes.STRING,
-      username: DataTypes.STRING,
-      password: DataTypes.STRING
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            args: true,
+            msg: "please fill name"
+          },
+          notNull: {
+            args: true,
+            msg: "please enter your name"
+          }
+        }
+      },
+      username: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            args: true,
+            msg: "please fill username"
+          },
+          notNull: {
+            args: true,
+            msg: "please enter your username"
+          }
+        }
+      },
+      password: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notEmpty: {
+            args: true,
+            msg: "please fill password"
+          },
+          notNull: {
+            args: true,
+            msg: "please enter your password"
+          }
+        }
+      }
     },
     { sequelize }
   );
