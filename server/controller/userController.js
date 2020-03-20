@@ -7,9 +7,7 @@ class UserController {
       .then(result => {
         res.status(200).json(result);
       })
-      .catch(err => {
-        next(err);
-      });
+      .catch(next);
   }
 
   static async createUser(req, res, next) {
@@ -51,9 +49,7 @@ class UserController {
           throw message;
         }
       })
-      .catch(err => {
-        next(err);
-      });
+      .catch(next);
   }
 
   static userLogin(req, res, next) {
@@ -89,9 +85,7 @@ class UserController {
           // next(msg)
         }
       })
-      .catch(err => {
-        next(err);
-      });
+      .catch(next);
   }
 }
 

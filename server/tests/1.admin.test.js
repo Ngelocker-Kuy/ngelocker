@@ -3,7 +3,7 @@ const app = require("../app");
 
 let tokenAdmin;
 
-describe("Test Admin Features", function() {
+describe("Test Admin Features", function () {
   beforeAll(done => {
     request(app)
       .post("/admin/login")
@@ -234,10 +234,27 @@ describe("Test Admin Features", function() {
       expect(res.body.user).toHaveProperty("password");
       expect(res.body.user.password).toEqual("1234567");
     });
+    it("should return status code 404 when user id wrong", async () => {
+      const res = await request(app)
+        .put("/users/100")
+        .send({
+          name: "pengguna di update",
+          email: "penggunaUpdate@gmail.com",
+          username: "pengguna update",
+          password: "1234567"
+        })
+        .set({
+          token: tokenAdmin
+        });
+      expect(res.status).toEqual(404);
+      expect(res.body).toHaveProperty("message");
+      expect(res.body.message).toEqual("command not found");
+    });
+
   });
 });
 
-describe("Test Admin Login Router", function() {
+describe("Test Admin Login Router", function () {
   describe("Test admin login, post /admin/login route", () => {
     it("should return admin, token and status code 200", async () => {
       const res = await request(app)

@@ -1,10 +1,11 @@
 const request = require("supertest");
 const app = require("../app");
+const bcrypt = require('../helpers/bcrypt')
 
 let tokenUser = null;
 let tokenAdmin = null;
 
-describe("Test Users Features", function() {
+describe("Test Users Features", function () {
   beforeAll(done => {
     request(app)
       .post("/admin/login")
@@ -72,6 +73,7 @@ describe("Test Users Features", function() {
       expect(res.body.user.username).toEqual("pengguna");
       expect(res.body.user).toHaveProperty("password");
       expect(res.body.user.password).not.toEqual("123456");
+      expect(bcrypt.hashPassword("123456"))
       expect(res.body).toHaveProperty("token");
       tokenUser = res.body.token;
     });
@@ -152,55 +154,46 @@ describe("Test Users Features", function() {
       expect(res.status).toEqual(200);
       expect(res.body).toHaveProperty("guest");
       expect(res.body.guest).toHaveProperty("id");
+      expect(res.body.guest.id).toEqual(1);
       expect(res.body.guest).toHaveProperty("status");
       expect(res.body.guest.status).toEqual(true);
     });
+
+    it("should return user and status code 404", async () => {
+      const res = await request(app)
+        .put("/guests/100")
+        .send({
+          status: true
+        })
+        .set({
+          token: tokenUser
+        });
+      expect(res.status).toEqual(404);
+      expect(res.body).toHaveProperty("message")
+    });
   });
 
-  describe("Test users login, post /users/login route", () => {
-    it("should return users, token and status code 200", async () => {
+  describe("Test /guests/:id route", () => {
+    it("should return guest and status code 200", async () => {
       const res = await request(app)
-        .post("/users/login")
-        .send({
-          username: "pengguna",
-          password: "123456"
+        .delete("/guests/1")
+        .set({
+          token: tokenUser
         });
-      expect(res.statusCode).toEqual(200);
-      expect(res.body).toHaveProperty("user");
-      expect(res.body.user).toHaveProperty("id");
-      expect(res.body.user).toHaveProperty("name");
-      expect(res.body.user.name).toEqual("pengguna locker");
-      expect(res.body.user).toHaveProperty("email");
-      expect(res.body.user.email).toEqual("pengguna@gmail.com");
-      expect(res.body.user).toHaveProperty("username");
-      expect(res.body.user.username).toEqual("pengguna");
-      expect(res.body.user).toHaveProperty("password");
-      expect(res.body.user.password).not.toEqual("123456");
-      expect(res.body).toHaveProperty("token");
+      expect(res.status).toEqual(200);
+      expect(res.body).toHaveProperty("message");
+      expect(res.body.message).toEqual("Guest has been deleted");
     });
 
-    it("should return status code 404 when password wrong", async () => {
+    it("should return guest not found if wrong id", async () => {
       const res = await request(app)
-        .post("/users/login")
-        .send({
-          username: "pengguna",
-          password: "beda password"
+        .delete("/guests/100")
+        .set({
+          token: tokenUser
         });
-      expect(res.statusCode).toEqual(404);
+      expect(res.status).toEqual(404);
       expect(res.body).toHaveProperty("message");
-      expect(res.body.message).toEqual("username/password wrong");
-    });
-
-    it("should return status code 404 when username wrong", async () => {
-      const res = await request(app)
-        .post("/users/login")
-        .send({
-          username: "pengguna salah",
-          password: "123456"
-        });
-      expect(res.statusCode).toEqual(404);
-      expect(res.body).toHaveProperty("message");
-      expect(res.body.message).toEqual("username/password wrong");
+      expect(res.body.message).toEqual("Guest not found");
     });
   });
 });
