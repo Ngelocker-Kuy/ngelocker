@@ -16,8 +16,8 @@ app.use("/", index);
 app.use(error);
 
 //if want to test comment below codes
-// app.listen(port, () => {
-//   console.log(`listening on port ${port}`);
-// });
+app.listen(port, () => {
+  console.log(`listening on port ${port}`);
+});
 
 module.exports = app;

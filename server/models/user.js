@@ -8,12 +8,14 @@ module.exports = (sequelize, DataTypes) => {
       name: DataTypes.STRING,
       email: DataTypes.STRING,
       username: DataTypes.STRING,
-      password: DataTypes.STRING
+      password: DataTypes.STRING,
+      LockerId: DataTypes.Integer
     },
     { sequelize }
   );
   User.associate = function(models) {
     // associations can be defined here
+    User.belongsTo(models.Locker);
   };
   return User;
 };
