@@ -1,10 +1,10 @@
 const request = require("supertest");
 const app = require("../app");
 
-let tokenUser;
-let tokenAdmin;
+let tokenUser = null;
+let tokenAdmin = null;
 
-describe("Test Users Features", function () {
+describe("Test Users Features", function() {
   beforeAll(done => {
     request(app)
       .post("/admin/login")
@@ -25,34 +25,6 @@ describe("Test Users Features", function () {
         done();
       });
   });
-
-  describe("Test admin add users, post /users route", () => {
-    it("should return user, status code 201", async () => {
-      const res = await request(app)
-        .post("/users")
-        .send({
-          name: "pengguna locker",
-          email: "pengguna@gmail.com",
-          username: "pengguna",
-          password: "123456"
-        })
-        .set({
-          token: tokenAdmin
-        });
-      expect(res.status).toEqual(201);
-      expect(res.body).toHaveProperty("user");
-      expect(res.body.user).toHaveProperty("id");
-      expect(res.body.user).toHaveProperty("name");
-      expect(res.body.user.name).toEqual("pengguna locker");
-      expect(res.body.user).toHaveProperty("email");
-      expect(res.body.user.email).toEqual("pengguna@gmail.com");
-      expect(res.body.user).toHaveProperty("username");
-      expect(res.body.user.username).toEqual("pengguna");
-      expect(res.body.user).toHaveProperty("password");
-      expect(res.body.user.password).not.toEqual("123456");
-    });
-  });
-
 
   describe("Test user update, put /users/:id route", () => {
     it("should return user and status code 200", async () => {
