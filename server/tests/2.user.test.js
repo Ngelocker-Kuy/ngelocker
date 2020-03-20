@@ -4,7 +4,7 @@ const app = require("../app");
 let tokenUser;
 let tokenAdmin;
 
-describe("Test Admin Features", function() {
+describe("Test Users Features", function () {
   beforeAll(done => {
     request(app)
       .post("/admin/login")
@@ -20,22 +20,37 @@ describe("Test Admin Features", function() {
       .send({
         name: "guest",
         phoneNumber: "081382062347"
-      });
-    request(app)
-      .post("/users")
-      .send({
-        name: "pengguna locker",
-        email: "pengguna@gmail.com",
-        username: "pengguna",
-        password: "123456"
-      })
-      .set({
-        token: tokenAdmin
       })
       .end((err, res) => {
-        tokenUser = res.body.token;
         done();
       });
+  });
+
+  describe("Test admin add users, post /users route", () => {
+    it("should return user, status code 201", async () => {
+      const res = await request(app)
+        .post("/users")
+        .send({
+          name: "pengguna locker",
+          email: "pengguna@gmail.com",
+          username: "pengguna",
+          password: "123456"
+        })
+        .set({
+          token: tokenAdmin
+        });
+      expect(res.status).toEqual(201);
+      expect(res.body).toHaveProperty("user");
+      expect(res.body.user).toHaveProperty("id");
+      expect(res.body.user).toHaveProperty("name");
+      expect(res.body.user.name).toEqual("pengguna locker");
+      expect(res.body.user).toHaveProperty("email");
+      expect(res.body.user.email).toEqual("pengguna@gmail.com");
+      expect(res.body.user).toHaveProperty("username");
+      expect(res.body.user.username).toEqual("pengguna");
+      expect(res.body.user).toHaveProperty("password");
+      expect(res.body.user.password).not.toEqual("123456");
+    });
   });
 
 
@@ -95,9 +110,7 @@ describe("Test Admin Features", function() {
       expect(res.body.guest.status).toEqual(true);
     });
   });
-});
 
-describe("Test User Login Router", function() {
   describe("Test users login, post /users/login route", () => {
     it("should return users, token and status code 200", async () => {
       const res = await request(app)
