@@ -1,6 +1,6 @@
 const { Admin, User, Locker } = require("../models");
 const bcrypt = require("bcryptjs");
-let jwt = require("jsonwebtoken");
+let jwt = require("../");
 class AdminController {
   static loginAdmin(req, res, next) {
     let username = req.body.id;
