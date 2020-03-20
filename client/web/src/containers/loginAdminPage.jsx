@@ -20,8 +20,6 @@ function LoginAdminPage() {
                     <div className="col-lg-12 login-title">
                         ADMIN PANEL
                 </div>
-
-                    <div className="col-lg-12 login-form">
                         <div className="col-lg-12 login-form">
                             <form onSubmit={() => login()}>
                                 <div className="form-group">
