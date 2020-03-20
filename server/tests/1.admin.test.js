@@ -3,7 +3,7 @@ const app = require("../app");
 
 let tokenAdmin;
 
-describe("Test Admin Features", function() {
+describe("Test Admin Features", function () {
   beforeAll(done => {
     request(app)
       .post("/admin/login")
@@ -57,7 +57,7 @@ describe("Test Admin Features", function() {
         .set({
           token: tokenAdmin
         });
-      expect(res.statusCode).toEqual(400);
+      expect(res.status).toEqual(400);
       expect(res.body).toHaveProperty("message");
       expect(res.body.message).toEqual("please fill email");
     });
@@ -74,7 +74,7 @@ describe("Test Admin Features", function() {
         .set({
           token: tokenAdmin
         });
-      expect(res.statusCode).toEqual(400);
+      expect(res.status).toEqual(400);
       expect(res.body).toHaveProperty("message");
       expect(res.body.message).toEqual("please enter your email");
     });
@@ -91,7 +91,7 @@ describe("Test Admin Features", function() {
         .set({
           token: tokenAdmin
         });
-      expect(res.statusCode).toEqual(400);
+      expect(res.status).toEqual(400);
       expect(res.body).toHaveProperty("message");
       expect(res.body.message).toEqual("format email wrong");
     });
@@ -108,7 +108,7 @@ describe("Test Admin Features", function() {
         .set({
           token: tokenAdmin
         });
-      expect(res.statusCode).toEqual(400);
+      expect(res.status).toEqual(400);
       expect(res.body).toHaveProperty("message");
       expect(res.body.message).toEqual("email already exist");
     });
@@ -127,7 +127,7 @@ describe("Test Admin Features", function() {
         .set({
           token: tokenAdmin
         });
-      expect(res.statusCode).toEqual(400);
+      expect(res.status).toEqual(400);
       expect(res.body).toHaveProperty("message");
       expect(res.body.message).toEqual("please enter your password");
     });
@@ -143,7 +143,7 @@ describe("Test Admin Features", function() {
         .set({
           token: tokenAdmin
         });
-      expect(res.statusCode).toEqual(400);
+      expect(res.status).toEqual(400);
       expect(res.body).toHaveProperty("message");
       expect(res.body.message).toEqual("please fill password");
     });
@@ -160,9 +160,9 @@ describe("Test Admin Features", function() {
         .set({
           token: tokenAdmin
         });
-      expect(res.statusCode).toEqual(400);
+      expect(res.status).toEqual(400);
       expect(res.body).toHaveProperty("message");
-      expect(res.body.message).toEqual("minimal password 6");
+      expect(res.body.message).toEqual("minimal password 6 character");
     });
   });
 
@@ -193,7 +193,7 @@ describe("Test Admin Features", function() {
   describe("Test /users/:id route", () => {
     it("should send an error with 401 status code because token undefined", async () => {
       const res = await request(app).delete("/users/1");
-      expect(res.statusCode).toEqual(401);
+      expect(res.status).toEqual(401);
       expect(res.body).toHaveProperty("message");
       expect(res.body.message).toEqual("Unauthorized Invalid Token");
     });
@@ -202,7 +202,7 @@ describe("Test Admin Features", function() {
   describe("Test /lockers/:id route", () => {
     it("should send an error with 401 status code because token undefined", async () => {
       const res = await request(app).delete("/lockers/1");
-      expect(res.statusCode).toEqual(401);
+      expect(res.status).toEqual(401);
       expect(res.body).toHaveProperty("message");
       expect(res.body.message).toEqual("Unauthorized Invalid Token");
     });
@@ -236,7 +236,7 @@ describe("Test Admin Features", function() {
   });
 });
 
-describe("Test Admin Login Router", function() {
+describe("Test Admin Login Router", function () {
   describe("Test admin login, post /admin/login route", () => {
     it("should return admin, token and status code 200", async () => {
       const res = await request(app)
@@ -245,7 +245,7 @@ describe("Test Admin Login Router", function() {
           username: "admin",
           password: "adminlocker123"
         });
-      expect(res.statusCode).toEqual(200);
+      expect(res.status).toEqual(200);
       expect(res.body).toHaveProperty("admin");
       expect(res.body.admin).toHaveProperty("id");
       expect(res.body.admin).toHaveProperty("name");
@@ -264,7 +264,7 @@ describe("Test Admin Login Router", function() {
           username: "admin",
           password: "beda password"
         });
-      expect(res.statusCode).toEqual(404);
+      expect(res.status).toEqual(404);
       expect(res.body).toHaveProperty("message");
       expect(res.body.message).toEqual("username/password wrong");
     });
@@ -276,7 +276,7 @@ describe("Test Admin Login Router", function() {
           username: "admin salah",
           password: "adminlocker123"
         });
-      expect(res.statusCode).toEqual(404);
+      expect(res.status).toEqual(404);
       expect(res.body).toHaveProperty("message");
       expect(res.body.message).toEqual("username/password wrong");
     });
