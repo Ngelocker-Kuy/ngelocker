@@ -13,6 +13,7 @@ describe('Test Admin Features', function () {
             })
             .end((err, res) => {
                 tokenAdmin = res.body.token
+                done()
             })
     })
 
