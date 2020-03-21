@@ -4,7 +4,7 @@ import ErrorPermission from '../components/errorPermission'
 import SuccessPermission from '../components/successPermission'
 
 function permissionPage() {
-    const dummyData = false
+    const dummyData = true
     return (
         <div id="container">
             {
