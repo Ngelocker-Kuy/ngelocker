@@ -43,19 +43,21 @@ function listUsersPage() {
     ]
 
     return (
-        <section className="Grid">
-            <div className="Grid-row" style={{
-                display: "flex", flexDirection: "row", flexWrap: "wrap",
-            }}>
-                {
-                    dataDummy.map(user => {
-                        return (
-                            <Card data={user} key={user.id} />
-                        )
-                    })
-                }
-            </div>
-        </section >
+        <div className="listCard">
+            <section className="Grid">
+                <div className="Grid-row" style={{
+                    display: "flex", flexDirection: "row", flexWrap: "wrap",
+                }}>
+                    {
+                        dataDummy.map(user => {
+                            return (
+                                <Card data={user} key={user.id} />
+                            )
+                        })
+                    }
+                </div>
+            </section >
+        </div>
     )
 }
 

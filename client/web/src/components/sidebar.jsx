@@ -3,40 +3,108 @@ import '../styles/sidebar.css'
 
 function Sidebar() {
   return (
-    <div className="page">
-      <header tabIndex="0"></header>
-      <div id="nav-container">
-        <div className="bg"></div>
-        <div className="button" tabIndex="0">
-          <span className="icon-bar"></span>
-          <span className="icon-bar"></span>
-          <span className="icon-bar"></span>
+    <section class="menu menu--circle">
+      <input type="checkbox" id="menu__active" />
+      <label for="menu__active" class="menu__active">
+        <div class="menu__toggle">
+          <div class="icon">
+            <div class="hamburger"></div>
+          </div>
         </div>
-        <div id="nav-content" tabIndex="0">
-          <ul>
+        <input type="radio" name="arrow--up" id="degree--up-0" />
+        <input type="radio" name="arrow--up" id="degree--up-1" />
+        <input type="radio" name="arrow--up" id="degree--up-2" />
+        <div class="menu__listings">
+          <ul class="circle">
             <li>
-              <a href="#0">Home</a>
+              <div class="placeholder">
+                <div class="upside">
+                  <a href="https://codepen.io/logrithumn" class="button"><i class="fa fa-user"></i></a>
+                </div>
+              </div>
             </li>
             <li>
-              <a href="#0">Services</a>
+              <div class="placeholder">
+                <div class="upside">
+                  <a href="#" class="button"><i class="fa fa-cog"></i></a>
+                </div>
+              </div>
             </li>
             <li>
-              <a href="#0">Blog</a>
+              <div class="placeholder">
+                <div class="upside">
+                  <a href="#">&nbsp</a>
+                </div>
+              </div>
             </li>
             <li>
-              <a href="#0">About</a>
+              <div class="placeholder">
+                <div class="upside">
+                  <a href="#" class="button"><i class="fa fa-commenting"></i></a>
+                </div>
+              </div>
             </li>
             <li>
-              <a href="#0">Contact</a>
+              <div class="placeholder">
+                <div class="upside">
+                  <a href="#" class="button"><i class="fa fa-trash"></i></a>
+                </div>
+              </div>
             </li>
-            <li className="small">
-              <a href="#0">Facebook</a>
-              <a href="#0">Instagram</a>
+            <li>
+              <div class="placeholder">
+                <div class="upside">
+                  <a href="#" class="button"><i class="fa fa-battery-4"></i></a>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="placeholder">
+                <div class="upside">
+                  <a href="#" class="button"><i class="fa fa-calendar"></i></a>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="placeholder">
+                <div class="upside">
+                  <a href="#" class="button"><i class="fa fa-cloud"></i></a>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="placeholder">
+                <div class="upside">
+                  <a href="#" class="button"><i class="fa fa-wifi"></i></a>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="placeholder">
+                <div class="upside">
+                  <a href="#" class="button"><i class="fa fa-envelope-o"></i></a>
+                </div>
+              </div>
             </li>
           </ul>
         </div>
-      </div>
-    </div>
+        <div class="menu__arrow menu__arrow--top">
+          <ul>
+            <li>
+              <label for="degree--up-0">
+                <div class="arrow"></div>
+              </label>
+              <label for="degree--up-1">
+                <div class="arrow"></div>
+              </label>
+              <label for="degree--up-2">
+                <div class="arrow"></div>
+              </label>
+            </li>
+          </ul>
+        </div>
+      </label>
+    </section>
   );
 }
 
