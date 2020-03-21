@@ -20,7 +20,7 @@ function App() {
           <Route path="/users" exact component={ListUsersPage} />
           <Route path="/permission" exact component={PermissionPage} />
           <Route path="/register/user" exact component={RegisterUserPage} />
-          <Route path="/register/guest" exact component={RegisterGuestPage} />
+          <Route path="/guest/:UserId" exact component={RegisterGuestPage} />
           <Route path="/" exact component={LoginAdminPage} />
         </Switch>
       </Router>
