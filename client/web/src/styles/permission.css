@@ -68,7 +68,7 @@ button, .dot {
 #success-box {
     margin-top: 11vh;
     position: fixed;
-    width: 80%;
+    width: 19rem;
     height: 60vh;
     left: 12%;
     background: linear-gradient(to bottom right, #B0DB7D 40%, #99DBB4 100%);
@@ -80,7 +80,7 @@ button, .dot {
 #error-box {
   margin-top: 11vh;
   position: fixed;
-  width: 80%;
+  width: 19rem;
   height: 60vh;
   left: 12%;
   perspective: 40px;
@@ -118,7 +118,7 @@ button, .dot {
 .button-box {
     position: fixed;
     background: #FCFCFC;
-    width: 35vw;
+    width: 8rem;
     height: 9%;
     border-radius: 20px;
     top: 85%;
