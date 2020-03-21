@@ -92,5 +92,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: 40,
     marginBottom: 10
+  },
+  loginText: {
+    color: "white",
+    fontSize: 16,
+    fontWeight: "bold"
   }
 });
