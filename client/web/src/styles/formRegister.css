@@ -1,13 +1,28 @@
-.btn {
-  padding: 1.075rem 0.75rem;
-}
 .btn-register {
-  background-color: #ee4d2d;
-  border-color: #ee4d2d;
+  padding: 1.075rem 0.75rem;
+  border-radius: 5px;
+  background-color: #000000;
+  border-color: #000000;
   color: #fff;
   font-weight: 600;
   font-size: 0.85rem;
   line-height: 18px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+}
+input[type=text] {
+  background-color: #1A2226;
+  border: none;
+  border-bottom: 2px solid #0DB8DE;
+  border-top: 0px;
+  border-radius: 0px;
+  font-weight: bold;
+  outline: 0;
+  margin-bottom: 0;
+  padding-left: 0px;
+  color: #ECF0F5;
 }
 .user-accounts-form {
   border-radius: 3px;
@@ -37,14 +52,14 @@
   color: rgba(0, 0, 0, 0.54);
 }
 .user-accounts-form-header .link-page {
-  color: #ee4d2d;
+  color: #00ffc8;
   font-weight: 600;
   cursor: pointer;
 }
 h1 {
   font-size: 32px;
   font-weight: 500px;
-  color: #ee4d2d;
+  color: #0084ff;
   line-height: 57px;
 }
 p {
