@@ -1,10 +1,10 @@
 import React from 'react';
 import "../styles/permission.css";
-import ErrorPermission from '../components/errorPermission'
-import SuccessPermission from '../components/successPermission'
+import { ErrorPermission, SuccessPermission } from '.'
 
-function permissionPage() {
+function PermissionPage() {
     const dummyData = false
+
     return (
         <div id="container">
             {
@@ -16,4 +16,4 @@ function permissionPage() {
         </div >
     )
 }
-export default permissionPage
+export default PermissionPage

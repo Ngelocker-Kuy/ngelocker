@@ -1,6 +1,6 @@
 const jwt = require("../helpers/jwt");
 
-module.exports = function(req, res, next) {
+module.exports = function (req, res, next) {
   try {
     const token = req.headers.token;
     const user = jwt.verify(token);
