@@ -1,8 +1,26 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import '../styles/card.css';
-import Card from '../components/card'
+import { Card } from '.'
+import axios from '../services/axios'
 
-function listUsersPage() {
+function ListUsersPage() {
+    const [users, setUsers] = useState([])
+
+    useEffect(() => {
+        axios
+            .get('/users', {
+                headers: {
+                    token: localStorage.token
+                }
+            })
+            .then(({ data }) => {
+                setUsers(data)
+            })
+            .catch(err => {
+                console.log(err.response)
+            })
+    }, [])
+
     const dataDummy = [
         {
             id: 1,
@@ -61,4 +79,4 @@ function listUsersPage() {
     )
 }
 
-export default listUsersPage
+export default ListUsersPage

@@ -6,8 +6,6 @@ export default function usersReducers(state = initialState, actions) {
   switch (actions.type) {
     case 'TEST':
       return state
-      break;
-  
     default:
       return state
   }

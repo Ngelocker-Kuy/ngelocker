@@ -7,8 +7,8 @@ class AdminController {
     let password = req.body.password;
     Admin.findOne({
       where: {
-        username: username,
-        password: password
+        username,
+        password
       }
     })
       .then(user => {

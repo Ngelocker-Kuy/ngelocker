@@ -4,7 +4,6 @@ const redis = require('../services/redis')
 class GuestController {
   static async getGuest(req, res, next) {
     let listGuest = await redis.get("listGuest")
-
     if (listGuest) {
       res.status(200).json(JSON.parse(listGuest))
     } else {
