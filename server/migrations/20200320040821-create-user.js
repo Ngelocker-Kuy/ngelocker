@@ -23,8 +23,8 @@ module.exports = {
       LockerId: {
         type: Sequelize.INTEGER
       },
-      deviceLabel: {
-        type: Sequelize.INTEGER
+      lockerLabel: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,

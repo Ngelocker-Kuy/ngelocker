@@ -16,7 +16,8 @@ class UserController {
         name: req.body.name,
         username: req.body.username,
         password: req.body.password,
-        email: req.body.email
+        email: req.body.email,
+        lockerLabel: req.body.lockerLabel
       };
       const registerUser = await User.create(dataUser);
       const createLocker = await Locker.create({ UserId: registerUser.id });
