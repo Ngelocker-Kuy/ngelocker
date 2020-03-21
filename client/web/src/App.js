@@ -8,7 +8,7 @@ import {
   Route
 } from 'react-router-dom'
 import store from './store/index'
-import { LoginAdminPage, ListUsersPage, PermissionPage, RegisterUserPage, RegisterGuestPage } from './containers'
+import { LoginAdminPage, ListUsersPage, PermissionPage, RegisterUserPage, RegisterGuestPage, WaitingPage } from './containers'
 import Sidebar from './components/Sidebar'
 
 function App() {
@@ -17,6 +17,7 @@ function App() {
       <Router>
         <Sidebar />
         <Switch>
+          <Route path="/waiting" exact component={WaitingPage} />
           <Route path="/users" exact component={ListUsersPage} />
           <Route path="/permission" exact component={PermissionPage} />
           <Route path="/register/user" exact component={RegisterUserPage} />
