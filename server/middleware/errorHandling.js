@@ -1,6 +1,5 @@
 "use strict";
 module.exports = (err, req, res, next) => {
-    // console.log(err, "ini buat liat console log==============");
     if (err.status && err.message) {
         res.status(err.status).json({ message: err.message });
     } else if (err.name === "JsonWebTokenError") {
