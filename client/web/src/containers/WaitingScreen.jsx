@@ -13,7 +13,6 @@ function WaitingScreen() {
         loop
         autoplay
       ></lottie-player>
-      
       </div>
       <div>
       <lottie-player
