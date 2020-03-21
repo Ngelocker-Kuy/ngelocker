@@ -29,14 +29,14 @@ function RegisterUserPage() {
                                 </div>
                                 <div className="form-group">
                                     <label>Email</label>
-                                    <input type="email" className="form-control" />
+                                    <input type="text" className="form-control" />
                                     <p className="user-input-info">Contoh: email@ngelocker.com</p>
                                 </div>
                                 <div className="form-group">
                                     <label>Password</label>
                                     <input type="password" className="form-control" />
                                 </div>
-                                <button type="submit" className="btn btn-register btn-block mt-4">Daftar</button>
+                                <button type="submit" className="btn-register btn-block mt-4">Daftar</button>
                             </form>
                         </div>
                     </div>

@@ -8,7 +8,7 @@ import {
   Route
 } from 'react-router-dom'
 import store from './store/index'
-import { LoginAdminPage, ListUsersPage, PermissionPage } from './containers'
+import { LoginAdminPage, ListUsersPage, PermissionPage, RegisterUserPage } from './containers'
 import Sidebar from './components/Sidebar'
 
 function App() {
@@ -21,6 +21,9 @@ function App() {
             {/* <ListUsersPage /> */}
           </Route>
           <Route path="/permission" exact component={PermissionPage}>
+            {/* <PermissionPage /> */}
+          </Route>
+          <Route path="/register/user" exact component={RegisterUserPage}>
             {/* <PermissionPage /> */}
           </Route>
           <Route path="/" exact component={LoginAdminPage}>
