@@ -9,14 +9,17 @@ import {
 } from 'react-router-dom'
 import store from './store/index'
 import Sidebar from './components/sidebar'
-import { LoginAdminPage, ListUsersPage } from './containers/index'
+import { LoginAdminPage, ListUsersPage, WaitingPage } from './containers/index'
 
 function App() {
   return (
     <Provider store={store}>
       <Router>
-        <Sidebar/>
+        {/* <Sidebar /> */}
         <Switch>
+          <Route path="/waiting" exact>
+            <WaitingPage />
+          </Route>
           <Route path="/users" exact>
             <ListUsersPage />
           </Route>

@@ -44,7 +44,6 @@ function LoginAdminPage() {
                     <div className="col-lg-3 col-md-2"></div>
                 </div>
             </div>
-        </div>
     );
 }
 
