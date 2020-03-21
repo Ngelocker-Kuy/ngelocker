@@ -67,7 +67,7 @@ function ListUsersPage() {
                     display: "flex", flexDirection: "row", flexWrap: "wrap",
                 }}>
                     {
-                        dataDummy.map(user => {
+                        users.map(user => {
                             return (
                                 <Card data={user} key={user.id} />
                             )

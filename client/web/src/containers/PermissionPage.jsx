@@ -1,14 +1,15 @@
 import React from 'react';
 import "../styles/permission.css";
 import { ErrorPermission, SuccessPermission } from '.'
+import { useSelector } from 'react-redux'
 
 function PermissionPage() {
-    const dummyData = true
+    const statusLock = useSelector(state => state.lockerReducers.status)
 
     return (
         <div id="container">
             {
-                dummyData ?
+                statusLock ?
                     <SuccessPermission />
                     :
                     <ErrorPermission />
