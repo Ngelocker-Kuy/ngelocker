@@ -10,7 +10,7 @@ function RegisterUserPage() {
                         <h1>Daftarkan User!</h1>
                         <p>Isi dengan benar dan lengkapi</p>
                         <lottie-player
-                            src="https://assets10.lottiefiles.com/packages/lf20_i25VGQ.json" background="transparent" speed="1" style={{ width: "300px", height: "57vh", cursor: "pointer" }} hover autoplay loop >
+                            src="https://assets10.lottiefiles.com/packages/lf20_i25VGQ.json" background="transparent" speed="1" style={{ width: "300px", height: "70vh", cursor: "pointer" }} hover autoplay loop >
                         </lottie-player>
                     </div>
                     <div className="col-5">
@@ -25,6 +25,10 @@ function RegisterUserPage() {
                             <form>
                                 <div className="form-group">
                                     <label>Username</label>
+                                    <input type="text" className="form-control" />
+                                </div>
+                                <div className="form-group">
+                                    <label>Locker Label</label>
                                     <input type="text" className="form-control" />
                                 </div>
                                 <div className="form-group">
