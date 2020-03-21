@@ -1,18 +1,41 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom'
 import "../styles/formRegister.css";
 import axios from '../services/axios'
 
 function RegisterUserPage() {
+    const [name, setName] = useState('')
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
+    const [lockerLabel, setLockerLabel] = useState('')
     const [password, setPassword] = useState('')
+
+    const history = useHistory()
 
     const proceedRegisterUser = (e) => {
         e.preventDefault()
-        console.log(username, email, password)
+        console.log(username, email, password, lockerLabel)
 
         axios
-            .post('/users')
+            .post('/users', {
+                name,
+                username,
+                email,
+                password,
+                lockerLabel
+            }, {
+                headers: {
+                    token: localStorage.token
+                }
+            })
+            .then(({ data }) => {
+                console.log(data)
+
+                history.push('/users')
+            })
+            .catch(err => {
+                console.log(err.response)
+            })
     }
 
     return (
@@ -37,12 +60,16 @@ function RegisterUserPage() {
                             </div>
                             <form onSubmit={(e) => proceedRegisterUser(e)}>
                                 <div className="form-group">
+                                    <label>Name</label>
+                                    <input type="text" className="form-control" onChange={(e) => setName(e.target.value)} />
+                                </div>
+                                <div className="form-group">
                                     <label>Username</label>
                                     <input type="text" className="form-control" onChange={(e) => setUsername(e.target.value)} />
                                 </div>
                                 <div className="form-group">
                                     <label>Locker Label</label>
-                                    <input type="text" className="form-control" />
+                                    <input type="text" className="form-control" onChange={(e) => setLockerLabel(e.target.value)} />
                                 </div>
                                 <div className="form-group">
                                     <label>Email</label>
