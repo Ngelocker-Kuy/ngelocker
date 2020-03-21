@@ -41,10 +41,10 @@ function RegisterUserPage() {
     return (
         <div className="register">
             <div className="container">
-                <div className="row justify-content-center mt-5">
+                <div className="row justify-content-center mt-4">
                     <div className="col-5 text-center">
-                        <h1>Daftarkan User!</h1>
-                        <p>Isi dengan benar dan lengkapi</p>
+                        <h1>Register User!</h1>
+                        <p>Fill in correctly</p>
                         <lottie-player
                             src="https://assets10.lottiefiles.com/packages/lf20_i25VGQ.json" background="transparent" speed="1" style={{ width: "300px", height: "70vh", cursor: "pointer" }} hover autoplay loop >
                         </lottie-player>
@@ -52,11 +52,7 @@ function RegisterUserPage() {
                     <div className="col-5">
                         <div className="user-accounts-form shadow p-5">
                             <div className="user-accounts-form-header">
-                                <h2 className="title">Daftarkan Sekarang</h2>
-                                <p className="text">
-                                    Sudah Punya Locker?
-                                    <a className="link-page"> check locker</a>
-                                </p>
+                                <h2 className="title">Form</h2>
                             </div>
                             <form onSubmit={(e) => proceedRegisterUser(e)}>
                                 <div className="form-group">
@@ -74,7 +70,6 @@ function RegisterUserPage() {
                                 <div className="form-group">
                                     <label>Email</label>
                                     <input type="text" className="form-control" onChange={(e) => setEmail(e.target.value)} />
-                                    <p className="user-input-info">Contoh: email@ngelocker.com</p>
                                 </div>
                                 <div className="form-group">
                                     <label>Password</label>
