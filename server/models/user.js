@@ -59,20 +59,7 @@ module.exports = (sequelize, DataTypes) => {
         }
       },
       LockerId: DataTypes.INTEGER,
-      lockerLabel: {
-        type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: {
-            args: true,
-            msg: "please fill locker label"
-          },
-          notNull: {
-            args: true,
-            msg: "please enter your locker label"
-          }
-        }
-      }
+      lockerLabel: DataTypes.STRING
     },
     {
       sequelize,
