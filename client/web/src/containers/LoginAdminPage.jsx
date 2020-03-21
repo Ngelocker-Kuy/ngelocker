@@ -1,12 +1,30 @@
 import React, { useState } from "react";
+import { useHistory } from 'react-router-dom'
 import "../styles/loginAdmin.css";
+import axios from '../services/axios'
 
 function LoginAdminPage() {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
 
-    const login = () => {
+    const history = useHistory()
 
+    const login = (e) => {
+        e.preventDefault()
+
+        axios
+            .post('/admin/login', {
+                username,
+                password
+            })
+            .then(result => {
+                let token = result.data.token
+                localStorage.setItem('token', token)
+                history.push('/users')
+            })
+            .catch(({ response: { data } }) => {
+                console.log(data)
+            })
     }
 
     return (
@@ -21,7 +39,7 @@ function LoginAdminPage() {
                         ADMIN PANEL
                 </div>
                     <div className="col-lg-12 login-form">
-                        <form onSubmit={() => login()}>
+                        <form onSubmit={(e) => login(e)}>
                             <div className="form-group">
                                 <label className="form-control-label">USERNAME</label>
                                 <input type="text" className="form-control" onChange={(e) => setUsername(e.target.value)} />

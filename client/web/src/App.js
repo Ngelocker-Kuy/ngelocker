@@ -8,8 +8,8 @@ import {
   Route
 } from 'react-router-dom'
 import store from './store/index'
-import { LoginAdminPage, ListUsersPage, PermissionPage } from './containers/index'
-import Sidebar from './components/sidebar'
+import { LoginAdminPage, ListUsersPage, PermissionPage } from './containers'
+import Sidebar from './components/Sidebar'
 
 function App() {
   return (
@@ -17,14 +17,14 @@ function App() {
       <Router>
         <Sidebar />
         <Switch>
-          <Route path="/users" exact>
-            <ListUsersPage />
+          <Route path="/users" exact component={ListUsersPage}>
+            {/* <ListUsersPage /> */}
           </Route>
-          <Route path="/permission" exact>
-            <PermissionPage />
+          <Route path="/permission" exact component={PermissionPage}>
+            {/* <PermissionPage /> */}
           </Route>
-          <Route path="/" exact>
-            <LoginAdminPage />
+          <Route path="/" exact component={LoginAdminPage}>
+            {/* <LoginAdminPage /> */}
           </Route>
         </Switch>
       </Router>
