@@ -3,7 +3,7 @@ let bcrypt = require("bcrypt");
 module.exports = (sequelize, DataTypes) => {
   const { Model } = sequelize.Sequelize;
 
-  class User extends Model {}
+  class User extends Model { }
   User.init(
     {
       name: DataTypes.STRING,
@@ -58,12 +58,13 @@ module.exports = (sequelize, DataTypes) => {
           }
         }
       },
-      LockerId: DataTypes.INTEGER
+      LockerId: DataTypes.INTEGER,
+      deviceLabel: DataTypes.INTEGER
     },
     {
       sequelize,
       hooks: {
-        beforeCreate: function(user, options) {
+        beforeCreate: function (user, options) {
           return User.findOne({ where: { email: user.email } })
             .then(result => {
               if (result) {
@@ -81,7 +82,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
   );
-  User.associate = function(models) {
+  User.associate = function (models) {
     // associations can be defined here
     User.belongsTo(models.Locker);
     User.hasMany(models.Guest);
