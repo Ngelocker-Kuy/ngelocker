@@ -4,7 +4,6 @@ import "../styles/formRegister.css";
 import axios from '../services/axios'
 
 function RegisterUserPage() {
-    const [name, setName] = useState('')
     const [username, setUsername] = useState('')
     const [email, setEmail] = useState('')
     const [lockerLabel, setLockerLabel] = useState('')
@@ -14,11 +13,9 @@ function RegisterUserPage() {
 
     const proceedRegisterUser = (e) => {
         e.preventDefault()
-        console.log(username, email, password, lockerLabel)
 
         axios
             .post('/users', {
-                name,
                 username,
                 email,
                 password,
@@ -57,7 +54,7 @@ function RegisterUserPage() {
                             <form onSubmit={(e) => proceedRegisterUser(e)}>
                                 <div className="form-group">
                                     <label>Name</label>
-                                    <input type="text" className="form-control" onChange={(e) => setName(e.target.value)} />
+                                    <input type="text" className="form-control" />
                                 </div>
                                 <div className="form-group">
                                     <label>Username</label>
