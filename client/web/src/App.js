@@ -15,7 +15,7 @@ function App() {
   return (
     <Provider store={store}>
       <Router>
-        <Sidebar />
+        <Sidebar/>
         <Switch>
           <Route path="/users" exact>
             <ListUsersPage />

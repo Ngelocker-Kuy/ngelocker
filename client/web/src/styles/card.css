@@ -2,9 +2,16 @@ body {
   background: #f5f5f5;
   font-family: 'Libre Franklin', sans-serif;
 }
+.listCard{
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    width: fit-content;
+    height: 100%;
+}
 .Grid {
-  width: 70rem;
-  margin: 5rem auto;
+  width: 100%;
+  /* margin: 5rem auto; */
 }
 .Grid-row {
   display: -webkit-box;
