@@ -18,7 +18,9 @@ function RegisterGuestPage() {
                 phoneNumber,
                 UserId
             })
-            .then(result => {
+            .then(({ data }) => {
+                localStorage.setItem('userId', UserId)
+
                 history.push('/waiting')
             })
             .catch(err => {
