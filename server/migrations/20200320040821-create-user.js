@@ -23,6 +23,9 @@ module.exports = {
       LockerId: {
         type: Sequelize.INTEGER
       },
+      lockerLabel: {
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
