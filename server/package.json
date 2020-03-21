@@ -31,6 +31,7 @@
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "express": "^4.17.1",
+    "ioredis": "^4.16.0",
     "jsonwebtoken": "^8.5.1",
     "pg": "^7.18.2",
     "sequelize": "^5.21.5"

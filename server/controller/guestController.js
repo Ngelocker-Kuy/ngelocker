@@ -1,12 +1,21 @@
 const { Guest, User } = require("../models");
+const redis = require('../services/redis')
 
 class GuestController {
-  static getGuest(req, res, next) {
-    Guest.findAll({ where: { UserId: req.user.id } })
-      .then(result => {
-        res.status(200).json(result);
-      })
-      .catch(next)
+  static async getGuest(req, res, next) {
+    let listGuest = await redis.get("listGuest")
+
+    if (listGuest) {
+      res.status(200).json(JSON.parse(listGuest))
+    } else {
+      Guest.findAll({ where: { UserId: req.user.id } })
+        .then(result => {
+          redis.set('listGuest', JSON.stringify(result))
+
+          res.status(200).json(result);
+        })
+        .catch(next)
+    }
   }
 
   static createGuest(req, res, next) {
@@ -18,6 +27,7 @@ class GuestController {
     };
     Guest.create(body)
       .then(result => {
+        redis.del('listGuest')
         res.status(201).json({ guest: result.dataValues });
       })
       .catch(next)
@@ -28,11 +38,12 @@ class GuestController {
     Guest.update(status, { where: { id: req.params.id }, returning: true })
       .then(result => {
         if (result[0] != 0) {
+          redis.del('listGuest')
           res.status(200).json({ guest: result[1][0].dataValues });
         } else {
           let message = {
             status: "404",
-            message: "command not found"
+            message: "Guest not found"
           };
           throw message;
         }
@@ -44,9 +55,8 @@ class GuestController {
     Guest.findOne({ where: { id: req.params.id } })
       .then(result => {
         if (result != null) {
-          return Guest.destroy({
-            where: { id: req.params.id, UserId: req.user.id }
-          });
+          redis.del('listGuest')
+          return result.destroy();
         } else {
           let message = { status: 404, message: "Guest not found" };
           throw message;
