@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+import { useDispatch } from 'react-redux'
 import { useParams, useHistory } from 'react-router-dom'
 import axios from '../services/axios'
+
+import { ADDNEWGUEST } from '../store/actions/guest'
 
 function RegisterGuestPage() {
     const [name, setName] = useState('')
@@ -8,6 +11,7 @@ function RegisterGuestPage() {
 
     const { UserId } = useParams()
     const history = useHistory()
+    const dispatch = useDispatch()
 
     const registerGuest = (e) => {
         e.preventDefault()
@@ -20,6 +24,8 @@ function RegisterGuestPage() {
             })
             .then(({ data }) => {
                 localStorage.setItem('userId', UserId)
+
+                dispatch(ADDNEWGUEST(data.guest))
 
                 history.push('/waiting')
             })
