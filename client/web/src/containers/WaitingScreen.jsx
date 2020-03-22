@@ -1,15 +1,17 @@
 import React, { useEffect } from "react";
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import socket from '../services/socket'
 
-import { changeLockStatus } from '../store/actions'
+import { changeLockStatus } from '../store/actions/locker'
 
 function WaitingScreen() {
   const UserId = localStorage.userId
 
   const history = useHistory()
   const dispatch = useDispatch()
+
+  const guest = useSelector(state => state.guestReducers.guest)
 
   socket.on(`permission-${UserId}`, ({ status }) => {
     dispatch(changeLockStatus(status))
@@ -19,9 +21,13 @@ function WaitingScreen() {
     history.push('/permission')
   })
 
+  if (Object.keys(guest).length === 0) {
+    history.goBack()
+  }
+
   useEffect(() => {
     socket.emit('newGuest', UserId)
-  }, [])
+  }, [UserId])
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '50px' }}>
