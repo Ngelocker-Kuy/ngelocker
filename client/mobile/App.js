@@ -1,9 +1,13 @@
-import React from 'react';
+import React from "react";
 
-import LoginNavigator from './navigation/LoginNavigator';
+import LoginNavigator from "./navigation/LoginNavigator";
+import { Provider } from "react-redux";
+import store from "./store/index";
 
 export default function App() {
   return (
-    <LoginNavigator />
+    <Provider store={store}>
+      <LoginNavigator />
+    </Provider>
   );
 }
