@@ -13,7 +13,7 @@ function WaitingScreen() {
 
   const guest = useSelector(state => state.guestReducers.guest)
 
-  socket.on(`permission-${UserId}`, (status) => {
+  socket.on(`permission-${guest.id}`, (status) => {
     dispatch(changeLockStatus(status))
 
     sessionStorage.removeItem('userId')
