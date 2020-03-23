@@ -27,7 +27,6 @@ function ListGuestScreen({ navigation }) {
       return new Date(b.createdAt) - new Date(a.createdAt)
     })
 
-
     setGuests(guestList)
   }
 
