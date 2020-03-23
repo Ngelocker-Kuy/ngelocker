@@ -38,7 +38,9 @@ class GuestController {
     Guest.update({ status }, { where: { id: req.params.id }, returning: true })
       .then(result => {
         if (result[0] != 0) {
-          req.io.emit(`permission-${req.user.id}`, status)
+          const guestId = result[1][0].id
+
+          req.io.emit(`permission-${guestId}`, status)
 
           redis.del('listGuest')
 

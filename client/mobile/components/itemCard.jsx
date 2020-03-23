@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, View, Text, TouchableOpacity, AsyncStorage } from "react-native";
 import axios from '../services/axios'
+import ubidots from '../services/ubidots'
 import { GET_GUEST } from "../actions/guestAction";
 import { useDispatch } from "react-redux";
 
@@ -38,18 +39,11 @@ function generateStyle(color) {
     });
 }
 
-<<<<<<< HEAD
 function Item({ id, title, phoneNumber, status, type }) {
     const dispatch = useDispatch()
 
     let color;
 
-=======
-function Item({ title, phoneNumber, status, type }) {
-    let color;
-
-    console.log(status);
->>>>>>> 3098b14321ff42cd4c20cb617467b6193f9a1580
     if (status === null) {
         color = "#83a4d4";
     } else if (status) {
@@ -71,8 +65,23 @@ function Item({ title, phoneNumber, status, type }) {
                     token
                 }
             })
-            .then(result => {
+            .then(() => {
                 dispatch(GET_GUEST(token))
+
+                toggleLocker(status ? 1 : 0)
+            })
+            .catch(err => {
+                console.log(err.response)
+            })
+    }
+
+    const toggleLocker = (key) => {
+        ubidots
+            .post('/demoswitch/demo/values', {
+                value: key
+            })
+            .then(result => {
+                console.log(result)
             })
             .catch(err => {
                 console.log(err.response)
@@ -86,20 +95,12 @@ function Item({ title, phoneNumber, status, type }) {
             {/* button */}
             {type === "request" ?
                 <>
-<<<<<<< HEAD
                     <TouchableOpacity style={styles.btnAccept} onPress={() => unlockLocker(true)}>
-=======
-                    <TouchableOpacity style={styles.btnAccept}>
->>>>>>> 3098b14321ff42cd4c20cb617467b6193f9a1580
                         <Text>
                             <h3>Accept</h3>
                         </Text>
                     </TouchableOpacity>
-<<<<<<< HEAD
                     <TouchableOpacity style={styles.btnDecline} onPress={() => unlockLocker(false)}>
-=======
-                    <TouchableOpacity style={styles.btnDecline}>
->>>>>>> 3098b14321ff42cd4c20cb617467b6193f9a1580
                         <Text>
                             <h3>Decline</h3>
                         </Text>
