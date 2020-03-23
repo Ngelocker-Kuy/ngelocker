@@ -4,7 +4,6 @@ module.exports = function (req, res, next) {
   try {
     const token = req.headers.token;
     const user = jwt.verify(token);
-    console.log(user);
     req.user = user;
     next();
   } catch (error) {

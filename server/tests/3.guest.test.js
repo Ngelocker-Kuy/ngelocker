@@ -3,7 +3,7 @@ const app = require("../app");
 
 describe("Test Guest Features", function () {
   describe("Test register guest, post /guests route", () => {
-    it("should return guest and status code 201", async () => {
+    it("should return guest and status code 201", async (done) => {
       const res = await request(app)
         .post("/guests")
         .send({
@@ -20,6 +20,7 @@ describe("Test Guest Features", function () {
       expect(res.body.guest.phoneNumber).toEqual("081382062456");
       expect(res.body.guest).toHaveProperty("status");
       expect(res.body.guest.status).toEqual(false);
+      done()
     })
   })
 })
