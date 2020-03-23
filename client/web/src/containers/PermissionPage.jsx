@@ -3,7 +3,7 @@ import "../styles/permission.css";
 import { ErrorPermission, SuccessPermission } from '.'
 
 function PermissionPage() {
-    const dummyData = true
+    const dummyData = false
 
     return (
         <div id="container">
