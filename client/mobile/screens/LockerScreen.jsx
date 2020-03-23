@@ -11,7 +11,7 @@ import {
 export default function LoginScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.logo}>Lockey</Text>
+      <Text style={styles.logo}>Lock Key</Text>
       <View style={styles.containerLocker}>
         {/* Lock */}
         <TouchableOpacity style={styles.lockBtnLock}>
