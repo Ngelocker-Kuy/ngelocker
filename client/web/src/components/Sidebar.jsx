@@ -1,8 +1,16 @@
 import React from "react";
-import { Link } from "react-router-dom"
+import { Link, useHistory } from "react-router-dom"
 import '../styles/sidebar.css'
 
 function Sidebar() {
+  const history = useHistory()
+
+  const logout = () => {
+    sessionStorage.removeItem('token')
+    history.push('/')
+  }
+
+
   return (
     <section className="menu menu--circle">
       <input type="checkbox" id="menu__active" />
@@ -47,7 +55,7 @@ function Sidebar() {
             <li>
               <div className="placeholder">
                 <div className="upside">
-                  <Link className="button"><i class="fas fa-sign-out-alt"></i></Link>
+                  <button onClick={() => logout()} className="button"><i className="fas fa-sign-out-alt"></i></button>
                 </div>
               </div>
             </li>
@@ -66,7 +74,7 @@ function Sidebar() {
             <li>
               <div className="placeholder">
                 <div className="upside">
-                  <Link to="/register/user" className="button"><i class="fas fa-user-plus"></i></Link>
+                  <Link to="/register/user" className="button"><i className="fas fa-user-plus"></i></Link>
                 </div>
               </div>
             </li>
