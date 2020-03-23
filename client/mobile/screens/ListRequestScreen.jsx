@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   SafeAreaView,
   View,
   Text,
-  Button,
+  AsyncStorage,
   FlatList
 } from "react-native";
+import ItemCard from '../components/itemCard'
+import axios from '../services/axios'
 
 const DATA = [
   {
@@ -45,6 +47,29 @@ function Item({ title }) {
 }
 
 function ListRequestScreen({ navigation }) {
+  const [guests, setGuests] = useState([])
+
+  const getGuestList = async () => {
+    const token = await AsyncStorage.getItem('token')
+    const { data } = await axios.get('/guests', {
+      headers: {
+        token
+      }
+    })
+
+    const guestList = data.filter(guest => guest.status === null)
+
+    guestList.sort((a, b) => {
+      return new Date(b.createdAt) - new Date(a.createdAt)
+    })
+
+    setGuests(guestList)
+  }
+
+
+  useEffect(() => {
+    getGuestList()
+  }, [])
   // return (
   //   <View style={styles.container}>
   //     {/* {DummyList().map(item => (
@@ -61,12 +86,17 @@ function ListRequestScreen({ navigation }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <View style={{...styles.container, alignItems: "center"}}>
+      <View style={{ ...styles.container, alignItems: "center" }}>
         <Text style={styles.logo}>Request</Text>
       </View>
       <FlatList
-        data={DummyList()}
-        renderItem={({ item }) => <Item title={item.text} />}
+        data={guests}
+        renderItem={({ item }) =>
+          <ItemCard
+            title={item.name}
+            status={item.status}
+            type="request"
+            phoneNumber={item.phoneNumber} />}
         keyExtractor={item => item.id}
       />
     </SafeAreaView>
