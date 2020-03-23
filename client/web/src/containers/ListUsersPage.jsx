@@ -24,7 +24,7 @@ function ListUsersPage() {
     return (
         <div className="container">
             <div className="row" style={{ display: "flex", justifyContent: "center", margin: "2%" }}>
-                <h1 style={{ fontFamily: "Fredoka One" }}>List Users</h1>
+                <h1 style={{ fontFamily: "Fredoka One", color: "white" }}>List Users</h1>
             </div>
             <div className="row">
                 <div className="listCard">

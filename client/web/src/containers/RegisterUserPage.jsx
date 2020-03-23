@@ -61,33 +61,33 @@ function RegisterUserPage() {
     })
 
     return (
-        <div className="register" style={{ fontFamily: "Fredoka One" }}>
+        <div className="register mt-5" style={{ fontFamily: "Fredoka One" }}>
             < div className="container" >
                 <div className="row justify-content-center mt-4">
                     <div className="col-5 text-center">
-                        <h1>Register User!</h1>
-                        <p>Fill in correctly</p>
+                        <h1 style={{ color: 'white' }}>Register User!</h1>
+                        <p style={{ color: 'white' }}>Fill in correctly</p>
                         <lottie-player
-                            src="https://assets10.lottiefiles.com/packages/lf20_i25VGQ.json" background="transparent" speed="1" style={{ marginLeft: "7vh", display: "flex", justifyContent: "center", width: "100%", height: "69vh", cursor: "pointer" }} hover autoplay loop >
+                            src="https://assets10.lottiefiles.com/packages/lf20_i25VGQ.json" background="transparent" speed="1" style={{ marginLeft: "7vh", display: "flex", justifyContent: "center", width: "100%", height: "66vh", cursor: "pointer" }} autoplay loop >
                         </lottie-player>
                     </div>
                     <div className="col-5">
-                        <div className="user-accounts-form shadow p-5">
+                        <div className="user-accounts-form p-5">
                             <div className="user-accounts-form-header">
-                                <h2 className="title">Register User</h2>
+                                <h2 className="title">Form User</h2>
                             </div>
                             <form onSubmit={(e) => proceedRegisterUser(e)}>
                                 <div className="form-group">
                                     <label>Username</label>
-                                    <input type="text" className="form-control" onChange={(e) => setUsername(e.target.value)} />
+                                    <input style={{ color: "white" }} type="text" className="form-control" onChange={(e) => setUsername(e.target.value)} />
                                 </div>
                                 <div className="form-group">
                                     <label>Locker Label</label>
-                                    <input editable="false" type="text" className="form-control" value={lockerLabel} readOnly style={{ background: '#1A2226' }} />
+                                    <input style={{ color: "white" }} editable="false" type="text" className="form-control" value={lockerLabel} readOnly style={{ background: '#1A2226' }} />
                                 </div>
                                 <div className="form-group">
                                     <label>Email</label>
-                                    <input type="text" className="form-control" onChange={(e) => setEmail(e.target.value)} />
+                                    <input style={{ color: "white" }} type="text" className="form-control" onChange={(e) => setEmail(e.target.value)} />
                                 </div>
                                 <label>Password</label>
                                 <InputGroup className="mb-3">
@@ -117,7 +117,7 @@ function RegisterUserPage() {
                                         </Button>
                                     </InputGroup.Append>
                                 </InputGroup>
-                                <button type="submit" className="btn-register btn-block mt-4">Register</button>
+                                <button type="submit" className="btn-register btn-block mt-4">Submit</button>
                             </form>
                         </div>
                     </div>
