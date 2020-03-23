@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom'
 import "../styles/formRegister.css";
 import axios from '../services/axios'
 import { InputGroup, Button, FormControl } from 'react-bootstrap'
 import { BsEyeSlashFill, BsEyeFill } from 'react-icons/bs';
-import { useEffect } from 'react';
 
 function RegisterUserPage() {
     const [username, setUsername] = useState('')
@@ -83,7 +82,7 @@ function RegisterUserPage() {
                                 </div>
                                 <div className="form-group">
                                     <label>Locker Label</label>
-                                    <input style={{ color: "white" }} editable="false" type="text" className="form-control" value={lockerLabel} readOnly style={{ background: '#1A2226' }} />
+                                    <input style={{ color: "white", background: '#1A2226' }} editable="false" type="text" className="form-control" value={lockerLabel} readOnly />
                                 </div>
                                 <div className="form-group">
                                     <label>Email</label>
