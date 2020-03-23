@@ -11,7 +11,6 @@ function LoginAdminPage({ children, ...rest }) {
 
     const login = (e) => {
         e.preventDefault()
-
         axios
             .post('/admin/login', {
                 username,

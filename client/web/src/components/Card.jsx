@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom"
 import '../styles/card.css';
 
 function Card(props) {
@@ -15,7 +16,7 @@ function Card(props) {
     ]
 
     return (
-        <a className="Card">
+        <Link className="Card">
             <div className="Card-thumb">
                 <div className="Card-shadow"></div>
                 <div className="Card-shadow"></div>
@@ -24,7 +25,7 @@ function Card(props) {
             </div>
             <div className="Card-title"><span>{props.data.name}</span></div>
             <div className="Card-explore"><span> ID {props.data.LockerId} Locker Owner</span></div>
-        </a>
+        </Link>
     );
 }
 

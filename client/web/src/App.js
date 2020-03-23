@@ -14,7 +14,6 @@ import {
   RegisterUserPage,
   RegisterGuestPage,
   WaitingPage,
-  SideBar,
   PrivateRoute
 } from './containers'
 
@@ -23,7 +22,6 @@ function App() {
   return (
     <Provider store={store}>
       <Router>
-        <SideBar />
         <Switch>
           <Route path="/" exact component={LoginAdminPage} />
           <Route path="/guest/:UserId" exact component={RegisterGuestPage} />

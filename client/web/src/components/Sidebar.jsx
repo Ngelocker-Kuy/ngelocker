@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom"
 import '../styles/sidebar.css'
 
 function Sidebar() {
@@ -19,70 +20,65 @@ function Sidebar() {
             <li>
               <div className="placeholder">
                 <div className="upside">
-                  <a href="https://codepen.io/logrithumn" className="button"><i className="fa fa-user"></i></a>
+                  <Link to="/users" className="button">
+                    <i className="fas fa-users"></i>
+                  </Link>
                 </div>
               </div>
             </li>
             <li>
               <div className="placeholder">
                 <div className="upside">
-                  <a href="#" className="button"><i className="fa fa-cog"></i></a>
                 </div>
               </div>
             </li>
             <li>
               <div className="placeholder">
                 <div className="upside">
-                  <a href="#">&nbsp</a>
                 </div>
               </div>
             </li>
             <li>
               <div className="placeholder">
                 <div className="upside">
-                  <a href="#" className="button"><i className="fa fa-commenting"></i></a>
                 </div>
               </div>
             </li>
             <li>
               <div className="placeholder">
                 <div className="upside">
-                  <a href="#" className="button"><i className="fa fa-trash"></i></a>
+                  <Link className="button"><i class="fas fa-sign-out-alt"></i></Link>
                 </div>
               </div>
             </li>
             <li>
               <div className="placeholder">
                 <div className="upside">
-                  <a href="#" className="button"><i className="fa fa-battery-4"></i></a>
                 </div>
               </div>
             </li>
             <li>
               <div className="placeholder">
                 <div className="upside">
-                  <a href="#" className="button"><i className="fa fa-calendar"></i></a>
                 </div>
               </div>
             </li>
             <li>
               <div className="placeholder">
                 <div className="upside">
-                  <a href="#" className="button"><i className="fa fa-cloud"></i></a>
+                  <Link to="/register/user" className="button"><i class="fas fa-user-plus"></i></Link>
                 </div>
               </div>
             </li>
             <li>
               <div className="placeholder">
                 <div className="upside">
-                  <a href="#" className="button"><i className="fa fa-wifi"></i></a>
                 </div>
               </div>
             </li>
             <li>
               <div className="placeholder">
                 <div className="upside">
-                  <a href="#" className="button"><i className="fa fa-envelope-o"></i></a>
                 </div>
               </div>
             </li>
