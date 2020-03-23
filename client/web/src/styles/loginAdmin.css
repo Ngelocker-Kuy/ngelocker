@@ -1,14 +1,19 @@
 body {
-  background: #222D32;
+  background: white;
   font-family: 'Roboto', sans-serif;
 }
 
 .login-box {
   margin-top: 75px;
   height: auto;
-  background: #1A2226;
+  background: white;
   text-align: center;
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  box-shadow: 2px 2px 15px 0px rgba(255, 255, 255, 0.75) ;
+  border-radius: 20px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  -ms-border-radius: 20px;
+  -o-border-radius: 20px;
 }
 
 .login-key {
@@ -23,7 +28,7 @@ body {
   font-size: 30px;
   letter-spacing: 2px;
   font-weight: bold;
-  color: #ECF0F5;
+  color: #364e6b;
 }
 
 .login-form {
@@ -32,7 +37,7 @@ body {
 }
 
 input[type=text] {
-  background-color: #1A2226;
+  background-color: #364e6b;
   border: none;
   border-bottom: 2px solid #0DB8DE;
   border-top: 0px;
@@ -42,10 +47,12 @@ input[type=text] {
   margin-bottom: 20px;
   padding-left: 0px;
   color: #ECF0F5;
+  font-family: "Fredoka One";
+  letter-spacing: 1px;
 }
 
 input[type=password] {
-  background-color: #1A2226;
+  background-color: #364e6b;
   border: none;
   border-bottom: 2px solid #0DB8DE;
   border-top: 0px;
@@ -55,6 +62,8 @@ input[type=password] {
   padding-left: 0px;
   margin-bottom: 20px;
   color: #ECF0F5;
+  font-family: "Fredoka One";
+  letter-spacing: 1px;
 }
 
 .form-group {
@@ -91,8 +100,8 @@ label {
 
 .btn-outline-primary {
   font-family: "Fredoka One";
-  border-color: #0DB8DE;
-  color: #0DB8DE;
+  border-color: #364e6b !important;
+  color: #364e6b !important;
   border-radius: 0px;
   font-weight: bold;
   letter-spacing: 1px;
@@ -100,8 +109,9 @@ label {
 }
 
 .btn-outline-primary:hover {
-  background-color: #0DB8DE;
+  background-color: #364e6b !important;
   right: 0px;
+  color: white !important;
 }
 
 .login-btm {
@@ -122,4 +132,12 @@ label {
 
 .loginbttm {
   padding: 0px;
+}
+
+.btn {
+  border-radius: 18px !important;
+  -webkit-border-radius: 18px !important;
+  -moz-border-radius: 18px !important;
+  -ms-border-radius: 18px !important;
+  -o-border-radius: 18px !important;
 }

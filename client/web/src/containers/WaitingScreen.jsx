@@ -30,8 +30,8 @@ function WaitingScreen() {
   }, [UserId])
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '50px' }}>
-      <h1 style={{ textAlign: 'center', color: 'black' }}>WAITING FOR PERMISSION</h1>
+    <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '20vh 5vh' }}>
+      <h1 style={{ textAlign: 'center', color: 'white', fontFamily: "Fredoka One" }}>WAITING FOR PERMISSION</h1>
       <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'center' }}>
         <lottie-player
           src="https://assets7.lottiefiles.com/packages/lf20_4gycw9.json"

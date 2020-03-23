@@ -35,14 +35,14 @@ function RegisterGuestPage() {
     }
 
     return (
-        <div className="register" style={{ fontFamily: "Fredoka One", marginTop: '15vh' }}>
+        <div className="register" style={{ fontFamily: "Fredoka One", marginTop: '8vh' }}>
             <div className="container">
                 <div className="row justify-content-center mt-5" style={{ marginTop: "8rem!important", flexDirection: "column" }}>
                     <lottie-player
                         src="https://assets7.lottiefiles.com/packages/lf20_rRm3Ew.json"
                         background="transparent"
                         speed="1"
-                        style={{ width: "100vw", height: "70vh", cursor: "pointer" }}
+                        style={{ width: "200vw", height: "70vh", cursor: "pointer", marginBottom: "18vh" }}
                         autoplay loop >
                     </lottie-player>
                     <div className="col" style={{ position: "absolute", zIndex: 99, width: "90%" }}>
@@ -53,11 +53,11 @@ function RegisterGuestPage() {
                             <form onSubmit={(e) => { registerGuest(e) }} >
                                 <div className="form-group">
                                     <label style={{ color: "black" }}>Name</label>
-                                    <input type="text" className="form-control" onChange={e => setName(e.target.value)} />
+                                    <input style={{ color: "white" }} type="text" className="form-control" onChange={e => setName(e.target.value)} />
                                 </div>
                                 <div className="form-group">
                                     <label style={{ color: "black" }}>Phone Number</label>
-                                    <input type="text" className="form-control" onChange={e => setPhoneNumber(e.target.value)} />
+                                    <input style={{ color: "white" }} type="text" className="form-control" onChange={e => setPhoneNumber(e.target.value)} />
                                 </div>
                                 <button type="submit" className="btn-register btn-block mt-4">Submit</button>
                             </form>

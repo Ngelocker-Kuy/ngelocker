@@ -59,7 +59,7 @@ function LoginAdminPage({ children, ...rest }) {
                                     </div>
                                     <div className="row" style={{ justifyContent: "flex-end" }}>
                                         <div className="login-btm login-button">
-                                            <button type="submit" className="btn btn-outline-primary">LOGIN</button>
+                                            <button type="submit" className="btn btn-outline-primary" style={{ marginRight: "2.5vh" }}>LOGIN</button>
                                         </div>
                                     </div>
                                 </div>
