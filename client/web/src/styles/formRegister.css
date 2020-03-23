@@ -27,7 +27,13 @@ input {
 }
 
 .user-accounts-form {
-  border-radius: 3px;
+  border-radius: 18px;
+  background-color: white;
+  box-shadow: 2px 2px 15px 0px rgba(255, 255, 255, 0.75) ;
+  -webkit-border-radius: 18px;
+  -moz-border-radius: 18px;
+  -ms-border-radius: 18px;
+  -o-border-radius: 18px;
 }
 .user-accounts-form label {
   color: rgba(0, 0, 0, 0.54);

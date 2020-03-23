@@ -1,6 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Fredoka+One&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Baloo+Tammudu+2&display=swap');
 
+#root{
+  background-color: rgb(0, 63, 92);
+}
 /* .App {
   text-align: center;
 }

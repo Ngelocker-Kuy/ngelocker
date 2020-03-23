@@ -44,19 +44,23 @@ function LoginAdminPage({ children, ...rest }) {
                         </div>
                         <div className="col-lg-12 login-form">
                             <form onSubmit={(e) => login(e)}>
-                                <div className="form-group">
-                                    <label className="form-control-label">USERNAME</label>
-                                    <input type="text" className="form-control" onChange={(e) => setUsername(e.target.value)} />
-                                </div>
-                                <div className="form-group">
-                                    <label className="form-control-label">PASSWORD</label>
-                                    <input type="password" className="form-control" autoComplete="false" onChange={(e) => setPassword(e.target.value)} />
-                                </div>
-                                <div className="col-lg-12 loginbttm">
-                                    <div className="col-lg-6 login-btm login-text">
+                                <div className="container">
+                                    <div className="row">
+                                        <div className="form-group col">
+                                            <label className="form-control-label">USERNAME</label>
+                                            <input style={{ color: "white" }} type="text" className="form-control" onChange={(e) => setUsername(e.target.value)} />
+                                        </div>
                                     </div>
-                                    <div className="login-btm login-button">
-                                        <button type="submit" className="btn btn-outline-primary">LOGIN</button>
+                                    <div className="row">
+                                        <div className="form-group col">
+                                            <label className="form-control-label">PASSWORD</label>
+                                            <input style={{ color: "white" }} type="password" className="form-control" autoComplete="false" onChange={(e) => setPassword(e.target.value)} />
+                                        </div>
+                                    </div>
+                                    <div className="row" style={{ justifyContent: "flex-end" }}>
+                                        <div className="login-btm login-button">
+                                            <button type="submit" className="btn btn-outline-primary">LOGIN</button>
+                                        </div>
                                     </div>
                                 </div>
                             </form>
