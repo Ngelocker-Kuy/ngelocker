@@ -1,29 +1,31 @@
 .btn-register {
+  border-radius: 99px !important;
   padding: 1.075rem 0.75rem;
   border-radius: 5px;
-  background-color: #000000;
-  border-color: #000000;
+  background-color: #1a2226;
   color: #fff;
   font-weight: 600;
   font-size: 0.85rem;
   line-height: 18px;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  -ms-border-radius: 5px;
-  -o-border-radius: 5px;
+  outline: none;
 }
 
 input {
-  background-color: #1A2226 !important;
+  background-color: #364e6b !important;
+  border-radius: 13px !important;
   border: none;
   border-bottom: 2px solid #0DB8DE !important;
   border-top: 0px;
-  border-radius: 0px;
   font-weight: bold;
   outline: 0;
   margin-bottom: 0;
+  padding: 8px !important;
   padding-left: 0px;
   color: #ECF0F5;
+  -webkit-border-radius: 13px !important;
+  -moz-border-radius: 13px !important;
+  -ms-border-radius: 13px !important;
+  -o-border-radius: 13px !important;
 }
 
 .user-accounts-form {

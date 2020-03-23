@@ -33,7 +33,7 @@ function Sidebar() {
               <div className="placeholder">
                 <div className="upside clicked">
                   {/* <Link to="/users" className="button"> */}
-                  <button onClick={() => userPage()} className="button"><i className="fas fa-users"></i></button>
+                  <button onClick={() => userPage()} className="button"><i className="fas fa-users" style={{ fontSize: '30px', color: "white" }}></i></button>
 
                   {/* </Link> */}
                 </div>
@@ -60,7 +60,7 @@ function Sidebar() {
             <li>
               <div className="placeholder">
                 <div className="upside">
-                  <button onClick={() => logout()} className="button"><i className="fas fa-sign-out-alt"></i></button>
+                  <button onClick={() => logout()} className="button"><i className="fas fa-sign-out-alt" style={{ fontSize: '30px', color: "white" }}></i></button>
                 </div>
               </div>
             </li>
@@ -79,7 +79,7 @@ function Sidebar() {
             <li>
               <div className="placeholder">
                 <div className="upside">
-                  <Link to="/register/user" className="button"><i className="fas fa-user-plus"></i></Link>
+                  <Link to="/register/user" className="button"><i className="fas fa-user-plus" style={{ fontSize: '30px', color: "white" }}></i></Link>
                 </div>
               </div>
             </li>

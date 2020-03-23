@@ -57,9 +57,9 @@ body * {
   position: absolute;
   top: -100px;
   left: -100px;
-  width: 200px;
-  height: 200px;
-  background-color: rgb(94, 255, 0);
+  width: 170px;
+  height: 170px;
+  background-color: white;
   border-radius: 50%;
   transition: transform 1.3s;
   cursor: pointer;
@@ -71,8 +71,8 @@ body * {
   position: absolute;
   top: -200px;
   left: -200px;
-  width: 400px;
-  height: 400px;
+  width: 330px;
+  height: 330px;
   border-radius: 50%;
   transform: scale(0.1) rotate(150deg);
   transition: transform 1s;
@@ -93,7 +93,7 @@ body * {
 }
 .menu__arrow--top {
   top: 0.5em;
-  left: 220px;
+  left: 135px;
 }
 .menu__arrow--top .arrow {
   transform: rotate(-45deg);
@@ -108,15 +108,15 @@ body * {
 .arrow {
   width: 20px;
   height: 20px;
-  border-right: 6.666666666666667px solid rgb(255, 0, 0);
-  border-top: 6.666666666666667px solid rgb(0, 204, 255);
+  border-right: 6.666666666666667px solid white;
+  border-top: 6.666666666666667px solid white;
   border-radius: 3px;
   transition: border-color 0.3s;
   cursor: pointer;
   pointer-events: auto;
 }
 .arrow:hover {
-  border-color: #043069;
+  border-color: #a8a8a8;
   transition: border-color 0.3s;
 }
 .circle {
@@ -125,7 +125,7 @@ body * {
   margin: 0;
   height: 100%;
   width: 100%;
-  background-color: rgb(255, 0, 0);
+      background-color: #607d8b87;
   border-radius: 50%;
   transform: rotate(108deg);
   overflow: hidden;
@@ -150,6 +150,7 @@ body * {
 }
 .circle li .placeholder .upside {
   transform: rotate(180deg);
+  margin-top: -20px;
 }
 .circle li .placeholder a {
   text-decoration: none;

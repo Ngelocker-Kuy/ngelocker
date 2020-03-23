@@ -106,7 +106,9 @@ function RegisterUserPage() {
                                             paddingBottom: '0',
                                             borderTopColor: '#1A2226',
                                             borderBottom: '#0DB8DE 2px solid',
-                                            borderRadius: '0'
+                                            borderRadius: '13px',
+                                            outline: "none !important",
+                                            marginRight: '0 !important'
                                         }}
                                             onClick={() => toggleVisibility()}
                                         >
@@ -117,7 +119,7 @@ function RegisterUserPage() {
                                         </Button>
                                     </InputGroup.Append>
                                 </InputGroup>
-                                <button type="submit" className="btn-register btn-block mt-4">Submit</button>
+                                <button type="submit" className="btn-register btn-block mt-4" style={{ outline: "none" }}>Submit</button>
                             </form>
                         </div>
                     </div>
