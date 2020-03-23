@@ -13,7 +13,7 @@ class UserController {
   static async createUser(req, res, next) {
     try {
       let dataUser = {
-        name: req.body.name,
+        name: req.body.username,
         username: req.body.username,
         password: req.body.password,
         email: req.body.email,
