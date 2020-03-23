@@ -16,7 +16,7 @@ io.on('connection', (socket) => {
         // emit to react native
 
         // emit to waiting room web
-        // socket.emit(`permission-${UserId}`, { status: true })
+        socket.emit(`permission-${UserId}`, { status: false })
     });
 });
 

@@ -50,6 +50,7 @@ h1 {
     border: 1px solid transparent;
     border-radius: .25rem;
     font-size: 0.9rem;
+    margin-top: -6vh;
 }
 
 p {
@@ -58,6 +59,7 @@ p {
   font-weight: 100;
   color: #5e5e5e;
   letter-spacing: 1px;
+  padding: 1vh;
 }
 
 button, .dot {
