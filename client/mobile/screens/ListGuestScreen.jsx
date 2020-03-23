@@ -24,7 +24,6 @@ function ListGuestScreen() {
 
   const dispatch = useDispatch();
 
-
   const getGuestList = async () => {
     const token = await AsyncStorage.getItem("token");
     dispatch(GET_GUEST(token));
