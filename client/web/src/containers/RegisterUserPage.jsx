@@ -61,14 +61,14 @@ function RegisterUserPage() {
     })
 
     return (
-        <div className="register">
+        <div className="register" style={{ fontFamily: "Fredoka One" }}>
             < div className="container" >
                 <div className="row justify-content-center mt-4">
                     <div className="col-5 text-center">
                         <h1>Register User!</h1>
                         <p>Fill in correctly</p>
                         <lottie-player
-                            src="https://assets10.lottiefiles.com/packages/lf20_i25VGQ.json" background="transparent" speed="1" style={{ width: "300px", height: "70vh", cursor: "pointer" }} hover autoplay loop >
+                            src="https://assets10.lottiefiles.com/packages/lf20_i25VGQ.json" background="transparent" speed="1" style={{ marginLeft: "7vh", display: "flex", justifyContent: "center", width: "100%", height: "69vh", cursor: "pointer" }} hover autoplay loop >
                         </lottie-player>
                     </div>
                     <div className="col-5">

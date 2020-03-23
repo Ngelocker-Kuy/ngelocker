@@ -37,7 +37,7 @@ function WaitingScreen() {
           src="https://assets7.lottiefiles.com/packages/lf20_4gycw9.json"
           background="transparent"
           speed="1"
-          style={{ width: '100%', height: '100%', alignSelf: 'center', position: 'absolute', marginTop: '20vh' }}
+          style={{ width: '100%', height: '100%', alignSelf: 'center' }}
           loop
           autoplay
         ></lottie-player>

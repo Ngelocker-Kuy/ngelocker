@@ -18,11 +18,10 @@ body {
 }
 
 .login-title {
-  margin-top: 15px;
+  font-family: "Fredoka One";
   text-align: center;
   font-size: 30px;
   letter-spacing: 2px;
-  margin-top: 15px;
   font-weight: bold;
   color: #ECF0F5;
 }
@@ -83,6 +82,7 @@ label {
 }
 
 .form-control-label {
+  font-family: "Fredoka One";
   font-size: 10px;
   color: #6C6C6C;
   font-weight: bold;
@@ -90,6 +90,7 @@ label {
 }
 
 .btn-outline-primary {
+  font-family: "Fredoka One";
   border-color: #0DB8DE;
   color: #0DB8DE;
   border-radius: 0px;

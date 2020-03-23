@@ -3,7 +3,7 @@ import "../styles/permission.css";
 
 function SuccessPermission() {
     return (
-        <div id="success-box">
+        <div id="success-box" style={{ fontFamily: "Fredoka One" }}>
             <div className="dot"></div>
             <div className="dot two"></div>
             <div className="success-qr">

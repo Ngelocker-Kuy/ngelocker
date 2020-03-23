@@ -39,10 +39,7 @@ function LoginAdminPage({ children, ...rest }) {
                 <div className="row">
                     <div className="col-lg-3 col-md-2"></div>
                     <div className="col-lg-6 col-md-8 login-box">
-                        {/* <div className="col-lg-12 login-key" style={{ padding: '10px' }}>
-                            LOGIN
-                        </div> */}
-                        <img src={logo} style={{ width: "100px", height: "100px" }} alt="logo-ngelocker" />
+                        <img src={logo} style={{ width: "150px", height: "150px" }} alt="logo-ngelocker" />
                         <div className="col-lg-12 login-title">
                             ADMIN PANEL
                         </div>

@@ -3,7 +3,7 @@ import "../styles/permission.css";
 
 function ErrorPermission() {
     return (
-        <div id="error-box">
+        <div id="error-box" style={{ fontFamily: "Fredoka One" }}>
             <div className="dot"></div>
             <div className="dot two"></div>
             <div className="wrong-qr">
