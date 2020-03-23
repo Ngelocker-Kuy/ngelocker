@@ -1,9 +1,9 @@
 import React from "react";
-import { StyleSheet, TouchableOpacity, Text, View } from "react-native";
+import { StyleSheet, TouchableOpacity, Text } from "react-native";
 
 function Btn(props) {
   return (
-    <TouchableOpacity {...props} style={{...styles.btn}}>
+    <TouchableOpacity {...props} style={{ ...styles.btn }}>
       <Text style={styles.text}>{props.text}</Text>
     </TouchableOpacity>
   );
