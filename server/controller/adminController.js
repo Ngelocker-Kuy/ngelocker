@@ -5,6 +5,9 @@ class AdminController {
   static loginAdmin(req, res, next) {
     let username = req.body.username;
     let password = req.body.password;
+
+    console.log(req.body)
+
     Admin.findOne({
       where: {
         username,

@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom'
 import "../styles/formRegister.css";
 import axios from '../services/axios'
 import { InputGroup, Button, FormControl } from 'react-bootstrap'
-import { BsEyeSlashFill } from 'react-icons/bs';
+import { BsEyeSlashFill, BsEyeFill } from 'react-icons/bs';
 import { useEffect } from 'react';
 
 function RegisterUserPage() {
@@ -11,6 +11,8 @@ function RegisterUserPage() {
     const [email, setEmail] = useState('')
     const [lockerLabel, setLockerLabel] = useState('')
     const [password, setPassword] = useState('')
+
+    const [passwordVisibility, setPasswordVisibility] = useState(false)
 
     const history = useHistory()
 
@@ -25,7 +27,7 @@ function RegisterUserPage() {
                 lockerLabel
             }, {
                 headers: {
-                    token: localStorage.token
+                    token: sessionStorage.token
                 }
             })
             .then(({ data }) => {
@@ -38,11 +40,15 @@ function RegisterUserPage() {
             })
     }
 
+    const toggleVisibility = () => {
+        setPasswordVisibility(!passwordVisibility)
+    }
+
     useEffect(() => {
         axios
             .get('/users', {
                 headers: {
-                    token: localStorage.token
+                    token: sessionStorage.token
                 }
             })
             .then(({ data }) => {
@@ -68,7 +74,7 @@ function RegisterUserPage() {
                     <div className="col-5">
                         <div className="user-accounts-form shadow p-5">
                             <div className="user-accounts-form-header">
-                                <h2 className="title">Form</h2>
+                                <h2 className="title">Register User</h2>
                             </div>
                             <form onSubmit={(e) => proceedRegisterUser(e)}>
                                 <div className="form-group">
@@ -83,22 +89,35 @@ function RegisterUserPage() {
                                     <label>Email</label>
                                     <input type="text" className="form-control" onChange={(e) => setEmail(e.target.value)} />
                                 </div>
-                                {/* <div className="form-group">
-                                    <input editable="false" type="text" className="form-control" value={lockerLabel} readOnly style={{ background: '#1A2226' }} />
-                                </div> */}
                                 <label>Password</label>
                                 <InputGroup className="mb-3">
                                     <FormControl
+                                        autoComplete="false"
                                         className="form-control"
                                         style={{ borderRight: 'none' }}
+                                        type={passwordVisibility ? "text" : "password"}
+                                        defaultValue={lockerLabel}
                                     />
                                     <InputGroup.Append >
-                                        <Button style={{ borderLeft: 'none', backgroundColor: "#1A2226", borderBottom: '2px solid #0DB8DE' }} >
-                                            <BsEyeSlashFill />
+                                        <Button style={{
+                                            borderLeft: 'none',
+                                            backgroundColor: "#1A2226",
+                                            paddingTop: '0',
+                                            paddingBottom: '0',
+                                            borderTopColor: '#1A2226',
+                                            borderBottom: '#0DB8DE 2px solid',
+                                            borderRadius: '0'
+                                        }}
+                                            onClick={() => toggleVisibility()}
+                                        >
+                                            {passwordVisibility ?
+                                                <BsEyeFill /> :
+                                                <BsEyeSlashFill />
+                                            }
                                         </Button>
                                     </InputGroup.Append>
                                 </InputGroup>
-                                <button type="submit" className="btn-register btn-block mt-4">Daftar</button>
+                                <button type="submit" className="btn-register btn-block mt-4">Register</button>
                             </form>
                         </div>
                     </div>

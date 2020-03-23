@@ -10,7 +10,7 @@ function ListUsersPage() {
         axios
             .get('/users', {
                 headers: {
-                    token: localStorage.token
+                    token: sessionStorage.token
                 }
             })
             .then(({ data }) => {

@@ -1,8 +1,8 @@
 import React from 'react';
-import { Link } from "react-router-dom"
 import '../styles/card.css';
 
 function Card(props) {
+
     const gambarLucu = [
         "https://robohash.org/1",
         "https://robohash.org/2",
@@ -16,16 +16,16 @@ function Card(props) {
     ]
 
     return (
-        <Link className="Card">
+        <div className="Card">
             <div className="Card-thumb">
                 <div className="Card-shadow"></div>
                 <div className="Card-shadow"></div>
                 <div className="Card-shadow"></div>
                 <div className="Card-image" style={{ backgroundImage: `url(${gambarLucu[Math.floor(Math.random() * 8) + 1]})` }}></div>
             </div>
-            <div className="Card-title"><span>{props.data.name}</span></div>
-            <div className="Card-explore"><span> ID {props.data.LockerId} Locker Owner</span></div>
-        </Link>
+            <div className="Card-title"><span>{props.data.username}</span></div>
+            <div className="Card-explore"><span>{props.data.lockerLabel} Locker Owner</span></div>
+        </div>
     );
 }
 

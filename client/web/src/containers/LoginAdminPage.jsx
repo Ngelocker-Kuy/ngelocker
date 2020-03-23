@@ -11,6 +11,7 @@ function LoginAdminPage({ children, ...rest }) {
 
     const login = (e) => {
         e.preventDefault()
+
         axios
             .post('/admin/login', {
                 username,
@@ -18,7 +19,7 @@ function LoginAdminPage({ children, ...rest }) {
             })
             .then(result => {
                 let token = result.data.token
-                localStorage.setItem('token', token)
+                sessionStorage.setItem('token', token)
 
                 history.push('/users')
             })
@@ -30,7 +31,7 @@ function LoginAdminPage({ children, ...rest }) {
     return (
 
         <div className="container">
-            {localStorage.token ?
+            {sessionStorage.token ?
                 <Redirect to={{
                     pathname: "/users",
                 }} /> :
@@ -51,7 +52,7 @@ function LoginAdminPage({ children, ...rest }) {
                                 </div>
                                 <div className="form-group">
                                     <label className="form-control-label">PASSWORD</label>
-                                    <input type="password" className="form-control" onChange={(e) => setPassword(e.target.value)} />
+                                    <input type="password" className="form-control" autoComplete="false" onChange={(e) => setPassword(e.target.value)} />
                                 </div>
                                 <div className="col-lg-12 loginbttm">
                                     <div className="col-lg-6 login-btm login-text">
