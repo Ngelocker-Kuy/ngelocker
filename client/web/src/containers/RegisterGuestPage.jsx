@@ -35,7 +35,7 @@ function RegisterGuestPage() {
     }
 
     return (
-        <div className="register">
+        <div className="register" style={{ fontFamily: "Fredoka One" }}>
             <div className="container">
                 <div className="row justify-content-center mt-5" style={{ marginTop: "8rem!important", flexDirection: "column" }}>
                     <lottie-player
@@ -48,15 +48,15 @@ function RegisterGuestPage() {
                     <div className="col" style={{ position: "absolute", zIndex: 99, width: "90%" }}>
                         <div className="user-accounts-form shadow p-5">
                             <div className="user-accounts-form-header">
-                                <h2 className="title">Form Guest</h2>
+                                <h2 className="title" style={{ color: "black" }}>Form Guest</h2>
                             </div>
                             <form onSubmit={(e) => { registerGuest(e) }}>
                                 <div className="form-group">
-                                    <label>Name</label>
+                                    <label style={{ color: "black" }}>Name</label>
                                     <input type="text" className="form-control" onChange={e => setName(e.target.value)} />
                                 </div>
                                 <div className="form-group">
-                                    <label>Phone Number</label>
+                                    <label style={{ color: "black" }}>Phone Number</label>
                                     <input type="text" className="form-control" onChange={e => setPhoneNumber(e.target.value)} />
                                 </div>
                                 <button type="submit" className="btn-register btn-block mt-4">Submit</button>
