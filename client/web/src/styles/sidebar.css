@@ -65,6 +65,14 @@ body * {
   cursor: pointer;
   pointer-events: auto;
 }
+.clicked{
+   z-index: 11;
+  background-color: rgb(94, 255, 0);
+  border-radius: 50%;
+  transition: transform 1.3s;
+  cursor: pointer;
+  pointer-events: auto;
+}
 .menu__listings {
   z-index: 10;
   position: absolute;
@@ -205,7 +213,7 @@ body * {
   transform: rotate(10deg) scale(1);
   transition: transform 1s;
 }
-#menu__active:checked ~ label .menu__toggle {
+#menu__active:checked ~ label .menu__toggle .clicked {
   background-color: #392338ce;
   transition: all 1s;
 }
