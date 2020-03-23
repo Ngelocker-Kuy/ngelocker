@@ -3,7 +3,7 @@ const app = require("../app");
 const bcrypt = require('../helpers/bcrypt')
 
 let tokenUser = null;
-let tokenAdmin = null;
+let tokenAdmin = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNTg0OTM5NDY3fQ.cWbwE8rewgigzsujrRSOiWUsmVEw158BT2D6l1TDlKU";
 
 describe("Test Users Features", function () {
   beforeAll(done => {
@@ -32,10 +32,11 @@ describe("Test Users Features", function () {
       const res = await request(app)
         .post("/users")
         .send({
-          name: "pengguna locker",
+          name: "pengguna",
           email: "pengguna@gmail.com",
           username: "pengguna",
-          password: "123456"
+          password: "123456",
+          lockerLabel: "locker 1"
         })
         .set({
           token: tokenAdmin
@@ -44,13 +45,15 @@ describe("Test Users Features", function () {
       expect(res.body).toHaveProperty("user");
       expect(res.body.user).toHaveProperty("id");
       expect(res.body.user).toHaveProperty("name");
-      expect(res.body.user.name).toEqual("pengguna locker");
+      expect(res.body.user.name).toEqual("pengguna");
       expect(res.body.user).toHaveProperty("email");
       expect(res.body.user.email).toEqual("pengguna@gmail.com");
       expect(res.body.user).toHaveProperty("username");
       expect(res.body.user.username).toEqual("pengguna");
       expect(res.body.user).toHaveProperty("password");
       expect(res.body.user.password).not.toEqual("123456");
+      expect(res.body.user).toHaveProperty("lockerLabel");
+      expect(res.body.user.lockerLabel).toEqual("locker 1");
     });
   });
 
@@ -66,7 +69,7 @@ describe("Test Users Features", function () {
       expect(res.body).toHaveProperty("user");
       expect(res.body.user).toHaveProperty("id");
       expect(res.body.user).toHaveProperty("name");
-      expect(res.body.user.name).toEqual("pengguna locker");
+      expect(res.body.user.name).toEqual("pengguna");
       expect(res.body.user).toHaveProperty("email");
       expect(res.body.user.email).toEqual("pengguna@gmail.com");
       expect(res.body.user).toHaveProperty("username");
@@ -139,6 +142,15 @@ describe("Test Users Features", function () {
       expect(res.status).toEqual(200);
       expect(res.body).toEqual(res.body);
     });
+    it("should return all guests, status code 200", async () => {
+      const res = await request(app)
+        .get("/guests")
+        .set({
+          token: tokenUser
+        });
+      expect(res.status).toEqual(200);
+      expect(res.body).toEqual(res.body);
+    });
   });
 
   describe("Test user update guests status, put /guests/:id route", () => {
@@ -185,7 +197,7 @@ describe("Test Users Features", function () {
       expect(res.body.message).toEqual("Guest has been deleted");
     });
 
-    it("should return guest not found if wrong id", async () => {
+    it("should return guest not found if wrong id", async (done) => {
       const res = await request(app)
         .delete("/guests/100")
         .set({
@@ -194,6 +206,7 @@ describe("Test Users Features", function () {
       expect(res.status).toEqual(404);
       expect(res.body).toHaveProperty("message");
       expect(res.body.message).toEqual("Guest not found");
+      done()
     });
   });
 });

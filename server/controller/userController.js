@@ -56,7 +56,6 @@ class UserController {
   static userLogin(req, res, next) {
     let username = req.body.username;
     let password = req.body.password;
-    console.log("aa");
     User.findOne({
       where: {
         username: username

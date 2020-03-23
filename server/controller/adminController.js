@@ -12,7 +12,6 @@ class AdminController {
       }
     })
       .then(user => {
-        console.log(user, "<<<");
         if (user) {
           // if (bcrypt.checkPassword(password, user.password)) {
           let token = jwt.createToken({ email: user.email, id: user.id });

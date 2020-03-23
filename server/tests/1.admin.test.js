@@ -22,7 +22,7 @@ describe("Test Admin Features", function () {
       const res = await request(app)
         .post("/users")
         .send({
-          name: "pengguna locker",
+          name: "pengguna",
           email: "pengguna@gmail.com",
           username: "pengguna",
           password: "123456"
@@ -34,7 +34,7 @@ describe("Test Admin Features", function () {
       expect(res.body).toHaveProperty("user");
       expect(res.body.user).toHaveProperty("id");
       expect(res.body.user).toHaveProperty("name");
-      expect(res.body.user.name).toEqual("pengguna locker");
+      expect(res.body.user.name).toEqual("pengguna");
       expect(res.body.user).toHaveProperty("email");
       expect(res.body.user.email).toEqual("pengguna@gmail.com");
       expect(res.body.user).toHaveProperty("username");
@@ -287,7 +287,7 @@ describe("Test Admin Login Router", function () {
       expect(res.body.message).toEqual("username/password wrong");
     });
 
-    it("should return status code 404 when username wrong", async () => {
+    it("should return status code 404 when username wrong", async (done) => {
       const res = await request(app)
         .post("/admin/login")
         .send({
@@ -297,6 +297,7 @@ describe("Test Admin Login Router", function () {
       expect(res.status).toEqual(404);
       expect(res.body).toHaveProperty("message");
       expect(res.body.message).toEqual("username/password wrong");
+      done()
     });
   });
 });
