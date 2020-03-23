@@ -12,10 +12,11 @@
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
 }
-input[type=text] {
-  background-color: #1A2226;
+
+input {
+  background-color: #1A2226 !important;
   border: none;
-  border-bottom: 2px solid #0DB8DE;
+  border-bottom: 2px solid #0DB8DE !important;
   border-top: 0px;
   border-radius: 0px;
   font-weight: bold;
