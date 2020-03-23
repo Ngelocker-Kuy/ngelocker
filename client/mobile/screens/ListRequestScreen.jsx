@@ -22,6 +22,7 @@ function ListRequestScreen() {
     });
     return guestList;
   });
+
   const dispatch = useDispatch();
 
   const getGuestList = async () => {
