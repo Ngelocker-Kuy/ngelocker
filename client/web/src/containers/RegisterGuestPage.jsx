@@ -35,7 +35,7 @@ function RegisterGuestPage() {
     }
 
     return (
-        <div className="register" style={{ fontFamily: "Fredoka One" }}>
+        <div className="register" style={{ fontFamily: "Fredoka One", marginTop: '15vh' }}>
             <div className="container">
                 <div className="row justify-content-center mt-5" style={{ marginTop: "8rem!important", flexDirection: "column" }}>
                     <lottie-player
@@ -46,11 +46,11 @@ function RegisterGuestPage() {
                         autoplay loop >
                     </lottie-player>
                     <div className="col" style={{ position: "absolute", zIndex: 99, width: "90%" }}>
-                        <div className="user-accounts-form shadow p-5">
+                        <div className="user-accounts-form shadow p-5" style={{ marginLeft: '4.5vh' }}>
                             <div className="user-accounts-form-header">
                                 <h2 className="title" style={{ color: "black" }}>Form Guest</h2>
                             </div>
-                            <form onSubmit={(e) => { registerGuest(e) }}>
+                            <form onSubmit={(e) => { registerGuest(e) }} >
                                 <div className="form-group">
                                     <label style={{ color: "black" }}>Name</label>
                                     <input type="text" className="form-control" onChange={e => setName(e.target.value)} />

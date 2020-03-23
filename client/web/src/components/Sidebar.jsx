@@ -10,6 +10,10 @@ function Sidebar() {
     history.push('/')
   }
 
+  const userPage = () => {
+    history.push('/users')
+  }
+
 
   return (
     <section className="menu menu--circle">
@@ -27,10 +31,11 @@ function Sidebar() {
           <ul className="circle">
             <li>
               <div className="placeholder">
-                <div className="upside">
-                  <Link to="/users" className="button">
-                    <i className="fas fa-users"></i>
-                  </Link>
+                <div className="upside clicked">
+                  {/* <Link to="/users" className="button"> */}
+                  <button onClick={() => userPage()} className="button"><i className="fas fa-users"></i></button>
+
+                  {/* </Link> */}
                 </div>
               </div>
             </li>

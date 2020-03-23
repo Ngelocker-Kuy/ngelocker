@@ -8,45 +8,22 @@ import {
   FlatList
 } from "react-native";
 
-import axios from "../services/axios";
-import ItemCard from "../components/itemCard";
-
-// const DATA = [
-//   {
-//     id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-//     title: "First Item"
-//   },
-//   {
-//     id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-//     title: "Second Item"
-//   },
-//   {
-//     id: "58694a0f-3da1-471f-bd96-145571e29d72",
-//     title: "Third Item"
-//   }
-// ];
-
-// function DummyList() {
-//   const arr = [];
-//   for (let i = 0; i < 30; i++) {
-//     arr.push({
-//       id: i,
-//       text: `Text ${i}`
-//     });
-//   }
-//   return arr;
-// }
-
-// function Item({ title }) {
-//   return (
-//     <View style={styles.item}>
-//       <Text style={styles.title}>{title}</Text>
-//     </View>
-//   );
-// }
+import ItemCard from '../components/itemCard'
+import axios from '../services/axios'
+// import socket from '../services/socket'
 
 function ListRequestScreen({ navigation }) {
   const [guests, setGuests] = useState([]);
+
+  // let UserId
+  // AsyncStorage.getItem('userid', (err, result) => {
+  //   if (err) {
+  //     console.log(err)
+  //   } else {
+  //     UserId = result
+  //   }
+  // })
+
 
   const getGuestList = async () => {
     const token = await AsyncStorage.getItem("token");
@@ -83,6 +60,7 @@ function ListRequestScreen({ navigation }) {
           <ItemCard
             title={item.name}
             status={item.status}
+            id={item.id}
             type="request"
             phoneNumber={item.phoneNumber}
           />

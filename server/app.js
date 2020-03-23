@@ -16,16 +16,15 @@ io.on('connection', (socket) => {
         // emit to react native
 
         // emit to waiting room web
-        // socket.emit(`permission-${UserId}`, { status: true })
+        socket.emit(`permission-${UserId}`, { status: false })
     });
 });
 
-// app.use((req, res, next) => {
-//     req.io = io
+app.use((req, res, next) => {
+    req.io = io
 
-//     // req.io.emit('checkPermission')
-//     next()
-// })
+    next()
+})
 app.use("/", index);
 app.use(error);
 

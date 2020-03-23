@@ -1,5 +1,6 @@
 import React from "react";
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity, AsyncStorage } from "react-native";
+import axios from '../services/axios'
 
 // import Btn from "./Btn";
 
@@ -49,8 +50,27 @@ function Item({ title, phoneNumber, status, type }) {
 
   const styles = generateStyle(color);
 
-  return (
-    <View style={styles.item}>
+    const unlockLocker = async (status) => {
+        const token = await AsyncStorage.getItem('token')
+
+        axios
+            .put(`/guests/${id}`, {
+                status
+            }, {
+                headers: {
+                    token
+                }
+            })
+            .then(result => {
+                console.log(result)
+            })
+            .catch(err => {
+                console.log(err.response)
+            })
+    }
+
+    return (
+        <View style={styles.item}>
       <Text style={styles.name}>{title}</Text>
       <Text style={styles.phone}>{phoneNumber}</Text>
       {/* button */}
@@ -65,7 +85,7 @@ function Item({ title, phoneNumber, status, type }) {
         </Text>
       </TouchableOpacity>
     </View>
-  );
+    );
 }
 
 export default Item;
