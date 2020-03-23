@@ -1,16 +1,35 @@
-import React from "react";
-import { View, Text } from "react-native";
+import React, { useEffect } from "react";
+import { View, Text, AsyncStorage } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 
-import LockerScreen from "../screens/LockerScreen";
+import { GET_GUEST } from "../actions/guestAction";
+import { useDispatch, useSelector } from "react-redux";
 
+import LockerScreen from "../screens/LockerScreen";
 import ListRequestScreen from "../screens/ListRequestScreen";
 import ListGuestScreen from "../screens/ListGuestScreen";
 
 const Tab = createBottomTabNavigator();
 
 export default function HomeNavigator() {
+  const notifCount = useSelector(state => {
+    const filtered = state.guests.filter(guest => guest.status === null)
+
+    return filtered.length
+  });
+
+  const dispatch = useDispatch();
+
+  const getGuestList = async () => {
+    const token = await AsyncStorage.getItem("token");
+    dispatch(GET_GUEST(token));
+  };
+
+  useEffect(() => {
+    getGuestList();
+  }, []);
+
   return (
     <Tab.Navigator
       screenOptions={({ route }) => ({
@@ -25,6 +44,7 @@ export default function HomeNavigator() {
                 }
                 size={size}
                 color={color}
+                notifCount={notifCount}
               />
             );
           } else if (route.name === "guest") {
@@ -71,14 +91,14 @@ function IconWithBadge({ name, badgeCount, color, size }) {
             top: -3,
             backgroundColor: "red",
             borderRadius: 6,
-            width: 12,
-            height: 12,
+            width: 15,
+            height: 15,
             justifyContent: "center",
             alignItems: "center"
           }}
         >
           <Text style={{ color: "white", fontSize: 10, fontWeight: "bold" }}>
-            !
+            {badgeCount}
           </Text>
         </View>
       )}
@@ -88,5 +108,5 @@ function IconWithBadge({ name, badgeCount, color, size }) {
 
 function HomeIconWithBadge(props) {
   // You should pass down the badgeCount in some other ways like React Context API, Redux, MobX or event emitters.
-  return <IconWithBadge {...props} badgeCount={3} />;
+  return <IconWithBadge {...props} badgeCount={props.notifCount} />;
 }

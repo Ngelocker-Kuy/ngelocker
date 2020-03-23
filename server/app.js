@@ -12,11 +12,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 io.on('connection', (socket) => {
-    socket.on('newGuest', (UserId) => {
+    socket.on('newGuest', () => {
         // emit to react native
+        console.log('masuk server')
+        io.emit('guestUpdate')
 
         // emit to waiting room web
-        socket.emit(`permission-${UserId}`, { status: false })
+        // socket.emit(`permission-${UserId}`, { status: false })
     });
 });
 
