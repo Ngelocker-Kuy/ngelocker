@@ -7,82 +7,70 @@ import {
   AsyncStorage,
   FlatList
 } from "react-native";
-import ItemCard from '../components/itemCard'
-import axios from '../services/axios'
 
-const DATA = [
-  {
-    id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-    title: "First Item"
-  },
-  {
-    id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-    title: "Second Item"
-  },
-  {
-    id: "58694a0f-3da1-471f-bd96-145571e29d72",
-    title: "Third Item"
-  }
-];
+import axios from "../services/axios";
+import ItemCard from "../components/itemCard";
 
-function DummyList() {
-  const arr = [];
+// const DATA = [
+//   {
+//     id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
+//     title: "First Item"
+//   },
+//   {
+//     id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
+//     title: "Second Item"
+//   },
+//   {
+//     id: "58694a0f-3da1-471f-bd96-145571e29d72",
+//     title: "Third Item"
+//   }
+// ];
 
-  for (let i = 0; i < 30; i++) {
-    arr.push({
-      id: i,
-      text: `Text ${i}`
-    });
-  }
+// function DummyList() {
+//   const arr = [];
+//   for (let i = 0; i < 30; i++) {
+//     arr.push({
+//       id: i,
+//       text: `Text ${i}`
+//     });
+//   }
+//   return arr;
+// }
 
-  return arr;
-}
-
-function Item({ title }) {
-  return (
-    <View style={styles.item}>
-      <Text style={styles.title}>{title}</Text>
-    </View>
-  );
-}
+// function Item({ title }) {
+//   return (
+//     <View style={styles.item}>
+//       <Text style={styles.title}>{title}</Text>
+//     </View>
+//   );
+// }
 
 function ListRequestScreen({ navigation }) {
-  const [guests, setGuests] = useState([])
+  const [guests, setGuests] = useState([]);
 
   const getGuestList = async () => {
-    const token = await AsyncStorage.getItem('token')
-    const { data } = await axios.get('/guests', {
+    const token = await AsyncStorage.getItem("token");
+    const { data } = await axios.get("/guests", {
       headers: {
         token
       }
-    })
+    });
 
-    const guestList = data.filter(guest => guest.status === null)
+    const guestList = data.filter(guest => guest.status === null);
 
     guestList.sort((a, b) => {
-      return new Date(b.createdAt) - new Date(a.createdAt)
-    })
+      const timeA = new Date(a.createdAt);
+      const timeB = new Date(b.createdAt);
+      return timeB.getTime() - timeA.getTime();
+      // return new Date(b.createdAt) - new Date(a.createdAt);
+    });
 
-    setGuests(guestList)
-  }
-
+    setGuests(guestList);
+  };
 
   useEffect(() => {
-    getGuestList()
-  }, [])
-  // return (
-  //   <View style={styles.container}>
-  //     {/* {DummyList().map(item => (
-  //       <FlatList style={styles.item} key={item.id}>
-  //         <Text style={{ fontSize: 32 }}>{item.text} asdf</Text>
-  //       </FlatList>
-  //     ))} */}
-  //     {/* <Button
-  //       onPress={() => navigation.navigate("guest")}
-  //       title="Go to notifications"
-  //     /> */}
-  //   </View>
-  // );
+    getGuestList();
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -91,12 +79,14 @@ function ListRequestScreen({ navigation }) {
       </View>
       <FlatList
         data={guests}
-        renderItem={({ item }) =>
+        renderItem={({ item }) => (
           <ItemCard
             title={item.name}
             status={item.status}
             type="request"
-            phoneNumber={item.phoneNumber} />}
+            phoneNumber={item.phoneNumber}
+          />
+        )}
         keyExtractor={item => item.id}
       />
     </SafeAreaView>

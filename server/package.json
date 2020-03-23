@@ -8,12 +8,12 @@
     "migrate": "sequelize db:migrate && npm run seed",
     "seed": "sequelize db:seed:all",
     "migrate:reset": "sequelize db:migrate:undo:all && npm run migrate",
-    "test": "NODE_ENV=test jest --coverage --forceExit --detectOpenHandles",
-    "pretest": "NODE_ENV=test npm run migrate:reset ",
-    "db_testing": "NODE_ENV=test sequelize db:create",
-    "db_dev": "NODE_ENV=development sequelize db:create",
+    "test": "cross-env NODE_ENV=test jest --coverage --forceExit --detectOpenHandles",
+    "pretest": "cross-env NODE_ENV=test npm run migrate:reset ",
+    "db_testing": "cross-env NODE_ENV=test sequelize db:create",
+    "db_dev": "cross-env NODE_ENV=development sequelize db:create",
     "start": "node app.js",
-    "dev": "NODE_ENV=development nodemon bin/http.js"
+    "dev": "cross-env NODE_ENV=development nodemon bin/http.js"
   },
   "repository": {
     "type": "git",
@@ -44,6 +44,7 @@
     ]
   },
   "devDependencies": {
+    "cross-env": "^7.0.2",
     "jest": "^25.1.0",
     "supertest": "^4.0.2"
   }
