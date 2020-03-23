@@ -33,11 +33,15 @@ class GuestController {
   }
 
   static updateGuest(req, res, next) {
-    let status = { status: true };
-    Guest.update(status, { where: { id: req.params.id }, returning: true })
+    let status = req.body.status;
+
+    Guest.update({ status }, { where: { id: req.params.id }, returning: true })
       .then(result => {
         if (result[0] != 0) {
+          req.io.emit(`permission-${req.user.id}`, status)
+
           redis.del('listGuest')
+
           res.status(200).json({ guest: result[1][0].dataValues });
         } else {
           let message = {

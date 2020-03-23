@@ -65,6 +65,7 @@ body * {
   cursor: pointer;
   pointer-events: auto;
 }
+
 .menu__listings {
   z-index: 10;
   position: absolute;
