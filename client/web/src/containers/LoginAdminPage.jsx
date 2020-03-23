@@ -18,7 +18,7 @@ function LoginAdminPage({ children, ...rest }) {
             })
             .then(result => {
                 let token = result.data.token
-                localStorage.setItem('token', token)
+                sessionStorage.setItem('token', token)
 
                 history.push('/users')
             })
@@ -30,7 +30,7 @@ function LoginAdminPage({ children, ...rest }) {
     return (
 
         <div className="container">
-            {localStorage.token ?
+            {sessionStorage.token ?
                 <Redirect to={{
                     pathname: "/users",
                 }} /> :

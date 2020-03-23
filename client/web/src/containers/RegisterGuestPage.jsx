@@ -23,7 +23,7 @@ function RegisterGuestPage() {
                 UserId
             })
             .then(({ data }) => {
-                localStorage.setItem('userId', UserId)
+                sessionStorage.setItem('userId', UserId)
 
                 dispatch(ADDNEWGUEST(data.guest))
 

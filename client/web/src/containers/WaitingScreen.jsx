@@ -6,7 +6,7 @@ import socket from '../services/socket'
 import { changeLockStatus } from '../store/actions/locker'
 
 function WaitingScreen() {
-  const UserId = localStorage.userId
+  const UserId = sessionStorage.userId
 
   const history = useHistory()
   const dispatch = useDispatch()
@@ -16,7 +16,7 @@ function WaitingScreen() {
   socket.on(`permission-${UserId}`, ({ status }) => {
     dispatch(changeLockStatus(status))
 
-    localStorage.removeItem('userId')
+    sessionStorage.removeItem('userId')
 
     history.push('/permission')
   })
