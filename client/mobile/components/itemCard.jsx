@@ -38,11 +38,18 @@ function generateStyle(color) {
     });
 }
 
+<<<<<<< HEAD
 function Item({ id, title, phoneNumber, status, type }) {
     const dispatch = useDispatch()
 
     let color;
 
+=======
+function Item({ title, phoneNumber, status, type }) {
+    let color;
+
+    console.log(status);
+>>>>>>> 3098b14321ff42cd4c20cb617467b6193f9a1580
     if (status === null) {
         color = "#83a4d4";
     } else if (status) {
@@ -79,12 +86,20 @@ function Item({ id, title, phoneNumber, status, type }) {
             {/* button */}
             {type === "request" ?
                 <>
+<<<<<<< HEAD
                     <TouchableOpacity style={styles.btnAccept} onPress={() => unlockLocker(true)}>
+=======
+                    <TouchableOpacity style={styles.btnAccept}>
+>>>>>>> 3098b14321ff42cd4c20cb617467b6193f9a1580
                         <Text>
                             <h3>Accept</h3>
                         </Text>
                     </TouchableOpacity>
+<<<<<<< HEAD
                     <TouchableOpacity style={styles.btnDecline} onPress={() => unlockLocker(false)}>
+=======
+                    <TouchableOpacity style={styles.btnDecline}>
+>>>>>>> 3098b14321ff42cd4c20cb617467b6193f9a1580
                         <Text>
                             <h3>Decline</h3>
                         </Text>
