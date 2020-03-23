@@ -7,12 +7,13 @@ import {
   AsyncStorage,
   FlatList
 } from "react-native";
+
 import ItemCard from '../components/itemCard'
 import axios from '../services/axios'
 // import socket from '../services/socket'
 
 function ListRequestScreen({ navigation }) {
-  const [guests, setGuests] = useState([])
+  const [guests, setGuests] = useState([]);
 
   // let UserId
   // AsyncStorage.getItem('userid', (err, result) => {
@@ -25,25 +26,28 @@ function ListRequestScreen({ navigation }) {
 
 
   const getGuestList = async () => {
-    const token = await AsyncStorage.getItem('token')
-    const { data } = await axios.get('/guests', {
+    const token = await AsyncStorage.getItem("token");
+    const { data } = await axios.get("/guests", {
       headers: {
         token
       }
-    })
+    });
 
-    const guestList = data.filter(guest => guest.status === null)
+    const guestList = data.filter(guest => guest.status === null);
 
     guestList.sort((a, b) => {
-      return new Date(b.createdAt) - new Date(a.createdAt)
-    })
+      const timeA = new Date(a.createdAt);
+      const timeB = new Date(b.createdAt);
+      return timeB.getTime() - timeA.getTime();
+      // return new Date(b.createdAt) - new Date(a.createdAt);
+    });
 
-    setGuests(guestList)
-  }
+    setGuests(guestList);
+  };
 
   useEffect(() => {
-    getGuestList()
-  }, [])
+    getGuestList();
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -52,13 +56,15 @@ function ListRequestScreen({ navigation }) {
       </View>
       <FlatList
         data={guests}
-        renderItem={({ item }) =>
+        renderItem={({ item }) => (
           <ItemCard
             title={item.name}
             status={item.status}
             id={item.id}
             type="request"
-            phoneNumber={item.phoneNumber} />}
+            phoneNumber={item.phoneNumber}
+          />
+        )}
         keyExtractor={item => item.id}
       />
     </SafeAreaView>
