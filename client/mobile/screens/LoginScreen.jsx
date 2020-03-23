@@ -1,16 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
   View,
   TextInput,
-  Button,
   TouchableOpacity,
   AsyncStorage
 } from "react-native";
 import axios from '../services/axios'
 
-export default function LoginScreen() {
+export default function LoginScreen({ navigation }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -23,11 +22,23 @@ export default function LoginScreen() {
       .then(({ data }) => {
         AsyncStorage.setItem('userid', data.user.id)
         AsyncStorage.setItem('token', data.token)
+
+        navigation.navigate('Home')
       })
       .catch(err => {
         console.log(err.response, "<")
       })
   }
+
+  const checkLogin = async () => {
+    const token = await AsyncStorage.getItem('token')
+
+    token ? navigation.navigate('Home') : null
+  }
+
+  useEffect(() => {
+    checkLogin()
+  })
 
   return (
     <View style={styles.container}>
