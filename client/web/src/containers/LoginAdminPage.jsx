@@ -29,7 +29,6 @@ function LoginAdminPage({ children, ...rest }) {
     }
 
     return (
-
         <div className="container">
             {sessionStorage.token ?
                 <Redirect to={{
