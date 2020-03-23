@@ -21,7 +21,7 @@ class GuestController {
     let body = {
       name: req.body.name,
       phoneNumber: req.body.phoneNumber,
-      status: false,
+      status: null,
       UserId: req.body.UserId
     };
     Guest.create(body)

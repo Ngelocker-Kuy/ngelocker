@@ -7,18 +7,31 @@ import {
   Button,
   TouchableOpacity
 } from "react-native";
+import ubidots from '../services/ubidots'
 
 export default function LoginScreen() {
+  const toggleLocker = (key) => {
+    ubidots.post('/demoswitch/demo/values', {
+      value: key
+    })
+      .then(result => {
+        console.log(result)
+      })
+      .catch(err => {
+        console.log(err.response)
+      })
+  }
+
   return (
     <View style={styles.container}>
       <Text style={styles.logo}>Lock Key</Text>
       <View style={styles.containerLocker}>
         {/* Lock */}
-        <TouchableOpacity style={styles.lockBtnLock}>
+        <TouchableOpacity style={styles.lockBtnLock} onPress={() => toggleLocker(0)}>
           <Text style={styles.lockText}>Lock</Text>
         </TouchableOpacity>
         {/* Unlock */}
-        <TouchableOpacity style={styles.lockBtnUnlock}>
+        <TouchableOpacity style={styles.lockBtnUnlock} onPress={() => toggleLocker(1)}>
           <Text style={styles.lockText}>Unlock</Text>
         </TouchableOpacity>
       </View>

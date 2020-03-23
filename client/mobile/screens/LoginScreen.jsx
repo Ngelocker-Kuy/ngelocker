@@ -5,25 +5,41 @@ import {
   View,
   TextInput,
   Button,
-  TouchableOpacity
+  TouchableOpacity,
+  AsyncStorage
 } from "react-native";
+import axios from '../services/axios'
 
 export default function LoginScreen() {
-  const [emailInput, setEmailInput] = useState("");
-  const [passwordInput, setPasswordInput] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  const login = () => {
+    axios
+      .post('/users/login', {
+        username,
+        password
+      })
+      .then(({ data }) => {
+        AsyncStorage.setItem('userid', data.user.id)
+        AsyncStorage.setItem('token', data.token)
+      })
+      .catch(err => {
+        console.log(err.response, "<")
+      })
+  }
 
   return (
     <View style={styles.container}>
       <Text style={styles.logo}>Lockey</Text>
-      {/* Email */}
+      {/* Username */}
       <View style={styles.inputView}>
         <TextInput
           style={styles.inputText}
-          placeholder="Email..."
+          placeholder="Username..."
           placeholderTextColor="#003f5c"
-          value={emailInput}
-          onChangeText={text => setEmailInput(text)}
-          keyboardType="email-address"
+          value={username}
+          onChangeText={text => setUsername(text)}
         />
       </View>
       {/* Password */}
@@ -32,8 +48,8 @@ export default function LoginScreen() {
           style={styles.inputText}
           placeholder="Password..."
           placeholderTextColor="#003f5c"
-          value={passwordInput}
-          onChangeText={text => setPasswordInput(text)}
+          value={password}
+          onChangeText={text => setPassword(text)}
           secureTextEntry={true}
         />
       </View>
@@ -42,7 +58,7 @@ export default function LoginScreen() {
         <Text style={styles.forgot}>Forgot Password?</Text>
       </TouchableOpacity> */}
       {/* Login Button */}
-      <TouchableOpacity style={styles.loginBtn}>
+      <TouchableOpacity style={styles.loginBtn} onPress={() => login()}>
         <Text style={styles.loginText}>LOGIN</Text>
       </TouchableOpacity>
       {/* Signup Button */}
