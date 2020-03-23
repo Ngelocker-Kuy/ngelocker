@@ -15,7 +15,7 @@ function PermissionPage() {
     }
 
     return (
-        <div id="container">
+        <div id="container" style={{ marginTop: '7vh' }}>
             {
                 statusLock ?
                     <SuccessPermission />
