@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GET_GUEST } from "../actions/guestAction";
 import {
@@ -10,11 +10,10 @@ import {
   FlatList
 } from "react-native";
 import ItemCard from "../components/itemCard";
-import axios from "../services/axios";
-// import socket from '../services/socket'
 
-function ListRequestScreen({ navigation }) {
-  // const [guests, setGuests] = useState([]);
+import socket from '../services/socket'
+
+function ListRequestScreen() {
   const guests = useSelector(state => {
     const guestList = state.guests.filter(guest => guest.status === null);
 
@@ -25,20 +24,16 @@ function ListRequestScreen({ navigation }) {
   });
   const dispatch = useDispatch();
 
-
-  // let UserId
-  // AsyncStorage.getItem('userid', (err, result) => {
-  //   if (err) {
-  //     console.log(err)
-  //   } else {
-  //     UserId = result
-  //   }
-  // })
-
   const getGuestList = async () => {
     const token = await AsyncStorage.getItem("token");
     dispatch(GET_GUEST(token));
   };
+
+  socket.on('guestUpdate', async () => {
+    const token = await AsyncStorage.getItem("token");
+
+    dispatch(GET_GUEST(token))
+  })
 
   useEffect(() => {
     getGuestList();
@@ -60,7 +55,7 @@ function ListRequestScreen({ navigation }) {
             phoneNumber={item.phoneNumber}
           />
         )}
-        keyExtractor={item => item.id}
+        keyExtractor={item => String(item.id)}
       />
     </SafeAreaView>
   );

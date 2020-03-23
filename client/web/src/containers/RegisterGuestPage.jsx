@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux'
 import { useParams, useHistory } from 'react-router-dom'
+
 import axios from '../services/axios'
+import socket from '../services/socket'
 
 import { ADDNEWGUEST } from '../store/actions/guest'
 
@@ -27,6 +29,7 @@ function RegisterGuestPage() {
 
                 dispatch(ADDNEWGUEST(data.guest))
 
+                socket.emit('newGuest')
                 history.push('/waiting')
             })
             .catch(err => {

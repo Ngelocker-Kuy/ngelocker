@@ -7,30 +7,26 @@ import {
   AsyncStorage,
   FlatList
 } from "react-native";
+import { GET_GUEST } from "../actions/guestAction";
+import { useDispatch, useSelector } from "react-redux";
 
-import axios from "../services/axios";
 import ItemCard from "../components/itemCard";
 
-function ListGuestScreen({ navigation }) {
-  const [guests, setGuests] = useState([]);
+function ListGuestScreen() {
+  const guests = useSelector(state => {
+    const guestList = state.guests.filter(guest => guest.status !== null);
+
+    guestList.sort((a, b) => {
+      return new Date(a.updatedAt) - new Date(b.updatedAt);
+    });
+    return guestList;
+  });
+
+  const dispatch = useDispatch();
 
   const getGuestList = async () => {
     const token = await AsyncStorage.getItem("token");
-    const { data } = await axios.get("/guests", {
-      headers: {
-        token
-      }
-    });
-
-    const guestList = data.filter(
-      guest => guest.status || guest.status === false
-    );
-
-    guestList.sort((a, b) => {
-      return new Date(b.createdAt) - new Date(a.createdAt);
-    });
-
-    setGuests(guestList);
+    dispatch(GET_GUEST(token));
   };
 
   useEffect(() => {
@@ -51,7 +47,7 @@ function ListGuestScreen({ navigation }) {
             status={item.status}
           />
         )}
-        keyExtractor={item => item.id}
+        keyExtractor={item => String(item.id)}
       />
     </SafeAreaView>
   );

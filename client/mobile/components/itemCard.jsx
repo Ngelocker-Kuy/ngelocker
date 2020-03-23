@@ -1,6 +1,8 @@
 import React from "react";
 import { StyleSheet, View, Text, TouchableOpacity, AsyncStorage } from "react-native";
 import axios from '../services/axios'
+import { GET_GUEST } from "../actions/guestAction";
+import { useDispatch } from "react-redux";
 
 // import Btn from "./Btn";
 
@@ -36,10 +38,11 @@ function generateStyle(color) {
     });
 }
 
-function Item({ title, phoneNumber, status, type }) {
+function Item({ id, title, phoneNumber, status, type }) {
+    const dispatch = useDispatch()
+
     let color;
 
-    console.log(status);
     if (status === null) {
         color = "#83a4d4";
     } else if (status) {
@@ -62,7 +65,7 @@ function Item({ title, phoneNumber, status, type }) {
                 }
             })
             .then(result => {
-                console.log(result)
+                dispatch(GET_GUEST(token))
             })
             .catch(err => {
                 console.log(err.response)
@@ -76,12 +79,12 @@ function Item({ title, phoneNumber, status, type }) {
             {/* button */}
             {type === "request" ?
                 <>
-                    <TouchableOpacity style={styles.btnAccept}>
+                    <TouchableOpacity style={styles.btnAccept} onPress={() => unlockLocker(true)}>
                         <Text>
                             <h3>Accept</h3>
                         </Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.btnDecline}>
+                    <TouchableOpacity style={styles.btnDecline} onPress={() => unlockLocker(false)}>
                         <Text>
                             <h3>Decline</h3>
                         </Text>
