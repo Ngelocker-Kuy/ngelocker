@@ -24,13 +24,13 @@ body {
   font-family: "Fredoka One";
   position: relative;
   -webkit-box-flex: 0;
-          flex: 0 1 15rem;
+  flex: 0 1 15rem;
   background-color: #fff;
   padding-bottom: 5rem;
-  -webkit-transition: background-color 0.2s cubic-bezier(0.5, 0.3, 0.8, 0.06);
   transition: background-color 0.2s cubic-bezier(0.5, 0.3, 0.8, 0.06);
   color: #000;
   margin: 10px;
+  box-shadow: 2px 2px 15px 0px rgba(255, 255, 255, 0.75);
 }
 .Card-thumb {
   position: relative;
