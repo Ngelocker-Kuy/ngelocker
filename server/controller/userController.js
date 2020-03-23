@@ -3,8 +3,10 @@ const jwt = require("../helpers/jwt");
 const Bcrypt = require("../helpers/bcrypt");
 class UserController {
   static getUser(req, res, next) {
+    console.log("aaa");
     User.findAll()
       .then(result => {
+        console.log(result, "<<<");
         res.status(200).json(result);
       })
       .catch(next);
