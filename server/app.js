@@ -20,12 +20,11 @@ io.on('connection', (socket) => {
     });
 });
 
-// app.use((req, res, next) => {
-//     req.io = io
+app.use((req, res, next) => {
+    req.io = io
 
-//     // req.io.emit('checkPermission')
-//     next()
-// })
+    next()
+})
 app.use("/", index);
 app.use(error);
 

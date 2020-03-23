@@ -65,14 +65,7 @@ body * {
   cursor: pointer;
   pointer-events: auto;
 }
-.clicked{
-   z-index: 11;
-  background-color: rgb(94, 255, 0);
-  border-radius: 50%;
-  transition: transform 1.3s;
-  cursor: pointer;
-  pointer-events: auto;
-}
+
 .menu__listings {
   z-index: 10;
   position: absolute;
