@@ -4,6 +4,7 @@ import "../styles/formRegister.css";
 import axios from '../services/axios'
 import { InputGroup, Button, FormControl } from 'react-bootstrap'
 import { BsEyeSlashFill, BsEyeFill } from 'react-icons/bs';
+import Swal from 'sweetalert2'
 
 function RegisterUserPage() {
     const [username, setUsername] = useState('')
@@ -30,12 +31,32 @@ function RegisterUserPage() {
                 }
             })
             .then(({ data }) => {
-                console.log(data)
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    onOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
 
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Successfully registered user'
+                })
                 history.push('/users')
             })
             .catch(err => {
-                console.log(err.response)
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: `${err.response.data.message}`,
+                    showConfirmButton: false,
+                    timer: 1500
+                })
             })
     }
 

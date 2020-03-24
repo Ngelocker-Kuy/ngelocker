@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux'
 import { useParams, useHistory } from 'react-router-dom'
+import Swal from 'sweetalert2'
 
 import axios from '../services/axios'
 import socket from '../services/socket'
@@ -26,6 +27,22 @@ function RegisterGuestPage() {
             })
             .then(({ data }) => {
                 sessionStorage.setItem('userId', UserId)
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    onOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Successfully registered'
+                })
 
                 dispatch(ADDNEWGUEST(data.guest))
 
@@ -34,6 +51,13 @@ function RegisterGuestPage() {
             })
             .catch(err => {
                 console.log(err.response)
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: `${err.response.data.message}`,
+                    showConfirmButton: false,
+                    timer: 1500
+                })
             })
     }
 

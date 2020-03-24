@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Text, TouchableOpacity, AsyncStorage } from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity, AsyncStorage, Alert } from "react-native";
 import axios from '../services/axios'
 import ubidots from '../services/ubidots'
 import { GET_GUEST } from "../actions/guestAction";
@@ -60,7 +60,32 @@ function Item({ id, title, phoneNumber, status, type }) {
 
     const unlockLocker = async (status) => {
         const token = await AsyncStorage.getItem('token')
+        let messageStatus = ''
+        if (status === true) {
+            messageStatus = 'accept'
+        } else {
+            messageStatus = 'decline'
+        }
+        Alert.alert(
+            `Are you sure want to ${messageStatus} this request?`,
+            '',
+            [
+                {
+                    text: 'Cancel',
+                    onPress: () => console.log('Cancel'),
+                    style: 'cancel',
+                },
+                {
+                    text: 'OK', onPress: () => editStatus(status, token)
+                },
+            ],
+            { cancelable: false },
+        )
 
+    }
+
+    const editStatus = (status, token) => {
+        // const token = await AsyncStorage.getItem('token')
         axios
             .put(`/guests/${id}`, {
                 status

@@ -12,11 +12,11 @@ module.exports = (sequelize, DataTypes) => {
         validate: {
           notEmpty: {
             args: true,
-            msg: "please fill password"
+            msg: "Please Fill Name"
           },
           notNull: {
             args: true,
-            msg: "please enter your password"
+            msg: "Please Enter Your Name"
           }
         }
       },
@@ -26,11 +26,11 @@ module.exports = (sequelize, DataTypes) => {
         validate: {
           notEmpty: {
             args: true,
-            msg: "please fill password"
+            msg: "Please Fill Phone Number"
           },
           notNull: {
             args: true,
-            msg: "please enter your password"
+            msg: "Please Enter Your Phone Number"
           }
         }
       },

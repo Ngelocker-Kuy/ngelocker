@@ -11,7 +11,7 @@ import {
   Image,
   KeyboardAvoidingView,
   AsyncStorage,
-  Alert
+  ToastAndroid
 } from "react-native";
 import axios from "../services/axios";
 
@@ -42,12 +42,8 @@ export default function LoginScreen({ navigation }) {
         navigation.navigate("Home");
       })
       .catch((err) => {
-        Alert.alert(
-          [
-            { text: "Username / Password Wrong" }
-          ],
-          { cancelable: false },
-        )
+        console.log(err.response.data.message);
+        ToastAndroid.show(`${err.response.data.message}`, ToastAndroid.SHORT)
       });
   };
 
@@ -87,11 +83,6 @@ export default function LoginScreen({ navigation }) {
           secureTextEntry={true}
         />
       </View>
-      {/* forgot password */}
-      {/* <TouchableOpacity>
-        <Text style={styles.forgot}>Forgot Password?</Text>
-      </TouchableOpacity> */}
-      {/* Login Button */}
       <TouchableOpacity style={styles.loginBtn} onPress={() => login()}>
         <Text style={styles.loginText}>LOGIN</Text>
       </TouchableOpacity>

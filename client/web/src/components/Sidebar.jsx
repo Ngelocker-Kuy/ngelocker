@@ -1,12 +1,29 @@
 import React from "react";
 import { Link, useHistory } from "react-router-dom"
 import '../styles/sidebar.css'
+import Swal from 'sweetalert2'
 
 function Sidebar() {
   const history = useHistory()
 
   const logout = () => {
     sessionStorage.removeItem('token')
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      onOpen: (toast) => {
+        toast.addEventListener('mouseenter', Swal.stopTimer)
+        toast.addEventListener('mouseleave', Swal.resumeTimer)
+      }
+    })
+
+    Toast.fire({
+      icon: 'success',
+      title: 'Successfully signed out'
+    })
     history.push('/')
   }
 
