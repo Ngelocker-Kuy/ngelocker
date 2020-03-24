@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import LockerScreen from "../screens/LockerScreen";
 import ListRequestScreen from "../screens/ListRequestScreen";
 import ListGuestScreen from "../screens/ListGuestScreen";
+import AccountNavigator from "./AccountNavigator";
 
 const Tab = createBottomTabNavigator();
 
@@ -74,6 +75,19 @@ export default function HomeNavigator() {
       <Tab.Screen name="locker" component={LockerScreen} />
       <Tab.Screen name="request" component={ListRequestScreen} />
       <Tab.Screen name="guest" component={ListGuestScreen} />
+      <Tab.Screen
+        name="account"
+        component={AccountNavigator}
+        options={{
+          tabBarIcon: ({size, color, focused}) => (
+            <Ionicons
+              name={focused ? "ios-person" : "md-person"}
+              size={size}
+              color={color}
+            />
+          )
+        }}
+      />
     </Tab.Navigator>
   );
 }
