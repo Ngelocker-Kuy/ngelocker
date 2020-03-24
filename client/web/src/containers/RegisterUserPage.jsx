@@ -57,7 +57,7 @@ function RegisterUserPage() {
             .catch(err => {
                 console.log(err.response)
             })
-    })
+    }, [])
 
     return (
         <div className="register mt-5" style={{ fontFamily: "Fredoka One" }}>
@@ -95,7 +95,8 @@ function RegisterUserPage() {
                                         className="form-control"
                                         style={{ borderRight: 'none' }}
                                         type={passwordVisibility ? "text" : "password"}
-                                        defaultValue={lockerLabel}
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
                                     />
                                     <InputGroup.Append >
                                         <Button style={{

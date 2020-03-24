@@ -25,10 +25,6 @@ function WaitingScreen() {
     history.goBack()
   }
 
-  useEffect(() => {
-    socket.emit('newGuest', UserId)
-  }, [UserId])
-
   return (
     <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', padding: '20vh 5vh' }}>
       <h1 style={{ textAlign: 'center', color: 'white', fontFamily: "Fredoka One" }}>WAITING FOR PERMISSION</h1>

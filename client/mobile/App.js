@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
+import { Notifications } from 'expo';
 
 import LoginNavigator from "./navigation/LoginNavigator";
 import * as Font from 'expo-font'
 import { Provider } from "react-redux";
 import store from "./store/index";
 import { View } from "react-native";
+
 
 export default function App() {
 

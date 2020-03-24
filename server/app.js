@@ -7,17 +7,15 @@ const io = require('socket.io')(server);
 const cors = require("cors");
 const error = require("./middleware/errorHandling");
 
+const pushNotification = require('./helpers/pushNotification')
+
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 io.on('connection', (socket) => {
-    socket.on('newGuest', () => {
-        // emit to react native
-        io.emit('guestUpdate')
-
-        // emit to waiting room web
-        // socket.emit(`permission-${UserId}`, { status: false })
+    socket.on('newGuest', ({ UserId, guest }) => {
+        pushNotification(io, { UserId, guest })
     });
 });
 

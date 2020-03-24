@@ -3,10 +3,8 @@ const jwt = require("../helpers/jwt");
 const Bcrypt = require("../helpers/bcrypt");
 class UserController {
   static getUser(req, res, next) {
-    console.log("aaa");
     User.findAll()
       .then(result => {
-        console.log(result, "<<<");
         res.status(200).json(result);
       })
       .catch(next);
@@ -21,6 +19,7 @@ class UserController {
         email: req.body.email,
         lockerLabel: req.body.lockerLabel
       };
+
       const registerUser = await User.create(dataUser);
       const createLocker = await Locker.create({ UserId: registerUser.id });
       await User.update(
@@ -60,6 +59,8 @@ class UserController {
     let password = req.body.password;
     let tokenExpo = req.body.tokenExpo;
     let token = "";
+
+    console.log(req.body, 'ini req.body')
     User.findOne({
       where: {
         username: username
@@ -67,6 +68,7 @@ class UserController {
     })
       .then(user => {
         if (user) {
+          console.log(user)
           if (Bcrypt.checkPassword(password, user.password)) {
             token = jwt.createToken({ email: user.email, id: user.id });
             // this.updateToken(user, token);
@@ -96,15 +98,17 @@ class UserController {
       .catch(next);
   }
 
-  static updateToken(user, token) {
-    user
-      .update({ token })
-      .then(result => {
-        res.status(200).json(result);
-      })
-      .catch(err => {
-        next(err);
-      });
+  static async findUser(id) {
+    try {
+      return await User
+        .findOne({
+          where: {
+            id
+          }
+        })
+    } catch (err) {
+      return err
+    }
   }
 }
 

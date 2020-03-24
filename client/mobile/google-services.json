@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "753265491992",
+    "firebase_url": "https://ngelocker.firebaseio.com",
+    "project_id": "ngelocker",
+    "storage_bucket": "ngelocker.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:753265491992:android:66362e80d0c1598c5ec36d",
+        "android_client_info": {
+          "package_name": "com.hacktiv8.ngelocker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "753265491992-c047eohlhc3mq0kj20s9olmbim0co75l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAblHPzgGW3FUu55CyBEkacV7lLCFOgORE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "753265491992-c047eohlhc3mq0kj20s9olmbim0co75l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

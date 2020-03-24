@@ -25,6 +25,11 @@
     ],
     "ios": {
       "supportsTablet": true
+    },
+    "android": {
+      "package": "com.hacktiv8.ngelocker",
+      "versionCode": 1,
+      "googleServicesFile": "./google-services.json"
     }
   }
 }
