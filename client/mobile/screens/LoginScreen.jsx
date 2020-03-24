@@ -9,7 +9,7 @@ import {
   KeyboardAvoidingView,
   AsyncStorage
 } from "react-native";
-import axios from '../services/axios'
+import axios from "../services/axios";
 import { NeuView } from "neumorphism-ui";
 
 export default function LoginScreen({ navigation }) {
@@ -17,36 +17,38 @@ export default function LoginScreen({ navigation }) {
   const [password, setPassword] = useState("");
 
   const login = () => {
-
     axios
-      .post('/users/login', {
+      .post("/users/login", {
         username,
         password
       })
       .then(({ data }) => {
-        AsyncStorage.setItem('userid', data.user.id)
-        AsyncStorage.setItem('token', data.token)
+        AsyncStorage.setItem("userid", data.user.id);
+        AsyncStorage.setItem("token", data.token);
 
-        navigation.navigate('Home')
+        navigation.navigate("Home");
       })
       .catch(err => {
-        console.log(err.response, "<")
-      })
-  }
+        console.log(err.response, "<");
+      });
+  };
 
   const checkLogin = async () => {
-    const token = await AsyncStorage.getItem('token')
+    const token = await AsyncStorage.getItem("token");
 
-    token ? navigation.navigate('Home') : null
-  }
+    token ? navigation.navigate("Home") : null;
+  };
 
   useEffect(() => {
-    checkLogin()
-  })
+    checkLogin();
+  });
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
-      <Image source={require('../assets/logo.png')} style={{ width: "100%", height: "40%", marginVertical: 30 }}></Image>
+      <Image
+        source={require("../assets/logo.png")}
+        style={{ width: "100%", height: "40%", marginVertical: 30 }}
+      ></Image>
       <View style={styles.inputView}>
         <TextInput
           style={styles.inputText}
@@ -91,7 +93,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     height: 50,
     marginBottom: 20,
-    justifyContent: "center",
+    justifyContent: "center"
     // shadowColor: "#000",
     // shadowOffset: {
     //   width: 0,
