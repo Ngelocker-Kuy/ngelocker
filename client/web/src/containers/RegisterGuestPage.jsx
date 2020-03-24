@@ -29,7 +29,7 @@ function RegisterGuestPage() {
 
                 dispatch(ADDNEWGUEST(data.guest))
 
-                socket.emit('newGuest')
+                socket.emit('newGuest', { guest: data.guest.name, UserId })
                 history.push('/waiting')
             })
             .catch(err => {

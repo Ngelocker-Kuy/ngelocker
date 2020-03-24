@@ -97,12 +97,12 @@ function Item({ id, title, phoneNumber, status, type }) {
                 <>
                     <TouchableOpacity style={styles.btnAccept} onPress={() => unlockLocker(true)}>
                         <Text>
-                            <h3>Accept</h3>
+                            Accept
                         </Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.btnDecline} onPress={() => unlockLocker(false)}>
                         <Text>
-                            <h3>Decline</h3>
+                            Decline
                         </Text>
                     </TouchableOpacity>
                 </>

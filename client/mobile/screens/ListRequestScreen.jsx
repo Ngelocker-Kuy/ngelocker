@@ -32,7 +32,7 @@ function ListRequestScreen() {
 
   socket.on('guestUpdate', async () => {
     const token = await AsyncStorage.getItem("token");
-
+    console.log('masuk', token)
     dispatch(GET_GUEST(token))
   })
 

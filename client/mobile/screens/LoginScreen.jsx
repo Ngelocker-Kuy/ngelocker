@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import { Notifications } from 'expo'
+import * as Permissions from 'expo-permissions';
+
 import {
   StyleSheet,
   Text,
@@ -16,11 +19,21 @@ export default function LoginScreen({ navigation }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  const login = () => {
+  const login = async () => {
+    const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS)
+
+    if (status !== 'granted') {
+      alert('No notification permissions!');
+      return;
+    }
+
+    let tokenExpo = await Notifications.getExpoPushTokenAsync();
+
     axios
       .post("/users/login", {
         username,
-        password
+        password,
+        tokenExpo
       })
       .then(({ data }) => {
         AsyncStorage.setItem("userid", data.user.id);
