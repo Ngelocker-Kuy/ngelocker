@@ -60,7 +60,7 @@ class UserController {
     let tokenExpo = req.body.tokenExpo;
     let token = "";
 
-    console.log(req.body, 'ini req.body')
+    console.log(req.body, "ini req.body");
     User.findOne({
       where: {
         username: username
@@ -68,7 +68,7 @@ class UserController {
     })
       .then(user => {
         if (user) {
-          console.log(user)
+          console.log(user);
           if (Bcrypt.checkPassword(password, user.password)) {
             token = jwt.createToken({ email: user.email, id: user.id });
             // this.updateToken(user, token);
@@ -100,15 +100,32 @@ class UserController {
 
   static async findUser(id) {
     try {
-      return await User
-        .findOne({
-          where: {
-            id
-          }
-        })
+      return await User.findOne({
+        where: {
+          id
+        }
+      });
     } catch (err) {
-      return err
+      return err;
     }
+  }
+
+  static findOne(req, res, next) {
+    User.findOne({ where: { id: req.params.id } })
+      .then(result => {
+        if (result) {
+          res.status(200).json(result);
+        } else {
+          let mesaage = {
+            status: "404",
+            message: "user not found"
+          };
+          throw mesaage;
+        }
+      })
+      .catcH(err => {
+        next(err);
+      });
   }
 }
 

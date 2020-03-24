@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Notifications } from 'expo'
-import * as Permissions from 'expo-permissions';
+import { Notifications } from "expo";
+import * as Permissions from "expo-permissions";
 
 import {
   StyleSheet,
@@ -20,30 +20,32 @@ export default function LoginScreen({ navigation }) {
   const [password, setPassword] = useState("");
 
   const login = async () => {
-    const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS)
+    const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
 
-    if (status !== 'granted') {
-      alert('No notification permissions!');
+    if (status !== "granted") {
+      alert("No notification permissions!");
       return;
     }
 
-    let tokenExpo = await Notifications.getExpoPushTokenAsync();
+    // let tokenExpo = await Notifications.getExpoPushTokenAsync();
+    console.log(status);
+    // console.log(tokenExpo, "<<<");
 
     axios
       .post("/users/login", {
         username,
-        password,
-        tokenExpo
+        password
+        // tokenExpo
       })
       .then(({ data }) => {
         AsyncStorage.setItem("userid", data.user.id);
         AsyncStorage.setItem("token", data.token);
-
+        console.log("masuk euy");
         navigation.navigate("Home");
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err.response.data.message);
-        ToastAndroid.show(`${err.response.data.message}`, ToastAndroid.SHORT)
+        ToastAndroid.show(`${err.response.data.message}`, ToastAndroid.SHORT);
       });
   };
 
@@ -106,11 +108,11 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 11,
+      height: 11
     },
     shadowOpacity: 0.57,
     shadowRadius: 15.19,
-    elevation: 10,
+    elevation: 10
   },
   inputText: {
     paddingLeft: 20,
@@ -137,11 +139,11 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
-      height: 20,
+      height: 20
     },
     shadowOpacity: 0.57,
     shadowRadius: 15.19,
-    elevation: 20,
+    elevation: 20
   },
   loginText: {
     color: "white",

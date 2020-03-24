@@ -8,19 +8,35 @@ import {
   FlatList,
   TouchableOpacity
 } from "react-native";
+import axios from "../services/axios";
 
 import ItemCard from "../components/itemCard";
 
-function ListGuestScreen(props) {
+function ListGuestScreen({ navigation }) {
+  const logout = () => {
+    axios
+      .post("/users/logout")
+      .then(({ data }) => {
+        AsyncStorage.clear();
+        navigation.navigate("login-page");
+      })
+      .catch(err => {
+        console.log(err.response);
+      });
+  };
   return (
     <View style={styles.container}>
       <SafeAreaView style={styles.container}>
         <View style={{ ...styles.container, alignItems: "center" }}>
-          <Text style={styles.logo}>List Guests</Text>
-          <TouchableOpacity style={styles.btn} onPress={() => {props.navigation.navigate("account-edit")}}>
+          <TouchableOpacity
+            style={styles.btn}
+            onPress={() => {
+              navigation.navigate("account-edit");
+            }}
+          >
             <Text style={styles.title}>Edit Account</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.btnLogout}>
+          <TouchableOpacity style={styles.btnLogout} onPress={() => logout()}>
             <Text style={styles.title}>Log Out</Text>
           </TouchableOpacity>
         </View>
