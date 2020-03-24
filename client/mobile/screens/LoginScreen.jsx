@@ -5,9 +5,12 @@ import {
   View,
   TextInput,
   TouchableOpacity,
+  Image,
+  KeyboardAvoidingView,
   AsyncStorage
 } from "react-native";
 import axios from '../services/axios'
+import { NeuView } from "neumorphism-ui";
 
 export default function LoginScreen({ navigation }) {
   const [username, setUsername] = useState("");
@@ -42,9 +45,8 @@ export default function LoginScreen({ navigation }) {
   })
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.logo}>Lockey</Text>
-      {/* Username */}
+    <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
+      <Image source={require('../assets/logo.png')} style={{ width: "100%", height: "40%", marginVertical: 30 }}></Image>
       <View style={styles.inputView}>
         <TextInput
           style={styles.inputText}
@@ -73,39 +75,40 @@ export default function LoginScreen({ navigation }) {
       <TouchableOpacity style={styles.loginBtn} onPress={() => login()}>
         <Text style={styles.loginText}>LOGIN</Text>
       </TouchableOpacity>
-      {/* Signup Button */}
-      {/* <TouchableOpacity>
-        <Text style={styles.loginText}>Signup</Text>
-      </TouchableOpacity> */}
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#003f5c",
     alignItems: "center",
     justifyContent: "center"
   },
-  logo: {
-    fontWeight: "bold",
-    fontSize: 50,
-    color: "#fb5b5a",
-    marginBottom: 40
-  },
   inputView: {
     width: "80%",
-    backgroundColor: "#465881",
+    backgroundColor: "white",
     borderRadius: 25,
     height: 50,
     marginBottom: 20,
     justifyContent: "center",
-    padding: 20
+    // shadowColor: "#000",
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 11,
+    // },
+    // shadowOpacity: 0.57,
+    // shadowRadius: 15.19,
+    // elevation: 10,
   },
   inputText: {
+    paddingLeft: 20,
     height: 50,
-    color: "white"
+    color: "black",
+    borderRadius: 40,
+    backgroundColor: "white",
+    fontFamily: "Fredoka One",
+    letterSpacing: 1
   },
   forgot: {
     color: "white",
@@ -113,17 +116,18 @@ const styles = StyleSheet.create({
   },
   loginBtn: {
     width: "80%",
-    backgroundColor: "#fb5b5a",
+    backgroundColor: "#364e6b",
     borderRadius: 25,
     height: 50,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 40,
+    marginTop: 10,
     marginBottom: 10
   },
   loginText: {
     color: "white",
     fontSize: 16,
-    fontWeight: "bold"
+    fontFamily: "Fredoka One",
+    letterSpacing: 5
   }
 });
