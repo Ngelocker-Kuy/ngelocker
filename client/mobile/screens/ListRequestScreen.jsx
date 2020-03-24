@@ -12,6 +12,7 @@ import {
 import ItemCard from "../components/itemCard";
 
 import socket from '../services/socket'
+import Constants from 'expo-constants'
 
 function ListRequestScreen() {
   const guests = useSelector(state => {
@@ -41,41 +42,46 @@ function ListRequestScreen() {
   }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={{ ...styles.container, alignItems: "center" }}>
-        <Text style={styles.logo}>Request</Text>
-      </View>
-      <FlatList
-        data={guests}
-        renderItem={({ item }) => (
-          <ItemCard
-            title={item.name}
-            status={item.status}
-            id={item.id}
-            type="request"
-            phoneNumber={item.phoneNumber}
-          />
-        )}
-        keyExtractor={item => String(item.id)}
-      />
-    </SafeAreaView>
+    <View style={styles.container} >
+      <SafeAreaView style={styles.container}>
+        <View style={{ ...styles.container, alignItems: "center" }}>
+          <Text style={styles.logo}>List Requests</Text>
+        </View>
+        <FlatList
+          style={{ marginTop: 10 }}
+          data={guests}
+          renderItem={({ item }) => (
+            <ItemCard
+              title={item.name}
+              status={item.status}
+              id={item.id}
+              type="request"
+              phoneNumber={item.phoneNumber}
+            />
+          )}
+          keyExtractor={item => String(item.id)}
+        />
+      </SafeAreaView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#003f5c",
-    justifyContent: "center"
+    justifyContent: "center",
+    backgroundColor: "white",
+    marginTop: Constants.statusBarHeight,
+    height: "100%",
   },
   logo: {
-    fontWeight: "bold",
-    fontSize: 50,
-    color: "#fb5b5a",
-    marginBottom: 40
+    fontFamily: "Fredoka One",
+    letterSpacing: 1,
+    fontSize: 45,
+    color: "#5e2a00",
+    marginBottom: 50
   },
   item: {
-    backgroundColor: "#f12711",
     padding: 20,
     marginVertical: 8,
     marginHorizontal: 16

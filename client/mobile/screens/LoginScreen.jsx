@@ -10,10 +10,10 @@ import {
   TouchableOpacity,
   Image,
   KeyboardAvoidingView,
-  AsyncStorage
+  AsyncStorage,
+  Alert
 } from "react-native";
 import axios from "../services/axios";
-import { NeuView } from "neumorphism-ui";
 
 export default function LoginScreen({ navigation }) {
   const [username, setUsername] = useState("");
@@ -41,8 +41,13 @@ export default function LoginScreen({ navigation }) {
 
         navigation.navigate("Home");
       })
-      .catch(err => {
-        console.log(err.response, "<");
+      .catch((err) => {
+        Alert.alert(
+          [
+            { text: "Username / Password Wrong" }
+          ],
+          { cancelable: false },
+        )
       });
   };
 
@@ -61,7 +66,7 @@ export default function LoginScreen({ navigation }) {
       <Image
         source={require("../assets/logo.png")}
         style={{ width: "100%", height: "40%", marginVertical: 30 }}
-      ></Image>
+      />
       <View style={styles.inputView}>
         <TextInput
           style={styles.inputText}

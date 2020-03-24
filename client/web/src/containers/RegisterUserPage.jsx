@@ -93,7 +93,7 @@ function RegisterUserPage() {
                                     <FormControl
                                         autoComplete="false"
                                         className="form-control"
-                                        style={{ borderRight: 'none' }}
+                                        style={{ borderRight: 'none', color: "white" }}
                                         type={passwordVisibility ? "text" : "password"}
                                         value={password}
                                         onChange={(e) => setPassword(e.target.value)}
