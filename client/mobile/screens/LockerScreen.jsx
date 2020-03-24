@@ -3,7 +3,8 @@ import {
   StyleSheet,
   Text,
   View,
-  TouchableOpacity
+  TouchableOpacity,
+  ToastAndroid
 } from "react-native";
 import ubidots from '../services/ubidots'
 import Constants from 'expo-constants'
@@ -15,10 +16,14 @@ export default function LoginScreen() {
       value: key
     })
       .then(result => {
-        console.log(result)
+        if (key === 1) {
+          ToastAndroid.show(`Successfully Unlock Locker`, ToastAndroid.SHORT)
+        } else {
+          ToastAndroid.show(`Successfully Lock Locker`, ToastAndroid.SHORT)
+        }
       })
       .catch(err => {
-        console.log(err.response)
+        ToastAndroid.show(`Locker Not Respond`, ToastAndroid.SHORT)
       })
   }
 

@@ -3,6 +3,7 @@ import { useHistory, Redirect } from 'react-router-dom'
 import "../styles/loginAdmin.css";
 import axios from '../services/axios'
 import logo from '../assets/logo.png'
+import Swal from 'sweetalert2'
 
 function LoginAdminPage({ children, ...rest }) {
     const [username, setUsername] = useState('')
@@ -22,11 +23,32 @@ function LoginAdminPage({ children, ...rest }) {
             .then(result => {
                 let token = result.data.token
                 sessionStorage.setItem('token', token)
-                console.log('masuk then')
+                const Toast = Swal.mixin({
+                    toast: true,
+                    position: 'top-end',
+                    showConfirmButton: false,
+                    timer: 3000,
+                    timerProgressBar: true,
+                    onOpen: (toast) => {
+                        toast.addEventListener('mouseenter', Swal.stopTimer)
+                        toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                })
+
+                Toast.fire({
+                    icon: 'success',
+                    title: 'Signed in successfully'
+                })
                 history.push('/users')
             })
             .catch(({ response: { data } }) => {
-                console.log(data)
+                Swal.fire({
+                    position: 'center',
+                    icon: 'error',
+                    title: `Incorrect Username / Password`,
+                    showConfirmButton: false,
+                    timer: 1500
+                })
             })
     }
 

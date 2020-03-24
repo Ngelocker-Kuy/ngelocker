@@ -3,7 +3,7 @@ let bcrypt = require("bcrypt");
 module.exports = (sequelize, DataTypes) => {
   const { Model } = sequelize.Sequelize;
 
-  class User extends Model {}
+  class User extends Model { }
   User.init(
     {
       name: DataTypes.STRING,
@@ -13,16 +13,16 @@ module.exports = (sequelize, DataTypes) => {
         validate: {
           notEmpty: {
             args: true,
-            msg: "please fill email"
+            msg: "Please Fill Email"
           },
           notNull: {
             args: true,
-            msg: "please enter your email"
+            msg: "Please Enter Your Email"
           },
 
           isEmail: {
             args: true,
-            msg: "format email wrong"
+            msg: "Incorrect Format Email"
           }
         }
       },
@@ -32,11 +32,11 @@ module.exports = (sequelize, DataTypes) => {
         validate: {
           notEmpty: {
             args: true,
-            msg: "please fill username"
+            msg: "Please Fill Username"
           },
           notNull: {
             args: true,
-            msg: "please enter your username"
+            msg: "Please Enter Your Username"
           }
         }
       },
@@ -46,15 +46,15 @@ module.exports = (sequelize, DataTypes) => {
         validate: {
           notEmpty: {
             args: true,
-            msg: "please fill password"
+            msg: "Please Fill Password"
           },
           notNull: {
             args: true,
-            msg: "please enter your password"
+            msg: "Please Enter Your Password"
           },
           len: {
             args: [6, 14],
-            msg: "minimal password 6 character"
+            msg: "Minimum Password is 6 Character"
           }
         }
       },
@@ -65,7 +65,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       hooks: {
-        beforeCreate: function(user, options) {
+        beforeCreate: function (user, options) {
           return User.findOne({ where: { email: user.email } })
             .then(result => {
               if (result) {
@@ -83,7 +83,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
   );
-  User.associate = function(models) {
+  User.associate = function (models) {
     // associations can be defined here
     User.belongsTo(models.Locker);
     User.hasMany(models.Guest);
