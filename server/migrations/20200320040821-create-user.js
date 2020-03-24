@@ -26,6 +26,9 @@ module.exports = {
       lockerLabel: {
         type: Sequelize.STRING
       },
+      tokenExpo: {
+        type: Sequelize.STRING
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
