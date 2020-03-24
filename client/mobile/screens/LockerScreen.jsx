@@ -1,13 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   StyleSheet,
   Text,
   View,
-  TextInput,
-  Button,
   TouchableOpacity
 } from "react-native";
 import ubidots from '../services/ubidots'
+import Constants from 'expo-constants'
+import LottieView from 'lottie-react-native'
 
 export default function LoginScreen() {
   const toggleLocker = (key) => {
@@ -23,16 +23,16 @@ export default function LoginScreen() {
   }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.logo}>Lock Key</Text>
+    <View style={styles.container} >
+      <LottieView style={styles.lottie} source={require('../assets/lockey.json')} autoPlay loop />
       <View style={styles.containerLocker}>
         {/* Lock */}
         <TouchableOpacity style={styles.lockBtnLock} onPress={() => toggleLocker(0)}>
-          <Text style={styles.lockText}>Lock</Text>
+          <Text style={styles.lockText}>LOCK</Text>
         </TouchableOpacity>
         {/* Unlock */}
         <TouchableOpacity style={styles.lockBtnUnlock} onPress={() => toggleLocker(1)}>
-          <Text style={styles.lockText}>Unlock</Text>
+          <Text style={styles.lockText}>UNLOCK</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -40,15 +40,16 @@ export default function LoginScreen() {
 }
 
 const styles = StyleSheet.create({
+  lottie: {
+    position: "relative"
+  },
   container: {
-    flex: 1,
-    backgroundColor: "#003f5c",
-    alignItems: "center",
-    justifyContent: "center"
+    backgroundColor: "white",
+    marginTop: Constants.statusBarHeight,
+    height: "100%",
   },
   containerLocker: {
     width: "100%",
-    backgroundColor: "#003f5c",
     alignItems: "center",
     justifyContent: "center"
   },
@@ -76,28 +77,45 @@ const styles = StyleSheet.create({
     fontSize: 11
   },
   lockBtnLock: {
+    marginTop: 30,
     width: "80%",
-    backgroundColor: "#F09819",
+    backgroundColor: "#5e2a00",
     borderRadius: 25,
-    height: 50,
+    height: 60,
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 40,
-    marginBottom: 10
+    marginBottom: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 20,
+    },
+    shadowOpacity: 0.57,
+    shadowRadius: 15.19,
+    elevation: 20,
   },
   lockBtnUnlock: {
     width: "80%",
-    backgroundColor: "#1d976c",
+    backgroundColor: "#ffd074",
     borderRadius: 25,
-    height: 50,
+    height: 60,
     alignItems: "center",
     justifyContent: "center",
     marginTop: 40,
-    marginBottom: 10
+    marginBottom: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 20,
+    },
+    shadowOpacity: 0.57,
+    shadowRadius: 15.19,
+    elevation: 20,
   },
   lockText: {
+    fontFamily: "Fredoka One",
+    letterSpacing: 2,
     color: "white",
-    fontSize: 16,
-    fontWeight: "bold"
+    fontSize: 20
   }
 });

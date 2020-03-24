@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
+import { ApplicationProvider, Layout, Text, IconRegistry } from '@ui-kitten/components';
+import { mapping, light as lightTheme } from '@eva-design/eva';
 import { Notifications } from 'expo';
+import { EvaIconsPack } from '@ui-kitten/eva-icons'
 
 import LoginNavigator from "./navigation/LoginNavigator";
 import * as Font from 'expo-font'
@@ -22,7 +25,10 @@ export default function App() {
 
   return (
     <Provider store={store}>
-      {loadFont ? <LoginNavigator /> : <View></View>}
+      <IconRegistry icons={EvaIconsPack} />
+      <ApplicationProvider mapping={mapping} theme={lightTheme}>
+        {loadFont ? <LoginNavigator /> : <View></View>}
+      </ApplicationProvider>
     </Provider>
   );
 }

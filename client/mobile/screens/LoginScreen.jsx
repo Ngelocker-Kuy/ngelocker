@@ -10,10 +10,10 @@ import {
   TouchableOpacity,
   Image,
   KeyboardAvoidingView,
-  AsyncStorage
+  AsyncStorage,
+  Alert
 } from "react-native";
 import axios from "../services/axios";
-import { NeuView } from "neumorphism-ui";
 
 export default function LoginScreen({ navigation }) {
   const [username, setUsername] = useState("");
@@ -41,8 +41,13 @@ export default function LoginScreen({ navigation }) {
 
         navigation.navigate("Home");
       })
-      .catch(err => {
-        console.log(err.response, "<");
+      .catch((err) => {
+        Alert.alert(
+          [
+            { text: "Username / Password Wrong" }
+          ],
+          { cancelable: false },
+        )
       });
   };
 
@@ -61,12 +66,12 @@ export default function LoginScreen({ navigation }) {
       <Image
         source={require("../assets/logo.png")}
         style={{ width: "100%", height: "40%", marginVertical: 30 }}
-      ></Image>
+      />
       <View style={styles.inputView}>
         <TextInput
           style={styles.inputText}
-          placeholder="Username..."
-          placeholderTextColor="#003f5c"
+          placeholder="Username"
+          placeholderTextColor="#343030a8"
           value={username}
           onChangeText={text => setUsername(text)}
         />
@@ -75,8 +80,8 @@ export default function LoginScreen({ navigation }) {
       <View style={styles.inputView}>
         <TextInput
           style={styles.inputText}
-          placeholder="Password..."
-          placeholderTextColor="#003f5c"
+          placeholder="Password"
+          placeholderTextColor="#343030a8"
           value={password}
           onChangeText={text => setPassword(text)}
           secureTextEntry={true}
@@ -106,15 +111,15 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     height: 50,
     marginBottom: 20,
-    justifyContent: "center"
-    // shadowColor: "#000",
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 11,
-    // },
-    // shadowOpacity: 0.57,
-    // shadowRadius: 15.19,
-    // elevation: 10,
+    justifyContent: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 11,
+    },
+    shadowOpacity: 0.57,
+    shadowRadius: 15.19,
+    elevation: 10,
   },
   inputText: {
     paddingLeft: 20,
@@ -137,7 +142,15 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 10,
-    marginBottom: 10
+    marginBottom: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 20,
+    },
+    shadowOpacity: 0.57,
+    shadowRadius: 15.19,
+    elevation: 20,
   },
   loginText: {
     color: "white",

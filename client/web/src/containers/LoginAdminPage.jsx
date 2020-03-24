@@ -11,6 +11,7 @@ function LoginAdminPage({ children, ...rest }) {
     const history = useHistory()
 
     const login = (e) => {
+        console.log('masuk lohon')
         e.preventDefault()
 
         axios
@@ -21,7 +22,7 @@ function LoginAdminPage({ children, ...rest }) {
             .then(result => {
                 let token = result.data.token
                 sessionStorage.setItem('token', token)
-
+                console.log('masuk then')
                 history.push('/users')
             })
             .catch(({ response: { data } }) => {
