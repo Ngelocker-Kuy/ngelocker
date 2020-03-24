@@ -5,12 +5,9 @@ import {
   View,
   Text,
   AsyncStorage,
-  FlatList,
   TouchableOpacity
 } from "react-native";
 import axios from "../services/axios";
-
-import ItemCard from "../components/itemCard";
 
 function ListGuestScreen({ navigation }) {
   const logout = () => {

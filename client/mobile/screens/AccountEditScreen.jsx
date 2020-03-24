@@ -12,29 +12,32 @@ import axios from "../services/axios";
 export default function LoginScreen() {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("");
 
-  let id;
-  let token;
   useEffect(() => {
     getUser();
   }, []);
 
   const getUser = async () => {
-    id = await AsyncStorage.getItem("userid");
-    token = await AsyncStorage.getItem("token");
+    console.log("masuk euy");
+    const token = await AsyncStorage.getItem("token");
+    const id = await AsyncStorage.getItem("userId");
 
-    const { data } = await axios.get(`users/${id}`);
-    console.log(data);
+    const { data } = await axios.get(`users/${id}`, { headers: { token } });
     setName(data.name);
-    setPassword(data.password);
+    setEmail(data.email);
   };
   const updateUser = async () => {
+    const token = await AsyncStorage.getItem("token");
+
+    console.log(password, "<<<<<<<");
     axios
       .put(
         `/users/${id}`,
         {
           name,
-          password
+          password,
+          email
         },
         {
           headers: {
@@ -65,9 +68,19 @@ export default function LoginScreen() {
         <View style={styles.inputView}>
           <TextInput
             style={styles.inputText}
+            value={email}
+            onChangeText={text => setEmail(text)}
+            placeholder="Email"
+            placeholderTextColor="#343030a8"
+            secureTextEntry={true}
+          />
+        </View>
+        <View style={styles.inputView}>
+          <TextInput
+            style={styles.inputText}
             value={password}
             onChangeText={text => setPassword(text)}
-            placeholder="Password"
+            placeholder="New Password"
             placeholderTextColor="#343030a8"
             secureTextEntry={true}
           />

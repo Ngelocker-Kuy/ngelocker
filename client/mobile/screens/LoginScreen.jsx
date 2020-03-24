@@ -38,8 +38,9 @@ export default function LoginScreen({ navigation }) {
         // tokenExpo
       })
       .then(({ data }) => {
-        AsyncStorage.setItem("userid", data.user.id);
+        AsyncStorage.setItem("userId", String(data.user.id));
         AsyncStorage.setItem("token", data.token);
+
         console.log("masuk euy");
         navigation.navigate("Home");
       })
