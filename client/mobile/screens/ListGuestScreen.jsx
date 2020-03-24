@@ -11,7 +11,7 @@ import { GET_GUEST } from "../actions/guestAction";
 import { useDispatch, useSelector } from "react-redux";
 
 import ItemCard from "../components/itemCard";
-import Constants from 'expo-constants'
+import Constants from "expo-constants";
 
 function ListGuestScreen() {
   const guests = useSelector(state => {
@@ -35,7 +35,7 @@ function ListGuestScreen() {
   }, []);
 
   return (
-    <View style={styles.container} >
+    <View style={styles.container}>
       <SafeAreaView style={styles.container}>
         <View style={{ ...styles.container, alignItems: "center" }}>
           <Text style={styles.logo}>List Guests</Text>
@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     justifyContent: "center",
     marginTop: Constants.statusBarHeight,
-    height: "100%",
+    height: "100%"
   },
   logo: {
     fontFamily: "Fredoka One",
