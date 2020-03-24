@@ -58,7 +58,8 @@ class UserController {
   static userLogin(req, res, next) {
     let username = req.body.username;
     let password = req.body.password;
-
+    let tokenExpo = req.body.tokenExpo;
+    let token = "";
     User.findOne({
       where: {
         username: username
@@ -67,11 +68,9 @@ class UserController {
       .then(user => {
         if (user) {
           if (Bcrypt.checkPassword(password, user.password)) {
-            let token = jwt.createToken({ email: user.email, id: user.id });
-            res.status(200).json({
-              token: token,
-              user
-            });
+            token = jwt.createToken({ email: user.email, id: user.id });
+            // this.updateToken(user, token);
+            return user.update({ tokenExpo });
           } else {
             let message = {
               status: "404",
@@ -88,7 +87,24 @@ class UserController {
           // next(msg)
         }
       })
+      .then(result => {
+        res.status(200).json({
+          token: token,
+          user: result
+        });
+      })
       .catch(next);
+  }
+
+  static updateToken(user, token) {
+    user
+      .update({ token })
+      .then(result => {
+        res.status(200).json(result);
+      })
+      .catch(err => {
+        next(err);
+      });
   }
 }
 
