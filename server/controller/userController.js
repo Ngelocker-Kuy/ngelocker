@@ -1,6 +1,8 @@
 const { User, Locker } = require("../models");
 const jwt = require("../helpers/jwt");
 const Bcrypt = require("../helpers/bcrypt");
+const redis = require('../services/redis')
+
 class UserController {
   static getUser(req, res, next) {
     User.findAll()
@@ -33,13 +35,15 @@ class UserController {
   }
 
   static updateUser(req, res, next) {
+    let password = Bcrypt.hashPassword(req.body.password)
+
     let body = {
       name: req.body.name,
-      username: req.body.username,
-      password: req.body.password,
+      password,
       email: req.body.email
     };
-    User.update(body, { where: { id: req.params.id }, returning: true })
+
+    User.update(body, { where: { id: req.user.id }, returning: true })
       .then(result => {
         if (result[0] != 0) {
           res.status(200).json({ user: result[1][0].dataValues });
@@ -60,7 +64,6 @@ class UserController {
     let tokenExpo = req.body.tokenExpo;
     let token = "";
 
-    console.log(req.body, "ini req.body");
     User.findOne({
       where: {
         username: username
@@ -68,7 +71,6 @@ class UserController {
     })
       .then(user => {
         if (user) {
-          console.log(user);
           if (Bcrypt.checkPassword(password, user.password)) {
             token = jwt.createToken({ email: user.email, id: user.id });
             // this.updateToken(user, token);
@@ -126,6 +128,12 @@ class UserController {
       .catcH(err => {
         next(err);
       });
+  }
+
+  static userLogout(req, res, next) {
+    redis.del('listGuest')
+
+    res.status(200).json({ msg: "Logout successfull" })
   }
 }
 

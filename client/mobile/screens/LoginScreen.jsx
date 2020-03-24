@@ -27,25 +27,21 @@ export default function LoginScreen({ navigation }) {
       return;
     }
 
-    // let tokenExpo = await Notifications.getExpoPushTokenAsync();
-    console.log(status);
-    // console.log(tokenExpo, "<<<");
+    let tokenExpo = await Notifications.getExpoPushTokenAsync();
 
     axios
       .post("/users/login", {
         username,
-        password
-        // tokenExpo
+        password,
+        tokenExpo
       })
       .then(({ data }) => {
         AsyncStorage.setItem("userId", String(data.user.id));
         AsyncStorage.setItem("token", data.token);
 
-        console.log("masuk euy");
         navigation.navigate("Home");
       })
       .catch(err => {
-        console.log(err.response.data.message);
         ToastAndroid.show(`${err.response.data.message}`, ToastAndroid.SHORT);
       });
   };
