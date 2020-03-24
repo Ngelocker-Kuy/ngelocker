@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import socket from '../services/socket'
@@ -6,8 +6,6 @@ import socket from '../services/socket'
 import { changeLockStatus } from '../store/actions/locker'
 
 function WaitingScreen() {
-  const UserId = sessionStorage.userId
-
   const history = useHistory()
   const dispatch = useDispatch()
 

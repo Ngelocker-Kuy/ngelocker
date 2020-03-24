@@ -35,7 +35,7 @@ export default function HomeNavigator() {
     <Tab.Navigator
       screenOptions={({ route }) => ({
         tabBarIcon: ({ focused, color, size }) => {
-          if (route.name === "request") {
+          if (route.name === "Request") {
             return (
               <HomeIconWithBadge
                 name={
@@ -48,7 +48,7 @@ export default function HomeNavigator() {
                 notifCount={notifCount}
               />
             );
-          } else if (route.name === "guest") {
+          } else if (route.name === "Guest") {
             return (
               <Ionicons
                 name={focused ? "ios-list-box" : "ios-list"}
@@ -56,7 +56,7 @@ export default function HomeNavigator() {
                 color={color}
               />
             );
-          } else if (route.name === "locker") {
+          } else if (route.name === "Locker") {
             return (
               <Ionicons
                 name={focused ? "ios-unlock" : "ios-lock"}
@@ -72,14 +72,14 @@ export default function HomeNavigator() {
         inactiveTintColor: "black"
       }}
     >
-      <Tab.Screen name="locker" component={LockerScreen} />
-      <Tab.Screen name="request" component={ListRequestScreen} />
-      <Tab.Screen name="guest" component={ListGuestScreen} />
+      <Tab.Screen name="Locker" component={LockerScreen} />
+      <Tab.Screen name="Request" component={ListRequestScreen} />
+      <Tab.Screen name="Guest" component={ListGuestScreen} />
       <Tab.Screen
-        name="account"
+        name="Account"
         component={AccountNavigator}
         options={{
-          tabBarIcon: ({size, color, focused}) => (
+          tabBarIcon: ({ size, color, focused }) => (
             <Ionicons
               name={focused ? "ios-person" : "md-person"}
               size={size}

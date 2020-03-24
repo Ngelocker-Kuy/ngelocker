@@ -53,7 +53,7 @@ module.exports = (sequelize, DataTypes) => {
             msg: "Please Enter Your Password"
           },
           len: {
-            args: [6, 14],
+            args: [6, 100],
             msg: "Minimum Password is 6 Character"
           }
         }

@@ -19,7 +19,6 @@ export default function LoginScreen() {
   }, []);
 
   const getUser = async () => {
-    console.log("masuk euy");
     const token = await AsyncStorage.getItem("token");
     const id = await AsyncStorage.getItem("userId");
 
@@ -29,8 +28,6 @@ export default function LoginScreen() {
   };
   const updateUser = async () => {
     const token = await AsyncStorage.getItem("token");
-
-    console.log(password, "<<<<<<<");
     axios
       .put(
         `/users/${id}`,
@@ -72,7 +69,6 @@ export default function LoginScreen() {
             onChangeText={text => setEmail(text)}
             placeholder="Email"
             placeholderTextColor="#343030a8"
-            secureTextEntry={true}
           />
         </View>
         <View style={styles.inputView}>
