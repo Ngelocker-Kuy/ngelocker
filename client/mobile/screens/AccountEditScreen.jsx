@@ -1,17 +1,54 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
   View,
   TouchableOpacity,
-  TextInput
+  TextInput,
+  AsyncStorage
 } from "react-native";
 // import LottieView from "lottie-react-native";
-
+import axios from "../services/axios";
 export default function LoginScreen() {
-  const [username, setUsername] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
 
+  let id;
+  let token;
+  useEffect(() => {
+    getUser();
+  }, []);
+
+  const getUser = async () => {
+    id = await AsyncStorage.getItem("userid");
+    token = await AsyncStorage.getItem("token");
+
+    const { data } = await axios.get(`users/${id}`);
+    console.log(data);
+    setName(data.name);
+    setPassword(data.password);
+  };
+  const updateUser = async () => {
+    axios
+      .put(
+        `/users/${id}`,
+        {
+          name,
+          password
+        },
+        {
+          headers: {
+            token
+          }
+        }
+      )
+      .then(({ data }) => {
+        console.log(data);
+      })
+      .catch(err => {
+        console.log(err.response);
+      });
+  };
   return (
     <View style={styles.container}>
       <View style={styles.containerLocker}>
@@ -19,9 +56,9 @@ export default function LoginScreen() {
         <View style={styles.inputView}>
           <TextInput
             style={styles.inputText}
-            value={username}
-            onChangeText={text => setUsername(text)}
-            placeholder="Username"
+            value={name}
+            onChangeText={text => setName(text)}
+            placeholder="Name"
             placeholderTextColor="#343030a8"
           />
         </View>
@@ -35,8 +72,8 @@ export default function LoginScreen() {
             secureTextEntry={true}
           />
         </View>
-        <TouchableOpacity style={styles.btn}>
-          <Text style={styles.title}>Continue</Text>
+        <TouchableOpacity style={styles.btn} onPress={() => updateUser()}>
+          <Text style={styles.title}>Save</Text>
         </TouchableOpacity>
       </View>
     </View>
