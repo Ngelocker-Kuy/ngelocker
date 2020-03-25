@@ -59,7 +59,7 @@ describe("Test Admin Features", function () {
         });
       expect(res.status).toEqual(400);
       expect(res.body).toHaveProperty("message");
-      expect(res.body.message).toEqual("please fill email");
+      expect(res.body.message).toEqual("Please Fill Email");
     });
 
     it("should return status code 400 when property email is null", async () => {
@@ -76,7 +76,7 @@ describe("Test Admin Features", function () {
         });
       expect(res.status).toEqual(400);
       expect(res.body).toHaveProperty("message");
-      expect(res.body.message).toEqual("please enter your email");
+      expect(res.body.message).toEqual("Please Enter Your Email");
     });
 
     it("should return status code 400 when property email not use @ and .", async () => {
@@ -93,7 +93,7 @@ describe("Test Admin Features", function () {
         });
       expect(res.status).toEqual(400);
       expect(res.body).toHaveProperty("message");
-      expect(res.body.message).toEqual("format email wrong");
+      expect(res.body.message).toEqual("Incorrect Format Email");
     });
 
     it("should return status code 400 when property email duplicate", async () => {
@@ -129,7 +129,7 @@ describe("Test Admin Features", function () {
         });
       expect(res.status).toEqual(400);
       expect(res.body).toHaveProperty("message");
-      expect(res.body.message).toEqual("please enter your password");
+      expect(res.body.message).toEqual("Please Enter Your Password");
     });
 
     it("should return status code 400 when property password is empty", async () => {
@@ -146,7 +146,7 @@ describe("Test Admin Features", function () {
         });
       expect(res.status).toEqual(400);
       expect(res.body).toHaveProperty("message");
-      expect(res.body.message).toEqual("please fill password");
+      expect(res.body.message).toEqual("Please Fill Password");
     });
 
     it("should return status code 400 when property password length less than 6", async () => {
@@ -163,7 +163,7 @@ describe("Test Admin Features", function () {
         });
       expect(res.status).toEqual(400);
       expect(res.body).toHaveProperty("message");
-      expect(res.body.message).toEqual("minimal password 6 character");
+      expect(res.body.message).toEqual("Minimum Password is 6 Character");
     });
   });
 
@@ -207,50 +207,6 @@ describe("Test Admin Features", function () {
       expect(res.body).toHaveProperty("message");
       expect(res.body.message).toEqual("Unauthorized Invalid Token");
     });
-  });
-
-  describe("Test admin update users, put /users/:id route", () => {
-    it("should return user and status code 200", async () => {
-      const res = await request(app)
-        .put("/users/1")
-        .send({
-          name: "pengguna di update",
-          email: "penggunaUpdate@gmail.com",
-          username: "pengguna update",
-          password: "1234567"
-        })
-        .set({
-          token: tokenAdmin
-        });
-      expect(res.status).toEqual(200);
-      expect(res.body).toHaveProperty("user");
-      expect(res.body.user).toHaveProperty("id");
-      expect(res.body.user).toHaveProperty("name");
-      expect(res.body.user.name).toEqual("pengguna di update");
-      expect(res.body.user).toHaveProperty("email");
-      expect(res.body.user.email).toEqual("penggunaUpdate@gmail.com");
-      expect(res.body.user).toHaveProperty("username");
-      expect(res.body.user.username).toEqual("pengguna update");
-      expect(res.body.user).toHaveProperty("password");
-      expect(res.body.user.password).toEqual("1234567");
-    });
-    it("should return status code 404 when user id wrong", async () => {
-      const res = await request(app)
-        .put("/users/100")
-        .send({
-          name: "pengguna di update",
-          email: "penggunaUpdate@gmail.com",
-          username: "pengguna update",
-          password: "1234567"
-        })
-        .set({
-          token: tokenAdmin
-        });
-      expect(res.status).toEqual(404);
-      expect(res.body).toHaveProperty("message");
-      expect(res.body.message).toEqual("command not found");
-    });
-
   });
 });
 

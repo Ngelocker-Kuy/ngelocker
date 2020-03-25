@@ -4,8 +4,10 @@ let expo = new Expo();
 const UserController = require('../controller/userController')
 
 async function pushNotification(io, { UserId, guest }) {
+    console.log("ini di luar");
     try {
         const { tokenExpo } = await UserController.findUser(UserId)
+        console.log(tokenExpo);
         let messages = [{
             to: tokenExpo,
             sound: 'default',
@@ -27,13 +29,14 @@ async function pushNotification(io, { UserId, guest }) {
                     // documentation:
                     // https://docs.expo.io/versions/latest/guides/push-notifications#response-format
                 } catch (error) {
-                    console.error(error);
+                    return
+                    // console.error(error);
                 }
             }
         })();
-
         io.emit('guestUpdate')
     } catch (err) {
+        console.log("ini di catch");
         console.log(err)
         return
     }

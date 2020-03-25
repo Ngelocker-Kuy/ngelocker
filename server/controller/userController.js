@@ -39,10 +39,8 @@ class UserController {
 
     if (req.body.password.length >= 6) {
       password = Bcrypt.hashPassword(req.body.password)
-    } else if (req.body.password.length < 6) {
-      password = req.body.password
     } else {
-      password = null
+      password = req.body.password
     }
 
     let body = {
@@ -69,7 +67,7 @@ class UserController {
         }
       })
       .then(result => {
-        res.status(200).json(result)
+        res.status(200).json({ user: result })
       })
       .catch(next)
   }
