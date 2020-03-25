@@ -10,13 +10,14 @@ import {
 } from "react-native";
 import LottieView from "lottie-react-native";
 import axios from "../services/axios";
+import { Feather } from "@expo/vector-icons";
 
-export default function LoginScreen({navigation}) {
-
+export default function LoginScreen({ navigation }) {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [id, setId] = useState(0);
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     getUser();
@@ -31,6 +32,10 @@ export default function LoginScreen({navigation}) {
     const { data } = await axios.get(`users/${id}`, { headers: { token } });
     await setName(data.name);
     await setEmail(data.email);
+  };
+
+  const changeVisibility = () => {
+    setShow(!show);
   };
 
   const updateUser = async () => {
@@ -51,8 +56,8 @@ export default function LoginScreen({navigation}) {
         }
       )
       .then(({ data }) => {
-        setPassword('')
-        navigation.navigate('account')
+        setPassword("");
+        navigation.navigate("account");
         ToastAndroid.show(`Successfully Updated Data`, ToastAndroid.SHORT);
       })
       .catch(err => {
@@ -63,12 +68,12 @@ export default function LoginScreen({navigation}) {
     <View style={styles.container}>
       <View style={styles.containerLocker}>
         <Text style={styles.logo}>My Account</Text>
-          <LottieView
-            style={styles.lottie}
-            source={require("../assets/account.json")}
-            autoPlay
-            loop
-          />
+        <LottieView
+          style={styles.lottie}
+          source={require("../assets/account.json")}
+          autoPlay
+          loop
+        />
         <View style={styles.inputView}>
           <TextInput
             style={styles.inputText}
@@ -94,8 +99,19 @@ export default function LoginScreen({navigation}) {
             onChangeText={text => setPassword(text)}
             placeholder="New Password"
             placeholderTextColor="#343030a8"
-            secureTextEntry={true}
+            secureTextEntry={show ? false : true}
           />
+          <TouchableOpacity
+            onPress={() => {
+              changeVisibility();
+            }}
+          >
+            <Feather
+              name={show ? "eye" : "eye-off"}
+              size={22}
+              style={styles.feather}
+            />
+          </TouchableOpacity>
         </View>
         <TouchableOpacity style={styles.btn} onPress={() => updateUser()}>
           <Text style={styles.title}>Save</Text>
@@ -118,7 +134,7 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "center",
     justifyContent: "center",
-    flexDirection: 'column'
+    flexDirection: "column"
   },
   logo: {
     fontFamily: "Fredoka One",
@@ -129,6 +145,7 @@ const styles = StyleSheet.create({
   },
   inputView: {
     width: "80%",
+    flexDirection: "row",
     backgroundColor: "white",
     borderRadius: 25,
     height: 50,
@@ -144,6 +161,7 @@ const styles = StyleSheet.create({
     elevation: 10
   },
   inputText: {
+    flex: 1,
     paddingLeft: 20,
     height: 50,
     color: "black",
@@ -219,11 +237,15 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 32,
     color: "snow",
-    fontFamily: 'Fredoka One'
+    fontFamily: "Fredoka One"
   },
   lottie: {
     width: 500,
     height: 500,
-    position: 'absolute',
+    position: "absolute"
+  },
+  feather: {
+    paddingTop: 14,
+    paddingRight: 15
   }
 });
