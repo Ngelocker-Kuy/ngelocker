@@ -127,9 +127,27 @@ describe("Test Users Features", function () {
       expect(res.body.user).toHaveProperty("email");
       expect(res.body.user.email).toEqual("penggunaUpdate@gmail.com");
       expect(res.body.user).toHaveProperty("username");
-      expect(res.body.user.username).toEqual("pengguna update");
+      expect(res.body.user.username).toEqual("pengguna");
       expect(res.body.user).toHaveProperty("password");
     });
+
+    it("should return status code 404 when user id wrong", async () => {
+      const res = await request(app)
+        .put("/users/100")
+        .send({
+          name: "pengguna di update",
+          email: "penggunaUpdate@gmail.com",
+          username: "pengguna update",
+          password: "1234567"
+        })
+        .set({
+          token: tokenUser
+        });
+      expect(res.status).toEqual(200);
+      expect(res.body).toHaveProperty("message");
+      expect(res.body.message).toEqual("command not found");
+    });
+
   });
 
   describe("Test users get all guests, get /guests route", () => {

@@ -20,21 +20,21 @@ async function pushNotification(io, { UserId, guest }) {
             for (let chunk of chunks) {
                 try {
                     let ticketChunk = await expo.sendPushNotificationsAsync(chunk);
-                    console.log(ticketChunk, "ticket chunk");
+                    // console.log(ticketChunk, "ticket chunk");
                     tickets.push(...ticketChunk);
                     // NOTE: If a ticket contains an error code in ticket.details.error, you
                     // must handle it appropriately. The error codes are listed in the Expo
                     // documentation:
                     // https://docs.expo.io/versions/latest/guides/push-notifications#response-format
                 } catch (error) {
-                    console.error(error);
+                    return
+                    // console.error(error);
                 }
             }
         })();
-
         io.emit('guestUpdate')
     } catch (err) {
-        console.log(err)
+        // console.log(err)
         return
     }
 }

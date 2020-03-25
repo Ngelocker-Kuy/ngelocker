@@ -19,7 +19,7 @@ describe("Test Guest Features", function () {
       expect(res.body.guest).toHaveProperty("phoneNumber");
       expect(res.body.guest.phoneNumber).toEqual("081382062456");
       expect(res.body.guest).toHaveProperty("status");
-      expect(res.body.guest.status).toEqual(false);
+      expect(res.body.guest.status).toEqual(null);
       done()
     })
   })
