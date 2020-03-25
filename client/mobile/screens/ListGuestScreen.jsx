@@ -14,11 +14,15 @@ import ItemCard from "../components/itemCard";
 import Constants from "expo-constants";
 
 function ListGuestScreen() {
+  const [id, setId] = useState(0)
+
   const guests = useSelector(state => {
-    const guestList = state.guests.filter(guest => guest.status !== null);
+    const guestList = state.guests.filter(guest => {
+      return guest.status !== null && guest.UserId === id
+    });
 
     guestList.sort((a, b) => {
-      return new Date(a.updatedAt) - new Date(b.updatedAt);
+      return new Date(b.updatedAt) - new Date(a.updatedAt);
     });
     return guestList;
   });
@@ -27,6 +31,10 @@ function ListGuestScreen() {
 
   const getGuestList = async () => {
     const token = await AsyncStorage.getItem("token");
+    const currentId = await AsyncStorage.getItem("userId");
+
+    await setId(Number(currentId))
+
     dispatch(GET_GUEST(token));
   };
 

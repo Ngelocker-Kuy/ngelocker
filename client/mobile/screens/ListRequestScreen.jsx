@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GET_GUEST } from "../actions/guestAction";
 import {
@@ -15,8 +15,12 @@ import socket from '../services/socket'
 import Constants from 'expo-constants'
 
 function ListRequestScreen() {
+  const [id, setId] = useState(0)
+
   const guests = useSelector(state => {
-    const guestList = state.guests.filter(guest => guest.status === null);
+    const guestList = state.guests.filter(guest => {
+      return guest.status === null && guest.UserId === id
+    });
 
     guestList.sort((a, b) => {
       return new Date(b.createdAt) - new Date(a.createdAt);
@@ -28,12 +32,15 @@ function ListRequestScreen() {
 
   const getGuestList = async () => {
     const token = await AsyncStorage.getItem("token");
+    const currentId = await AsyncStorage.getItem("userId")
+
+    await setId(Number(currentId))
+
     dispatch(GET_GUEST(token));
   };
 
   socket.on('guestUpdate', async () => {
     const token = await AsyncStorage.getItem("token");
-    console.log('masuk', token)
     dispatch(GET_GUEST(token))
   })
 

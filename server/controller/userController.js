@@ -92,6 +92,8 @@ class UserController {
         }
       })
       .then(result => {
+        redis.del('listGuest')
+
         res.status(200).json({
           token: token,
           user: result
