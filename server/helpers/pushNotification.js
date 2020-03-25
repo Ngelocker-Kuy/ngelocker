@@ -14,6 +14,7 @@ async function pushNotification(io, { UserId, guest }) {
             body: `${guest} requested to open your locker!`,
             data: { withSome: 'data asdasd' },
         }];
+        console.log(messages, "ini mesages");
 
         let chunks = expo.chunkPushNotifications(messages);
         let tickets = [];
@@ -29,6 +30,7 @@ async function pushNotification(io, { UserId, guest }) {
                     // documentation:
                     // https://docs.expo.io/versions/latest/guides/push-notifications#response-format
                 } catch (error) {
+                    console.log("masuk ga");
                     return
                     // console.error(error);
                 }
@@ -36,8 +38,6 @@ async function pushNotification(io, { UserId, guest }) {
         })();
         io.emit('guestUpdate')
     } catch (err) {
-        console.log("ini di catch");
-        console.log(err)
         return
     }
 }
