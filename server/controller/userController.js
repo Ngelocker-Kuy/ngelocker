@@ -35,7 +35,15 @@ class UserController {
   }
 
   static updateUser(req, res, next) {
-    let password = Bcrypt.hashPassword(req.body.password)
+    let password
+
+    if (req.body.password.length >= 6) {
+      password = Bcrypt.hashPassword(req.body.password)
+    } else if (req.body.password.length < 6) {
+      password = req.body.password
+    } else {
+      password = null
+    }
 
     let body = {
       name: req.body.name,
@@ -43,19 +51,27 @@ class UserController {
       email: req.body.email
     };
 
-    User.update(body, { where: { id: req.user.id }, returning: true })
-      .then(result => {
-        if (result[0] != 0) {
-          res.status(200).json({ user: result[1][0].dataValues });
-        } else {
-          let message = {
-            status: "404",
-            message: "command not found"
-          };
-          throw message;
+    User
+      .findOne({
+        where: {
+          id: req.params.id
         }
       })
-      .catch(next);
+      .then(user => {
+        if (!user) {
+          let message = {
+            status: "404",
+            message: "user not found"
+          };
+          throw message;
+        } else {
+          return user.update(body)
+        }
+      })
+      .then(result => {
+        res.status(200).json(result)
+      })
+      .catch(next)
   }
 
   static userLogin(req, res, next) {
@@ -127,7 +143,7 @@ class UserController {
           throw mesaage;
         }
       })
-      .catcH(err => {
+      .catch(err => {
         next(err);
       });
   }
