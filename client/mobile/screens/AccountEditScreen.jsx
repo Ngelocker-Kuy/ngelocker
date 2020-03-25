@@ -23,8 +23,8 @@ export default function LoginScreen() {
     const id = await AsyncStorage.getItem("userId");
 
     const { data } = await axios.get(`users/${id}`, { headers: { token } });
-    setName(data.name);
-    setEmail(data.email);
+    await setName(data.name);
+    await setEmail(data.email);
   };
   const updateUser = async () => {
     const token = await AsyncStorage.getItem("token");

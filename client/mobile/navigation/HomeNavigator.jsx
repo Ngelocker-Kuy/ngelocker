@@ -14,16 +14,23 @@ import AccountNavigator from "./AccountNavigator";
 const Tab = createBottomTabNavigator();
 
 export default function HomeNavigator() {
+  const dispatch = useDispatch();
+  let id
+
   const notifCount = useSelector(state => {
-    const filtered = state.guests.filter(guest => guest.status === null)
+    const filtered = state.guests.filter(guest => {
+      return guest.status === null && guest.UserId === id
+    })
 
     return filtered.length
   });
 
-  const dispatch = useDispatch();
-
   const getGuestList = async () => {
     const token = await AsyncStorage.getItem("token");
+    id = await AsyncStorage.getItem("userId");
+
+    console.log(id)
+
     dispatch(GET_GUEST(token));
   };
 

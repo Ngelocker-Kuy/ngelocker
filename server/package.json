@@ -16,7 +16,7 @@
     "db_production": "cross-env NODE_ENV=production sequelize db:create",
     "start": "node app.js",
     "dev": "cross-env NODE_ENV=development nodemon bin/http.js",
-    "prod": "cross-env NODE_ENV=production node bin/http.js"
+    "prod": "cross-env NODE_ENV=production pm2 start bin/http.js"
   },
   "repository": {
     "type": "git",
