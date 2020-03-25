@@ -5,26 +5,55 @@ import {
   View,
   Text,
   AsyncStorage,
-  TouchableOpacity
+  TouchableOpacity,
+  ToastAndroid,
+  Alert
 } from "react-native";
+import LottieView from "lottie-react-native";
 import axios from "../services/axios";
 
 function ListGuestScreen({ navigation }) {
   const logout = () => {
+    Alert.alert(
+      `Are you sure want to sign out?`,
+      '',
+      [
+          {
+              text: 'Cancel',
+              onPress: () => console.log('Cancel'),
+              style: 'cancel',
+          },
+          {
+              text: 'OK', onPress: () => logoutConfirm()
+          },
+      ],
+      { cancelable: false },
+  )
+    
+  };
+
+  const logoutConfirm = () => {
     axios
       .post("/users/logout")
       .then(({ data }) => {
         AsyncStorage.clear();
         navigation.navigate("login-page");
+        ToastAndroid.show(`Successfully Signed Out`, ToastAndroid.SHORT);
       })
       .catch(err => {
-        console.log(err.response);
+        ToastAndroid.show(`Failed Signing Out`, ToastAndroid.SHORT);
       });
-  };
+  }
   return (
     <View style={styles.container}>
       <SafeAreaView style={styles.container}>
-        <View style={{ ...styles.container, alignItems: "center" }}>
+        <View style={{ ...styles.container, alignItems: "center", flexDirection: 'column', justifyContent: 'center' }}>
+          <LottieView
+            style={styles.lottie}
+            source={require("../assets/account.json")}
+            autoPlay
+            loop
+          />
           <TouchableOpacity
             style={styles.btn}
             onPress={() => {
@@ -64,7 +93,8 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 32,
-    color: "snow"
+    color: "snow",
+    fontFamily: "Fredoka One"
   },
   btn: {
     marginTop: 30,
@@ -101,6 +131,11 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.57,
     shadowRadius: 15.19,
     elevation: 20
+  },
+  lottie: {
+    width: 500,
+    height: 500,
+    position: 'absolute'
   }
 });
 
