@@ -88,7 +88,7 @@ function RegisterUserPage() {
                         <h1 style={{ color: 'white' }}>Register User!</h1>
                         <p style={{ color: 'white' }}>Fill in correctly</p>
                         <lottie-player
-                            src="https://assets10.lottiefiles.com/packages/lf20_i25VGQ.json" background="transparent" speed="1" style={{ marginLeft: "7vh", display: "flex", justifyContent: "center", width: "100%", height: "66vh", cursor: "pointer" }} autoplay loop >
+                            src="https://assets10.lottiefiles.com/packages/lf20_i25VGQ.json" background="transparent" speed="1" style={{ display: "flex", justifyContent: "center", width: "100%", height: "66vh", cursor: "pointer" }} autoplay loop >
                         </lottie-player>
                     </div>
                     <div className="col-5">
