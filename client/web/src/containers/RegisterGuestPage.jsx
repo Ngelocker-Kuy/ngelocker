@@ -62,18 +62,20 @@ function RegisterGuestPage() {
     }
 
     return (
-        <div className="register" style={{ fontFamily: "Fredoka One", marginTop: '8vh' }}>
+        <div className="register" style={{ fontFamily: "Fredoka One" }}>
             <div className="container">
-                <div className="row justify-content-center mt-5" style={{ marginTop: "8rem!important", flexDirection: "column" }}>
-                    <lottie-player
-                        src="https://assets7.lottiefiles.com/packages/lf20_rRm3Ew.json"
-                        background="transparent"
-                        speed="1"
-                        style={{ width: "200vw", height: "70vh", cursor: "pointer", marginBottom: "18vh" }}
-                        autoplay loop >
-                    </lottie-player>
-                    <div className="col" style={{ position: "absolute", zIndex: 99, width: "90%" }}>
-                        <div className="user-accounts-form shadow p-5" style={{ marginLeft: '4.5vh' }}>
+                <div className="row justify-content-center" style={{ marginTop: "8rem!important", flexDirection: "column" }}>
+                    <div className="col" style={{paddingLeft: "0"}}>
+                        <lottie-player
+                            src="https://assets7.lottiefiles.com/packages/lf20_rRm3Ew.json"
+                            background="transparent"
+                            speed="1"
+                            style={{ width:"90vh", height: "90vh", cursor: "pointer", position: "fixed", marginBottom:"400vh" }}
+                            autoplay loop >
+                        </lottie-player>
+                    </div>
+                    <div className="col" style={{ position: "absolute", zIndex: 99, width: "100%" }}>
+                        <div className="user-accounts-form shadow p-5" style={{ marginTop:"102vh" }}>
                             <div className="user-accounts-form-header">
                                 <h2 className="title" style={{ color: "black" }}>Form Guest</h2>
                             </div>
