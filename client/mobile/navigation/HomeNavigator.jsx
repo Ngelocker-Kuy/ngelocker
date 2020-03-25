@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { View, Text, AsyncStorage } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
@@ -15,21 +15,19 @@ const Tab = createBottomTabNavigator();
 
 export default function HomeNavigator() {
   const dispatch = useDispatch();
-  let id
+  const [id, setId] = useState(0);
 
   const notifCount = useSelector(state => {
     const filtered = state.guests.filter(guest => {
-      return guest.status === null && guest.UserId === id
-    })
-
-    return filtered.length
+      return guest.status === null && guest.UserId === id;
+    });
+    return filtered.length;
   });
 
   const getGuestList = async () => {
     const token = await AsyncStorage.getItem("token");
-    id = await AsyncStorage.getItem("userId");
-
-    console.log(id)
+    let currentId = await AsyncStorage.getItem("userId");
+    await setId(Number(currentId));
 
     dispatch(GET_GUEST(token));
   };
