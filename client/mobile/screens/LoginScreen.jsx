@@ -13,19 +13,23 @@ import {
   KeyboardAvoidingView,
   AsyncStorage,
   ToastAndroid,
-  ActivityIndicator
 } from "react-native";
 import axios from "../services/axios";
+import { useSelector, useDispatch } from "react-redux";
+import {setLoadingTrue, setLoadingFalse} from '../actions/loadingActions'
+import Spinner from 'react-native-loading-spinner-overlay';
 
 export default function LoginScreen({ navigation }) {
+  const dispatch = useDispatch()
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [show, setShow] = useState(false);
-  const [isLogin, setIsLogin] = useState(false)
-
+  // const [isLogin, setIsLogin] = useState(false)
+  const isLoading = useSelector((state) => state.loadingReducer.isLoading)
+  console.log(isLoading)
   const login = async () => {
-    setIsLogin(true)
-
+    // setIsLogin(true)
+    dispatch(setLoadingTrue())
     const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
 
     if (status !== "granted") {
@@ -34,7 +38,6 @@ export default function LoginScreen({ navigation }) {
     }
 
     let tokenExpo = await Notifications.getExpoPushTokenAsync();
-
     axios
       .post("/users/login", {
         username,
@@ -42,7 +45,8 @@ export default function LoginScreen({ navigation }) {
         tokenExpo
       })
       .then(({ data }) => {
-        setIsLogin(false)
+        // setIsLogin(false)
+        dispatch(setLoadingFalse())
         AsyncStorage.setItem("userId", String(data.user.id));
         AsyncStorage.setItem("token", data.token);
         setUsername('')
@@ -51,6 +55,8 @@ export default function LoginScreen({ navigation }) {
         ToastAndroid.show(`Successfully Signed In`, ToastAndroid.SHORT);
       })
       .catch(err => {
+        dispatch(setLoadingFalse())
+        // setIsLogin(false)
         ToastAndroid.show(`Incorrect Username or Password`, ToastAndroid.SHORT);
       });
   };
@@ -71,6 +77,11 @@ export default function LoginScreen({ navigation }) {
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior="padding" enabled>
+      {isLoading ?  <Spinner
+          visible={isLoading}
+          textContent={'Loading...'}
+          textStyle={styles.spinnerTextStyle}
+        /> : <View></View>}
       <Image
         source={require("../assets/logo.png")}
         style={{ width: "100%", height: "40%", marginVertical: 30 }}
@@ -114,6 +125,9 @@ export default function LoginScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+  spinnerTextStyle:{
+    color: '#FFF'
+  },
   container: {
     flex: 1,
     alignItems: "center",

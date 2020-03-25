@@ -7,7 +7,8 @@ import {
   View,
   Text,
   AsyncStorage,
-  FlatList
+  FlatList,
+  Image,
 } from "react-native";
 import ItemCard from "../components/itemCard";
 
@@ -18,7 +19,7 @@ function ListRequestScreen() {
   const [id, setId] = useState(0)
 
   const guests = useSelector(state => {
-    const guestList = state.guests.filter(guest => {
+    const guestList = state.guestReducer.guests.filter(guest => {
       return guest.status === null && guest.UserId === id
     });
 
@@ -50,12 +51,14 @@ function ListRequestScreen() {
 
   return (
     <View style={styles.container} >
-      <SafeAreaView style={styles.container}>
-        <View style={{ ...styles.container, alignItems: "center" }}>
+        <View style={{ alignItems: "center" }}>
           <Text style={styles.logo}>List Requests</Text>
         </View>
-        <FlatList
-          style={{ marginTop: 10 }}
+      <SafeAreaView style={styles.container}>
+        {
+          guests.length > 0 ?
+          <FlatList
+          style={{ marginTop: 10, height: 600 }}
           data={guests}
           renderItem={({ item }) => (
             <ItemCard
@@ -67,7 +70,13 @@ function ListRequestScreen() {
             />
           )}
           keyExtractor={item => String(item.id)}
-        />
+        /> 
+          :  
+          <Image
+          source={require("../assets/nodata_800139.png")}
+          style={{ width: "100%", height: "50%", marginBottom: 100 }}
+          />
+        }
       </SafeAreaView>
     </View>
   );
@@ -86,7 +95,6 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
     fontSize: 45,
     color: "#5e2a00",
-    marginBottom: 50
   },
   item: {
     padding: 20,

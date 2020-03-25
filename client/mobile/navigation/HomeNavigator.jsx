@@ -18,7 +18,7 @@ export default function HomeNavigator() {
   const [id, setId] = useState(0);
 
   const notifCount = useSelector(state => {
-    const filtered = state.guests.filter(guest => {
+    const filtered = state.guestReducer.guests.filter(guest => {
       return guest.status === null && guest.UserId === id;
     });
     return filtered.length;

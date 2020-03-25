@@ -6,9 +6,11 @@ import logo from "../assets/logo.png";
 import Swal from "sweetalert2";
 import { InputGroup, Button, FormControl } from "react-bootstrap";
 import { BsEyeSlashFill, BsEyeFill } from "react-icons/bs";
+import LoadingOverlay from "react-loading-overlay";
 
 function LoginAdminPage({ children, ...rest }) {
   const [username, setUsername] = useState("");
+  const [loading, setLoading] = useState(false);
   const [password, setPassword] = useState("");
   const [passwordVisibility, setPasswordVisibility] = useState(false);
 
@@ -16,6 +18,7 @@ function LoginAdminPage({ children, ...rest }) {
 
   const login = e => {
     console.log("masuk lohon");
+    setLoading(true);
     e.preventDefault();
 
     axios
@@ -24,6 +27,7 @@ function LoginAdminPage({ children, ...rest }) {
         password
       })
       .then(result => {
+        setLoading(false);
         let token = result.data.token;
         sessionStorage.setItem("token", token);
         const Toast = Swal.mixin({
@@ -45,6 +49,7 @@ function LoginAdminPage({ children, ...rest }) {
         history.push("/users");
       })
       .catch(({ response: { data } }) => {
+        setLoading(false);
         Swal.fire({
           position: "center",
           icon: "error",
@@ -77,6 +82,15 @@ function LoginAdminPage({ children, ...rest }) {
               alt="logo-ngelocker"
             />
             <div className="col-lg-12 login-title">ADMIN PANEL</div>
+            {loading ? (
+              <LoadingOverlay
+                active={loading}
+                spinner
+                text="Loading your content..."
+              />
+            ) : (
+              <div></div>
+            )}
             <div className="col-lg-12 login-form">
               <form onSubmit={e => login(e)}>
                 <div className="container">

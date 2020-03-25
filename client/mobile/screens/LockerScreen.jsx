@@ -9,13 +9,20 @@ import {
 import ubidots from '../services/ubidots'
 import Constants from 'expo-constants'
 import LottieView from 'lottie-react-native'
+import { useSelector, useDispatch } from "react-redux";
+import {setLoadingTrue, setLoadingFalse} from '../actions/loadingActions'
+import Spinner from 'react-native-loading-spinner-overlay';
 
 export default function LoginScreen() {
+  const dispatch = useDispatch()
+  const isLoading = useSelector((state) => state.loadingReducer.isLoading)
   const toggleLocker = (key) => {
+    dispatch(setLoadingTrue())
     ubidots.post('/demoswitch/demo/values', {
       value: key
     })
-      .then(result => {
+    .then(result => {
+      dispatch(setLoadingFalse())
         if (key === 1) {
           ToastAndroid.show(`Successfully Unlock Locker`, ToastAndroid.SHORT)
         } else {
@@ -23,12 +30,18 @@ export default function LoginScreen() {
         }
       })
       .catch(err => {
+        dispatch(setLoadingFalse())
         ToastAndroid.show(`Locker Not Respond`, ToastAndroid.SHORT)
       })
   }
 
   return (
     <View style={styles.container} >
+      {isLoading ?  <Spinner
+          visible={isLoading}
+          textContent={'Loading...'}
+          textStyle={styles.spinnerTextStyle}
+        /> : <View></View>}
       <LottieView style={styles.lottie} source={require('../assets/lockey.json')} autoPlay loop />
       <View style={styles.containerLocker}>
         {/* Lock */}
@@ -45,6 +58,9 @@ export default function LoginScreen() {
 }
 
 const styles = StyleSheet.create({
+  spinnerTextStyle:{
+    color: '#FFF'
+  },
   lottie: {
     position: "relative"
   },

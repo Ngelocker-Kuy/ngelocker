@@ -18,13 +18,13 @@ function generateStyle(color) {
             marginHorizontal: 16
         },
         name: {
-            fontSize: 25,
+            fontSize: 20,
             color: "#5e2a00",
             textTransform: "capitalize",
             fontFamily: "Fredoka One"
         },
         phone: {
-            fontSize: 18,
+            fontSize: 15,
             color: "#5e2a00",
             fontFamily: "Fredoka One"
         },
