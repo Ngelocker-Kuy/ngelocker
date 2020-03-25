@@ -15,6 +15,7 @@
     "db_dev": "cross-env NODE_ENV=development sequelize db:create",
     "db_production": "cross-env NODE_ENV=production sequelize db:create",
     "start": "node app.js",
+    "dev-test": "cross-env NODE_ENV=test nodemon bin/http.js",
     "dev": "cross-env NODE_ENV=development nodemon bin/http.js",
     "prod": "cross-env NODE_ENV=production pm2 start bin/http.js"
   },
@@ -50,6 +51,7 @@
   },
   "devDependencies": {
     "cross-env": "^7.0.2",
+    "dotenv": "^8.2.0",
     "jest": "^25.1.0",
     "supertest": "^4.0.2"
   }

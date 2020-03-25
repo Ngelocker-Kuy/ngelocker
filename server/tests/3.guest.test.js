@@ -47,11 +47,14 @@ describe("Testing socket", function () {
   });
 
   describe('basic socket.io example', () => {
-    it("should comunicate", async () => {
-      socket.emit('newGuest', { UserId: 3, guest: "coba guest" })
-      socket.on('guestUpdate', async () => {
-
-      })
+    it("should comunicate", async (done) => {
+      socket.emit('newGuest', { UserId: 2, guest: "coba guest" })
+      socket.on('guestUpdate', (message) => {
+        // Check that the message matches
+        expect(message)
+        done();
+      });
+      done()
     })
   })
 })
