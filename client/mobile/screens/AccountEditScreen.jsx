@@ -13,6 +13,7 @@ export default function LoginScreen() {
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
+  const [id, setId] = useState(0)
 
   useEffect(() => {
     getUser();
@@ -22,12 +23,17 @@ export default function LoginScreen() {
     const token = await AsyncStorage.getItem("token");
     const id = await AsyncStorage.getItem("userId");
 
+    await setId(id)
+
     const { data } = await axios.get(`users/${id}`, { headers: { token } });
     await setName(data.name);
     await setEmail(data.email);
   };
+
+
   const updateUser = async () => {
     const token = await AsyncStorage.getItem("token");
+
     axios
       .put(
         `/users/${id}`,
