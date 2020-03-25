@@ -16,7 +16,7 @@ body {
   margin: auto;
   overflow: hidden;
   width: 100%;
-  height: 100%;
+  height: -webkit-fill-available;
 }
 
 h1 {
@@ -69,7 +69,6 @@ button, .dot {
 
 #success-box {
     margin-top: 11vh;
-    position: fixed;
     width: 19rem;
     height: 60vh;
     left: 12%;
@@ -81,7 +80,6 @@ button, .dot {
 
 #error-box {
   margin-top: 11vh;
-  position: fixed;
   width: 19rem;
   height: 60vh;
   left: 12%;
