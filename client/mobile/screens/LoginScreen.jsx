@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Notifications } from "expo";
 import * as Permissions from "expo-permissions";
+import { Feather } from "@expo/vector-icons";
 
 import {
   StyleSheet,
@@ -18,6 +19,7 @@ import axios from "../services/axios";
 export default function LoginScreen({ navigation }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [show, setShow] = useState(false);
 
   const login = async () => {
     const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
@@ -52,6 +54,10 @@ export default function LoginScreen({ navigation }) {
     token ? navigation.navigate("Home") : null;
   };
 
+  const changeVisibility = () => {
+    setShow(!show);
+  };
+
   useEffect(() => {
     checkLogin();
   });
@@ -79,8 +85,19 @@ export default function LoginScreen({ navigation }) {
           placeholderTextColor="#343030a8"
           value={password}
           onChangeText={text => setPassword(text)}
-          secureTextEntry={true}
+          secureTextEntry={show ? false : true}
         />
+        <TouchableOpacity
+          onPress={() => {
+            changeVisibility();
+          }}
+        >
+          <Feather
+            name={show ? "eye" : "eye-off"}
+            size={25}
+            style={styles.feather}
+          />
+        </TouchableOpacity>
       </View>
       <TouchableOpacity style={styles.loginBtn} onPress={() => login()}>
         <Text style={styles.loginText}>LOGIN</Text>
@@ -96,6 +113,7 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   inputView: {
+    flexDirection: "row",
     width: "80%",
     backgroundColor: "white",
     borderRadius: 25,
@@ -111,7 +129,14 @@ const styles = StyleSheet.create({
     shadowRadius: 15.19,
     elevation: 10
   },
+
+  feather: {
+    paddingTop: 11,
+    paddingRight: 15
+  },
+
   inputText: {
+    flex: 1,
     paddingLeft: 20,
     height: 50,
     color: "black",
@@ -120,6 +145,7 @@ const styles = StyleSheet.create({
     fontFamily: "Fredoka One",
     letterSpacing: 1
   },
+
   forgot: {
     color: "white",
     fontSize: 11
