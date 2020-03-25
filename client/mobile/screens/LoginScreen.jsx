@@ -12,7 +12,8 @@ import {
   Image,
   KeyboardAvoidingView,
   AsyncStorage,
-  ToastAndroid
+  ToastAndroid,
+  ActivityIndicator
 } from "react-native";
 import axios from "../services/axios";
 
@@ -20,8 +21,11 @@ export default function LoginScreen({ navigation }) {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [show, setShow] = useState(false);
+  const [isLogin, setIsLogin] = useState(false)
 
   const login = async () => {
+    setIsLogin(true)
+
     const { status } = await Permissions.askAsync(Permissions.NOTIFICATIONS);
 
     if (status !== "granted") {
@@ -38,13 +42,16 @@ export default function LoginScreen({ navigation }) {
         tokenExpo
       })
       .then(({ data }) => {
+        setIsLogin(false)
         AsyncStorage.setItem("userId", String(data.user.id));
         AsyncStorage.setItem("token", data.token);
-
+        setUsername('')
+        setPassword('')
         navigation.navigate("Home");
+        ToastAndroid.show(`Successfully Signed In`, ToastAndroid.SHORT);
       })
       .catch(err => {
-        ToastAndroid.show(`${err.response.data.message}`, ToastAndroid.SHORT);
+        ToastAndroid.show(`Incorrect Username or Password`, ToastAndroid.SHORT);
       });
   };
 

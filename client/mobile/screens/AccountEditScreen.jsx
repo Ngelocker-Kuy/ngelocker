@@ -5,15 +5,18 @@ import {
   View,
   TouchableOpacity,
   TextInput,
-  AsyncStorage
+  AsyncStorage,
+  ToastAndroid
 } from "react-native";
-// import LottieView from "lottie-react-native";
+import LottieView from "lottie-react-native";
 import axios from "../services/axios";
-export default function LoginScreen() {
+
+export default function LoginScreen({navigation}) {
+
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [id, setId] = useState(0)
+  const [id, setId] = useState(0);
 
   useEffect(() => {
     getUser();
@@ -23,13 +26,12 @@ export default function LoginScreen() {
     const token = await AsyncStorage.getItem("token");
     const id = await AsyncStorage.getItem("userId");
 
-    await setId(id)
+    await setId(id);
 
     const { data } = await axios.get(`users/${id}`, { headers: { token } });
     await setName(data.name);
     await setEmail(data.email);
   };
-
 
   const updateUser = async () => {
     const token = await AsyncStorage.getItem("token");
@@ -49,20 +51,24 @@ export default function LoginScreen() {
         }
       )
       .then(({ data }) => {
-        //INSERT ALERT HERE
-
-        console.log(data);
+        setPassword('')
+        navigation.navigate('account')
+        ToastAndroid.show(`Successfully Updated Data`, ToastAndroid.SHORT);
       })
       .catch(err => {
-        //INSERT ALERT HERE
-
-        console.log(err.response);
+        ToastAndroid.show(`${err.response.data.message}`, ToastAndroid.SHORT);
       });
   };
   return (
     <View style={styles.container}>
       <View style={styles.containerLocker}>
         <Text style={styles.logo}>My Account</Text>
+          <LottieView
+            style={styles.lottie}
+            source={require("../assets/account.json")}
+            autoPlay
+            loop
+          />
         <View style={styles.inputView}>
           <TextInput
             style={styles.inputText}
@@ -108,9 +114,11 @@ const styles = StyleSheet.create({
     height: "100%"
   },
   containerLocker: {
+    flex: 1,
     width: "100%",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    flexDirection: 'column'
   },
   logo: {
     fontFamily: "Fredoka One",
@@ -210,6 +218,12 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 32,
-    color: "snow"
+    color: "snow",
+    fontFamily: 'Fredoka One'
+  },
+  lottie: {
+    width: 500,
+    height: 500,
+    position: 'absolute',
   }
 });
