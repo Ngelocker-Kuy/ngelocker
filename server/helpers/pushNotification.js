@@ -4,8 +4,10 @@ let expo = new Expo();
 const UserController = require('../controller/userController')
 
 async function pushNotification(io, { UserId, guest }) {
+    console.log("ini di luar");
     try {
         const { tokenExpo } = await UserController.findUser(UserId)
+        console.log(tokenExpo);
         let messages = [{
             to: tokenExpo,
             sound: 'default',
@@ -20,7 +22,7 @@ async function pushNotification(io, { UserId, guest }) {
             for (let chunk of chunks) {
                 try {
                     let ticketChunk = await expo.sendPushNotificationsAsync(chunk);
-                    // console.log(ticketChunk, "ticket chunk");
+                    console.log(ticketChunk, "ticket chunk");
                     tickets.push(...ticketChunk);
                     // NOTE: If a ticket contains an error code in ticket.details.error, you
                     // must handle it appropriately. The error codes are listed in the Expo
@@ -34,7 +36,8 @@ async function pushNotification(io, { UserId, guest }) {
         })();
         io.emit('guestUpdate')
     } catch (err) {
-        // console.log(err)
+        console.log("ini di catch");
+        console.log(err)
         return
     }
 }

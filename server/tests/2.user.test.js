@@ -113,7 +113,6 @@ describe("Test Users Features", function () {
         .send({
           name: "pengguna di update",
           email: "penggunaUpdate@gmail.com",
-          username: "pengguna update",
           password: "1234567"
         })
         .set({
@@ -126,9 +125,39 @@ describe("Test Users Features", function () {
       expect(res.body.user.name).toEqual("pengguna di update");
       expect(res.body.user).toHaveProperty("email");
       expect(res.body.user.email).toEqual("penggunaUpdate@gmail.com");
-      expect(res.body.user).toHaveProperty("username");
-      expect(res.body.user.username).toEqual("pengguna");
       expect(res.body.user).toHaveProperty("password");
+    });
+
+    it("should return error and status code 400 when length password < 6", async () => {
+      const res = await request(app)
+        .put("/users/1")
+        .send({
+          name: "pengguna di update",
+          email: "penggunaUpdate@gmail.com",
+          password: "1234"
+        })
+        .set({
+          token: tokenUser
+        });
+      expect(res.status).toEqual(400);
+      expect(res.body).toHaveProperty("message");
+      expect(res.body.message).toEqual("Minimum Password is 6 Character");
+    });
+
+    it("should return error and status code 400 when password is null", async () => {
+      const res = await request(app)
+        .put("/users/1")
+        .send({
+          name: "pengguna di update",
+          email: "penggunaUpdate@gmail.com",
+          password: ""
+        })
+        .set({
+          token: tokenUser
+        });
+      expect(res.status).toEqual(400);
+      expect(res.body).toHaveProperty("message");
+      expect(res.body.message).toEqual("Please Fill Password");
     });
 
     it("should return status code 404 when user id wrong", async () => {
@@ -143,11 +172,10 @@ describe("Test Users Features", function () {
         .set({
           token: tokenUser
         });
-      expect(res.status).toEqual(200);
+      expect(res.status).toEqual(404);
       expect(res.body).toHaveProperty("message");
-      expect(res.body.message).toEqual("command not found");
+      expect(res.body.message).toEqual("user not found");
     });
-
   });
 
   describe("Test users get all guests, get /guests route", () => {
@@ -227,4 +255,45 @@ describe("Test Users Features", function () {
       done()
     });
   });
+
+  describe("Test get user /users/:id route", () => {
+    it("should return user and status code 200", async () => {
+      const res = await request(app)
+        .get("/users/1")
+        .set({
+          token: tokenUser
+        })
+      expect(res.status).toEqual(200)
+      expect(res.body).toHaveProperty("id");
+      expect(res.body).toHaveProperty("name");
+      expect(res.body.name).toEqual("pengguna di update");
+      expect(res.body).toHaveProperty("email");
+      expect(res.body.email).toEqual("penggunaUpdate@gmail.com");
+      expect(res.body).toHaveProperty("password");
+    })
+    it("should return status code 404 when user id wrong", async () => {
+      const res = await request(app)
+        .get("/users/100")
+        .set({
+          token: tokenUser
+        })
+      expect(res.status).toEqual(404);
+      expect(res.body).toHaveProperty("message");
+      expect(res.body.message).toEqual("user not found");
+    })
+  })
+
+  describe("Test post user /users/logout route", () => {
+    it("should return message logout and status code 200", async () => {
+      const res = await request(app)
+        .post("/users/logout")
+        .set({
+          token: tokenUser
+        })
+      expect(res.status).toEqual(200);
+      expect(res.body).toHaveProperty("msg");
+      expect(res.body.msg).toEqual("Logout successfull");
+    })
+  })
+
 });
