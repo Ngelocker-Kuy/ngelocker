@@ -49,9 +49,13 @@ export default function LoginScreen() {
         }
       )
       .then(({ data }) => {
+        //INSERT ALERT HERE
+
         console.log(data);
       })
       .catch(err => {
+        //INSERT ALERT HERE
+
         console.log(err.response);
       });
   };
