@@ -5,7 +5,8 @@ import {
   View,
   Text,
   AsyncStorage,
-  FlatList
+  FlatList,
+  Image
 } from "react-native";
 import { GET_GUEST } from "../actions/guestAction";
 import { useDispatch, useSelector } from "react-redux";
@@ -17,7 +18,7 @@ function ListGuestScreen() {
   const [id, setId] = useState(0)
 
   const guests = useSelector(state => {
-    const guestList = state.guests.filter(guest => {
+    const guestList = state.guestReducer.guests.filter(guest => {
       return guest.status !== null && guest.UserId === id
     });
 
@@ -44,22 +45,29 @@ function ListGuestScreen() {
 
   return (
     <View style={styles.container}>
-      <SafeAreaView style={styles.container}>
-        <View style={{ ...styles.container, alignItems: "center" }}>
+        <View style={{ alignItems: "center" }}>
           <Text style={styles.logo}>List Guests</Text>
         </View>
-        <FlatList
-          style={{ marginTop: 10 }}
-          data={guests}
-          renderItem={({ item }) => (
-            <ItemCard
-              title={item.name}
-              phoneNumber={item.phoneNumber}
-              status={item.status}
-            />
-          )}
-          keyExtractor={item => String(item.id)}
-        />
+      <SafeAreaView style={styles.container}>
+        {
+          guests.length > 0 ? 
+          <FlatList
+            style={{ marginTop: 10 }}
+            data={guests}
+            renderItem={({ item }) => (
+              <ItemCard
+                title={item.name}
+                phoneNumber={item.phoneNumber}
+                status={item.status}
+              />
+            )}
+            keyExtractor={item => String(item.id)}
+          /> : 
+          <Image
+          source={require("../assets/nodata_800139.png")}
+          style={{ width: "100%", height: "50%", marginBottom: 100 }}
+          />
+        }
       </SafeAreaView>
     </View>
   );
@@ -78,7 +86,6 @@ const styles = StyleSheet.create({
     letterSpacing: 1,
     fontSize: 45,
     color: "#5e2a00",
-    marginBottom: 50
   },
   item: {
     backgroundColor: "#f12711",

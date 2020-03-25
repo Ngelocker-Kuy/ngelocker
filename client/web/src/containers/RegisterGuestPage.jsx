@@ -82,11 +82,11 @@ function RegisterGuestPage() {
                             <form onSubmit={(e) => { registerGuest(e) }} >
                                 <div className="form-group">
                                     <label style={{ color: "black" }}>Name</label>
-                                    <input style={{ color: "white" }} type="text" className="form-control" onChange={e => setName(e.target.value)} />
+                                    <input style={{ color: "white" }} type="text" className="form-control" maxLength="12" onChange={e => setName(e.target.value)} />
                                 </div>
                                 <div className="form-group">
                                     <label style={{ color: "black" }}>Phone Number</label>
-                                    <input style={{ color: "white" }} type="text" className="form-control" onChange={e => setPhoneNumber(e.target.value)} />
+                                    <input style={{ color: "white" }} className="form-control" type="number" onChange={e => setPhoneNumber(e.target.value)} />
                                 </div>
                                 <button type="submit" className="btn-register btn-block mt-4">Submit</button>
                             </form>
