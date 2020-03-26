@@ -28,6 +28,11 @@ function generateStyle(color) {
             color: "#5e2a00",
             fontFamily: "Fredoka One"
         },
+        date: {
+            fontSize: 10,
+            color: "#5e2a00",
+            fontFamily: "Fredoka One"
+        },
         btnAccept: {
             borderRadius: 5,
             backgroundColor: "#00b894",
@@ -53,7 +58,7 @@ function generateStyle(color) {
     });
 }
 
-function Item({ id, title, phoneNumber, status, type }) {
+function Item({ id, title, phoneNumber, status, type, created }) {
     const dispatch = useDispatch()
 
     const styles = generateStyle();
@@ -116,6 +121,8 @@ function Item({ id, title, phoneNumber, status, type }) {
                 console.log(err.response)
             })
     }
+    const arrDate = created.split('-').join('-').split('T')
+    const fixDate = arrDate[0].split('-').reverse().join('-')
 
     return (
         <View style={styles.item}>
@@ -123,6 +130,7 @@ function Item({ id, title, phoneNumber, status, type }) {
                 <View>
                     <Text style={styles.name}>{title}</Text>
                     <Text style={styles.phone}>{phoneNumber}</Text>
+                    <Text style={styles.date}>{`${fixDate}`}</Text>
                 </View>
                 <View style={{ flex: 1, justifyContent: 'flex-end', flexDirection: 'row' }}>
                     {status === null ? <View></View> : status ? <FontAwesome name="check-circle-o" size={65} style={{ color: '#00b894' }} /> : <FontAwesome name="times-circle-o" size={65} style={{ color: '#d63031' }} />}

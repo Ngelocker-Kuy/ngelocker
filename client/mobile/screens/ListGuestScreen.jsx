@@ -58,6 +58,7 @@ function ListGuestScreen() {
               <ItemCard
                 title={item.name}
                 phoneNumber={item.phoneNumber}
+                created={item.createdAt}
                 status={item.status}
               />
             )}
