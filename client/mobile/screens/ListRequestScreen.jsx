@@ -67,6 +67,7 @@ function ListRequestScreen() {
               id={item.id}
               type="request"
               phoneNumber={item.phoneNumber}
+              created={item.createdAt}
             />
           )}
           keyExtractor={item => String(item.id)}
