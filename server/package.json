@@ -35,7 +35,7 @@
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "expo-server-sdk": "^3.4.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "ioredis": "^4.16.0",
     "jsonwebtoken": "^8.5.1",
     "pg": "^7.18.2",
