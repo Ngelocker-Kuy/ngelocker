@@ -37,7 +37,7 @@
     "expo-server-sdk": "^3.4.0",
     "express": "^4.17.1",
     "ioredis": "^4.16.0",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "pg": "^7.18.2",
     "sequelize": "^5.21.5",
     "socket.io": "^2.3.0",
